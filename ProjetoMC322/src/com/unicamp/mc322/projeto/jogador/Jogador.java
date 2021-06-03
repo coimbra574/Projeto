@@ -1,5 +1,7 @@
 package com.unicamp.mc322.projeto.jogador;
 
+import com.unicamp.mc322.projeto.cartas.Carta;
+import com.unicamp.mc322.projeto.main.Campo;
 import com.unicamp.mc322.projeto.turno.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ public abstract class Jogador {
 	private Scanner teclado = new Scanner(System.in);
 	private ArrayList<Carta> mao = new ArrayList<Carta>();  //Irá representar as cartas na mão do jogador
 	private Deck deckJogador;
+	private int numeroJogadorNoCampo=0;
 	
 	Jogador(Turno turnoInicial) {
 		/*
@@ -22,16 +25,23 @@ public abstract class Jogador {
 		this.mao = obter4CartasIniciais();
 	}
 	
+	public void setNumeroEmCampo(int n) {
+		numeroJogadorNoCampo = n;
+	}
+	
+	public int getNumeroEmCampo() {
+		return numeroJogadorNoCampo;
+	}
+	
 	private ArrayList<Carta> obter4CartasIniciais() {
 		/*
 		 * Esse método deve ser responsável por obter as quatro cartas inciais do jogador
 		 */
 		//Mostrar as cartas para o jogador
-		mao = deckJogador.obterCartasIniciais();
-		mao = substituirCartas(mao);
+		mao = deckJogador.obterCartasIniciais();		mao = substituirCartas(mao);
 	}
 	
-	private ArrayList<Carta> substituirCartas(mao) {
+	private ArrayList<Carta> substituirCartas(ArrayList<Carta> mao) {
 		/*
 		 * Esse método deverá ser responsável por substituir as cartas que o jogador não desejar
 		 */
@@ -98,6 +108,8 @@ public abstract class Jogador {
 	public void escolherCartaUtilizar() {
 		/*
 		 * O jogador deve escolher as cartas na mão que irá invocar ou ativar o efeito
+		 * 
+		 * Talvez adicionar a funcao de ativar feiti�o ou invocar seguidor/campeao aqui na hora em que escolhe?
 		 */
 		do {
 			boolean continuar=false;
@@ -119,24 +131,22 @@ public abstract class Jogador {
 		/*
 		 * Verificar se o jogadore possui mana suficiente para invocar/ativar uma carta
 		 */
-		if(mana>carta.getMana()) {
-			if(carta.getTipo().equals("Campeão") || carta.getTipo().equals("Seguidor")) {
-				invocarCarta();
-				mana-=carta.getMana();
-			}else {
-				ativarEfeito()
-				mana-=carta.getMana();
-			}
+		if(mana > carta.getMana()) {
 			return true;
 		}else {
 			return false;
 		}
 	}
 	
-	private void invocarCarta(Carta carta) {
+	private void invocarCarta(Carta carta, Campo campo, int posicaoNoCampo) {
 		/*
 		 * Esse método depende da implementação do campo de invocações, deverá invocá-lo nele 
 		 */
+		if(verificarCarta(carta)) {
+			campo.adicionarCartaEmCampo(numeroJogadorNoCampo, posicaoNoCampo, carta);
+		} else {
+			System.out.println("Sem mana suficiente para invocar esta carta");
+		}
 	}
 	
 	private void ativarEfeito() {
@@ -149,22 +159,23 @@ public abstract class Jogador {
 		this.nexus-=dano;
 	}
 	
-	public void atacar(Jogador oponente) {
+	// Deixar essa parte de combate aqui ou na classe Jogo/Game?
+	public void atacar(Jogador oponente, Campo campo, int... posicaoUnidades) {
 		/*
 		 * Esse metodo tem acesso ao campo de invocações para selecionar os combatentes, após isso chama a 
 		 * instancia da classe combate onde será feita a batalha
 		 */
-		ArrayList<Carta> unidadesCombatentes = campo.selecionarUnidades();
-		ArrayList<Carta> unidadesDefensoras = openente.defender();
-		combate(unidadesCombatentes, unidadesDefensoras);
-		acabarTurno();
+		ArrayList<Carta> unidadesCombatentes = campo.selecionarUnidades(numeroJogadorNoCampo, posicaoUnidades);
+		ArrayList<Carta> unidadesDefensoras = oponente.defender(campo, posicaoUnidades);  // 
+		//combate(unidadesCombatentes, unidadesDefensoras);
+		//acabarTurno();
 	}
 	
-	ArrayList<Carta> defender() {
+	ArrayList<Carta> defender(Campo campo, int...posicaoUnidades) {
 		/*
 		 * Esse metodo deve ser responsavel pela escolha das cartas que irao defender o jogador e chamar a instancia de combate
 		 */
-		ArrayList<Carta> unidadeDefensoras = campo.selecionarUnidades();
+		ArrayList<Carta> unidadesDefensoras = campo.selecionarUnidades(numeroJogadorNoCampo, posicaoUnidades);
 		return unidadesDefensoras;
 		
 	}
