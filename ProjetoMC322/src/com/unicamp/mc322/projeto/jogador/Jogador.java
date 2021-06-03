@@ -7,12 +7,11 @@ import java.util.ArrayList;
 public abstract class Jogador {
 	private int mana = 0;
 	private int nexus = 20;
-	private int numCartasDeck = 40;
 	private int manaDeFeitico = 0;
 	private Turno turno;
 	private Scanner teclado = new Scanner(System.in);
-	//private ArrayList<Carta> mao = new ArrayList<Carta>();   Irá representar as cartas na mão do jogador
-	//private Deck deckJogador;
+	private ArrayList<Carta> mao = new ArrayList<Carta>();  //Irá representar as cartas na mão do jogador
+	private Deck deckJogador;
 	
 	Jogador(Turno turnoInicial) {
 		/*
@@ -28,7 +27,8 @@ public abstract class Jogador {
 		 * Esse método deve ser responsável por obter as quatro cartas inciais do jogador
 		 */
 		//Mostrar as cartas para o jogador
-		substituirCartas(mao);
+		mao = deckJogador.obterCartasIniciais();
+		mao = substituirCartas(mao);
 	}
 	
 	private ArrayList<Carta> substituirCartas(mao) {
@@ -52,8 +52,8 @@ public abstract class Jogador {
 			
 			System.out.print("Qual carta deseja substituir? ");
 			indiceCarta =  Integer.valueOf(teclado.nextLine());
-			novaCarta = pegarCartaAleatoriaDeck(); // Esses três métodos a serem chamados serão da classe deck, imagino
-			recolocarNoBaralho(mao.get(indiceCarta));
+			novaCarta = deckJogador.pegarCartaAleatoriaDeck(); // Esses três métodos a serem chamados serão da classe deck, imagino
+			deckJogador.recolocarNoBaralho(mao.get(indiceCarta));
 			mao.get(indiceCarta) = novaCarta;
 		}
 		
@@ -65,7 +65,7 @@ public abstract class Jogador {
 		 * O método deve chamar um método do deck para obter uma carta do mesmo e colocá-lo na sua mao, todo começo de turno de ataque
 		 */
 		Carta carta;
-		carta = obterCartaDeck()//método do deck que retorna uma carta
+		carta = deckJogador.obterCartaDeck()//método do deck que retorna uma carta
 		if(carta ==  null) {
 			//perdeu o jogo, não tem mais cartas
 		}else {
@@ -135,7 +135,7 @@ public abstract class Jogador {
 	
 	private void invocarCarta(Carta carta) {
 		/*
-		 * Esse método depende da implementação do campo de invocações, mas deverá invocá-lo nele 
+		 * Esse método depende da implementação do campo de invocações, deverá invocá-lo nele 
 		 */
 	}
 	
@@ -154,17 +154,17 @@ public abstract class Jogador {
 		 * Esse metodo tem acesso ao campo de invocações para selecionar os combatentes, após isso chama a 
 		 * instancia da classe combate onde será feita a batalha
 		 */
-		ArrayList<Carta> unidadesCombatentes = selecionarUnidades();
+		ArrayList<Carta> unidadesCombatentes = campo.selecionarUnidades();
 		ArrayList<Carta> unidadesDefensoras = openente.defender();
 		combate(unidadesCombatentes, unidadesDefensoras);
 		acabarTurno();
 	}
 	
-	private ArrayList<Carta> defender() {
+	ArrayList<Carta> defender() {
 		/*
 		 * Esse metodo deve ser responsavel pela escolha das cartas que irao defender o jogador e chamar a instancia de combate
 		 */
-		ArrayList<Carta> unidadeDefensoras = selecionarUnidades();
+		ArrayList<Carta> unidadeDefensoras = campo.selecionarUnidades();
 		return unidadesDefensoras;
 		
 	}
