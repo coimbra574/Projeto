@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.unicamp.mc322.projeto.ModoDeJogo;
+import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.jogador.Deck;
 
 public class InterfaceTerminal {
@@ -61,19 +62,19 @@ public class InterfaceTerminal {
 	}
 	
 	public ArrayList<Carta> substituirCartasIniciais(ArrayList<Carta> listaCartas) {
-		ArrayList<Integer> comandosDigitados;
-		ArrayList<Carta> listaDeSubstituicao;
+		ArrayList<Integer> comandosDigitados = new ArrayList<Integer>();
+		ArrayList<Carta> listaDeSubstituicao = new ArrayList<Carta>();
 		String comando;
 		
 		System.out.println("Deseja substituir algumas das seguintes cartas iniciais?");
-		for(int i = 0; i < listaCartas.length; i++) {
+		for(int i = 0; i < listaCartas.size(); i++) {
 			System.out.printf("Digite [%d] - Para substituir a carta:", i+1);
-			System.out.println(listaCartas.get(i).ToString());
+			System.out.println(listaCartas.get(i).toString());
 		}
 		do {
 			System.out.println("Digite um numero ou [OK] para confirmar:");
 			comando = keyboard.nextLine();
-			if(Integer.parseInt(comando) >= 1 && Integer.parseInt(comando) <= listaCartas.length) {
+			if(Integer.parseInt(comando) >= 1 && Integer.parseInt(comando) <= listaCartas.size()) {
 				if(comandosDigitados.contains(Integer.parseInt(comando)-1)) {
 					comandosDigitados.remove(Integer.parseInt(comando)-1);
 					System.out.printf("Carta [%d] nao sera trocada.\n", Integer.parseInt(comando));

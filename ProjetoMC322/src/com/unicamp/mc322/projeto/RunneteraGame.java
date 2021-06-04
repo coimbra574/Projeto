@@ -2,6 +2,7 @@ package com.unicamp.mc322.projeto;
 
 import com.unicamp.mc322.projeto.Interface.*;
 import com.unicamp.mc322.projeto.jogador.*;
+import com.unicamp.mc322.projeto.main.Campo;
 
 public class RunneteraGame {
 	private boolean exitSelected = false;
@@ -10,6 +11,7 @@ public class RunneteraGame {
 	private Deck[] listaDecks;
 	private Jogador player1;
 	private Jogador player2;
+	private Campo campoBatalha;
 	
 	public RunneteraGame(Deck[] listaDecks) {
 		this.listaDecks = listaDecks;
@@ -30,8 +32,11 @@ public class RunneteraGame {
 		player1.substituirCartas(interfaceTerminal.substituirCartasIniciais(player1.getMao()));
 		player2.substituirCartas(interfaceTerminal.substituirCartasIniciais(player2.getMao()));
 		
+		this.campoBatalha = new Campo(player1, player2);
+		
 		while(!interfaceTerminal.getExitSelected()) {
-			interfaceTerminal.mostrarCampo(Campo campo);
+			interfaceTerminal.mostrarCampo(campoBatalha);
+			
 		}
 		interfaceTerminal.exitGame();
 	}
