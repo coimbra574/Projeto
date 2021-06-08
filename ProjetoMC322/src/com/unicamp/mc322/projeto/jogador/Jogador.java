@@ -1,19 +1,19 @@
 package com.unicamp.mc322.projeto.jogador;
 
-import com.unicamp.mc322.projeto.cartas.Carta;
+import com.unicamp.mc322.projeto.cartas.*;
 import com.unicamp.mc322.projeto.main.Campo;
 import com.unicamp.mc322.projeto.turno.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public abstract class Jogador {
-	private int mana = 0;
+	protected int mana = 0;
 	private int nexus = 20;
 	private int manaDeFeitico = 0;
 	private Turno turno;
-	private Scanner teclado = new Scanner(System.in);
-	private ArrayList<Carta> mao = new ArrayList<Carta>();  //Irá representar as cartas na mão do jogador
-	private Deck deckJogador;
+	//private Scanner teclado = new Scanner(System.in);
+	protected ArrayList<Carta> mao = new ArrayList<Carta>();  //Irá representar as cartas na mão do jogador
+	protected Deck deckJogador;
 	private int numeroJogadorNoCampo=0;
 	
 	Jogador(Turno turnoInicial) {
@@ -38,44 +38,19 @@ public abstract class Jogador {
 		 * Esse método deve ser responsável por obter as quatro cartas inciais do jogador
 		 */
 		//Mostrar as cartas para o jogador
-		mao = deckJogador.obterCartasIniciais();		mao = substituirCartas(mao);
-	}
-	
-	private ArrayList<Carta> substituirCartas(ArrayList<Carta> mao) {
-		/*
-		 * Esse método deverá ser responsável por substituir as cartas que o jogador não desejar
-		 */
-		int indiceCarta;
-		int numCartas;
-		
-		do {
-			System.out.print("Quantas cartas deseja substituir? ");
-			numCartas =  Integer.valueOf(teclado.nextLine());
-			if(numCartas>4) {
-				System.out.println("Digite um número de cartas válido!!! Até 4 cartas");
-			}	
-		}while(numCartas>4);
-		
-		
-		for(int i=0;i<numCartas;i++) {
-			Carta novaCarta;
-			
-			System.out.print("Qual carta deseja substituir? ");
-			indiceCarta =  Integer.valueOf(teclado.nextLine());
-			novaCarta = deckJogador.pegarCartaAleatoriaDeck(); // Esses três métodos a serem chamados serão da classe deck, imagino
-			deckJogador.recolocarNoBaralho(mao.get(indiceCarta));
-			mao.get(indiceCarta) = novaCarta;
-		}
-		
+		mao = deckJogador.obterCartasIniciais(mao);		
+		mao = substituirCartas(mao);
 		return mao;
 	}
+	
+	protected abstract ArrayList<Carta> substituirCartas(ArrayList<Carta> mao);
 	
 	public void pegarCarta() {
 		/*
 		 * O método deve chamar um método do deck para obter uma carta do mesmo e colocá-lo na sua mao, todo começo de turno de ataque
 		 */
 		Carta carta;
-		carta = deckJogador.obterCartaDeck()//método do deck que retorna uma carta
+		carta = deckJogador.obterCartaDeck();//método do deck que retorna uma carta
 		if(carta ==  null) {
 			//perdeu o jogo, não tem mais cartas
 		}else {
@@ -105,29 +80,9 @@ public abstract class Jogador {
 		}
 	}
 	
-	public void escolherCartaUtilizar() {
-		/*
-		 * O jogador deve escolher as cartas na mão que irá invocar ou ativar o efeito
-		 * 
-		 * Talvez adicionar a funcao de ativar feiti�o ou invocar seguidor/campeao aqui na hora em que escolhe?
-		 */
-		do {
-			boolean continuar=false;
-			System.out.println("Escolha uma carta para utilizar");
-			int cartaParaJogar;
-			do {
-				cartaParaJogar=  Integer.valueOf(teclado.nextLine());
-				verificarCarta(mao.get(cartaParaJogar));
-			}while(cartaParaJogar>mao.size());
-			if(mana>0) {
-				System.out.print("Deseja continuar? ");
-				continuar =  Boolean.valueOf(teclado.nextLine());//ver aqui se da pra melhoras sla
-			}
-		}while(mana>0 && continuar);
-		
-	}
+	public abstract void escolherCartaUtilizar();
 	
-	private boolean verificarCarta(Carta carta) {
+	protected boolean verificarCarta(Carta carta) {
 		/*
 		 * Verificar se o jogadore possui mana suficiente para invocar/ativar uma carta
 		 */
@@ -143,16 +98,18 @@ public abstract class Jogador {
 		 * Esse método depende da implementação do campo de invocações, deverá invocá-lo nele 
 		 */
 		if(verificarCarta(carta)) {
+			mana -= carta.getMana();
 			campo.adicionarCartaEmCampo(numeroJogadorNoCampo, posicaoNoCampo, carta);
 		} else {
 			System.out.println("Sem mana suficiente para invocar esta carta");
 		}
 	}
 	
-	private void ativarEfeito() {
+	protected void ativarEfeito(Carta carta) {
 		/*
 		 * Deve ativar o efeito de uma carta
 		 */
+		mana -= carta.getMana();
 	}
 	
 	public void diminuirNexus(int dano) {
@@ -168,7 +125,7 @@ public abstract class Jogador {
 		ArrayList<Carta> unidadesCombatentes = campo.selecionarUnidades(numeroJogadorNoCampo, posicaoUnidades);
 		ArrayList<Carta> unidadesDefensoras = oponente.defender(campo, posicaoUnidades);  // 
 		//combate(unidadesCombatentes, unidadesDefensoras);
-		//acabarTurno();
+		acabarTurno();
 	}
 	
 	ArrayList<Carta> defender(Campo campo, int...posicaoUnidades) {

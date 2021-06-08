@@ -17,6 +17,8 @@ public abstract class Carta {
 		return custo;
 	}
 	
+	public abstract String getTipo();
+	
 	public void setMana(int novoCusto) {
 		custo = novoCusto;
 	}

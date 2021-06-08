@@ -8,6 +8,7 @@ import com.unicamp.mc322.projeto.cartas.tracos.Traco;
 public class Seguidor extends Carta {
 	private int poder, vida;
 	private Traco traco;
+	final private String tipo = "Seguidor";// Coloquei isso pq eu preciso saber qual tipo de carta é pra invocá-la
 	private ArrayList<Efeito> listaEfeitos = new ArrayList<Efeito>();
 
 	public Seguidor(String nome, int custo, int poder, int vida, Traco traco, Efeito... efeitos) {
@@ -19,6 +20,11 @@ public class Seguidor extends Carta {
 		for(Efeito aux : efeitos) {
 			listaEfeitos.add(aux);
 		}
+	}
+	
+	@Override
+	public String getTipo() {
+		return tipo;
 	}
 	
 	public int getPoder() {

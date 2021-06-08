@@ -10,6 +10,7 @@ public class Campeao extends Seguidor {
 	private int quantParaEvolucao;
 	private Condicao condicaoDeEvolucao;
 	private Campeao evolucao;
+	final private String tipo = "CampeÃ£o";// Coloquei isso pq eu preciso saber qual tipo de carta Ã© pra invocÃ¡-la
 
 	public Campeao(String nome, int custo, int poder, int vida, Traco traco, Condicao condicaoDeEvolucao, int quantParaEvolucao, Campeao evolucao, Efeito ... efeitos) {
 		super(nome, custo, poder, vida, traco, efeitos);
@@ -17,12 +18,17 @@ public class Campeao extends Seguidor {
 		this.evolucao = evolucao;
 		this.quantParaEvolucao = quantParaEvolucao;
 		
-		// Se não tiver condição de evolução, já é um campeão de nível superior
+		// Se nï¿½o tiver condiï¿½ï¿½o de evoluï¿½ï¿½o, jï¿½ ï¿½ um campeï¿½o de nï¿½vel superior
 		if(condicaoDeEvolucao.equals(Condicao.SEM_EVOLUCAO)) {
 			nivel = Nivel.SUPERIOR;
 		} else {
 			nivel = Nivel.NORMAL;
 		}
+	}
+	
+	@Override
+	public String getTipo() {
+		return tipo;
 	}
 	
 	public void setNivel(Nivel novoNivel) {
@@ -46,7 +52,7 @@ public class Campeao extends Seguidor {
 	}
 	
 
-	// Verifica se a condição de evolução foi atendida
+	// Verifica se a condiï¿½ï¿½o de evoluï¿½ï¿½o foi atendida
 	public boolean chequeDeNivel(int n) {
 		boolean condicaoAtendida;
 		if(condicaoDeEvolucao.equals(Condicao.NUM_ATAQUE) && numeroAtaques >= quantParaEvolucao) {
@@ -68,7 +74,7 @@ public class Campeao extends Seguidor {
 	}
 	
 	
-	// Se durante o jogo o cheque de nível for true, então troca a carta pela sua evolução
+	// Se durante o jogo o cheque de nï¿½vel for true, entï¿½o troca a carta pela sua evoluï¿½ï¿½o
 	public Carta subirNivel(int n) {
 		return evolucao;
 	}
