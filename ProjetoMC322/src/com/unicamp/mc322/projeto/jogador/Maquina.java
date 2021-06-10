@@ -3,13 +3,14 @@ package com.unicamp.mc322.projeto.jogador;
 import java.util.ArrayList;
 
 import com.unicamp.mc322.projeto.cartas.Carta;
+import com.unicamp.mc322.projeto.main.Campo;
 import com.unicamp.mc322.projeto.turno.Turno;
 import java.util.Random;
 
-public class Máquina extends Jogador{
+public class Maquina extends Jogador{
 	Random geradorAleatorio = new Random();
 
-	Máquina(Turno turnoInicial) {
+	public Maquina(Turno turnoInicial) {
 		super(turnoInicial);
 		// TODO Auto-generated constructor stub
 	}
@@ -39,7 +40,7 @@ public class Máquina extends Jogador{
 	}
 
 	@Override
-	public void escolherCartaUtilizar() {
+	public void escolherCartaUtilizar(Campo campo) {
 		/*
 		 * A maquina deve escolher as cartas na mão que irá invocar ou ativar o efeito
 		 */

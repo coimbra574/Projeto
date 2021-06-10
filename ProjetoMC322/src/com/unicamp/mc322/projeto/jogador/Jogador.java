@@ -22,7 +22,7 @@ public abstract class Jogador {
 		 */
 		super();
 		this.turno = turnoInicial;
-		this.mao = obter4CartasIniciais();
+		//this.mao = obter4CartasIniciais();
 	}
 	
 	public void setNumeroEmCampo(int n) {
@@ -80,7 +80,7 @@ public abstract class Jogador {
 		}
 	}
 	
-	public abstract void escolherCartaUtilizar();
+	public abstract void escolherCartaUtilizar(Campo campo);
 	
 	protected boolean verificarCarta(Carta carta) {
 		/*
@@ -93,7 +93,7 @@ public abstract class Jogador {
 		}
 	}
 	
-	private void invocarCarta(Carta carta, Campo campo, int posicaoNoCampo) {
+	protected void invocarCarta(Carta carta, Campo campo, int posicaoNoCampo) {
 		/*
 		 * Esse método depende da implementação do campo de invocações, deverá invocá-lo nele 
 		 */

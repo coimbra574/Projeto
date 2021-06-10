@@ -1,19 +1,17 @@
 package com.unicamp.mc322.projeto.Interface;
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JButton;
+
 
 public class InterfaceGraficaCamp extends javax.swing.JFrame {
 
-    /**
-     * Creates new form InterfaceCampo
-     */
+
     public InterfaceGraficaCamp() {
+    	getContentPane().setFont(new Font("Arial", Font.PLAIN, 10));
         initComponents();
     }
 
@@ -42,46 +40,42 @@ public class InterfaceGraficaCamp extends javax.swing.JFrame {
         jblManaPlayer2 = new javax.swing.JLabel();
         jblManaFeiticoPlayer2 = new javax.swing.JLabel();
         jLayeredPane2 = new javax.swing.JLayeredPane();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        bntP1Carta0 = new javax.swing.JButton();
-        bntP1Carta1 = new javax.swing.JButton();
-        bntP1Carta2 = new javax.swing.JButton();
-        bntP1Carta3 = new javax.swing.JButton();
-        bntP1Carta4 = new javax.swing.JButton();
-        bntP1Carta5 = new javax.swing.JButton();
+        bntP1Carta12 = new javax.swing.JButton();
+        bntP1Carta15 = new javax.swing.JButton();
+        bntP1Carta16 = new javax.swing.JButton();
+        bntP1Carta17 = new javax.swing.JButton();
+        bntP1Carta13 = new javax.swing.JButton();
+        bntP1Carta14 = new javax.swing.JButton();
+        bntP1Carta18 = new javax.swing.JButton();
+        bntP1Carta19 = new javax.swing.JButton();
+        bntP1Carta20 = new javax.swing.JButton();
+        bntP1Carta21 = new javax.swing.JButton();
+        bntP1Carta22 = new javax.swing.JButton();
+        bntP1Carta23 = new javax.swing.JButton();
+        bntP1_Mao_0 = new javax.swing.JButton();
+        bntP1_Mao_0.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP2Carta1 = new javax.swing.JButton();
         bntP2Carta2 = new javax.swing.JButton();
         bntP2Carta3 = new javax.swing.JButton();
         bntP2Carta4 = new javax.swing.JButton();
         bntP2Carta5 = new javax.swing.JButton();
         bntP2Carta6 = new javax.swing.JButton();
+        bntP2Carta7 = new javax.swing.JButton();
+        bntP2Carta8 = new javax.swing.JButton();
+        bntP2Carta9 = new javax.swing.JButton();
+        bntP2Carta10 = new javax.swing.JButton();
+        bntP2Carta11 = new javax.swing.JButton();
+        bntP2Carta12 = new javax.swing.JButton();
+        bntP1Carta6 = new javax.swing.JButton();
+        bntP1Carta7 = new javax.swing.JButton();
+        bntP1Carta8 = new javax.swing.JButton();
+        bntP1Carta9 = new javax.swing.JButton();
+        bntP1Carta10 = new javax.swing.JButton();
+        bntP1Carta11 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(900, 800));
+        setPreferredSize(new Dimension(850, 850));
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -150,102 +144,6 @@ public class InterfaceGraficaCamp extends javax.swing.JFrame {
         jLayeredPane2.setBackground(new java.awt.Color(153, 255, 153));
         jLayeredPane2.setOpaque(true);
 
-        jLabel7.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Campeao");
-        jLabel7.setToolTipText("");
-        jLabel7.setAutoscrolls(true);
-        jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel7.setOpaque(true);
-
-        jLabel8.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Campeao");
-        jLabel8.setToolTipText("");
-        jLabel8.setAutoscrolls(true);
-        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel8.setOpaque(true);
-
-        jLabel9.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Campeao");
-        jLabel9.setToolTipText("");
-        jLabel9.setAutoscrolls(true);
-        jLabel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel9.setOpaque(true);
-
-        jLabel10.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("Campeao");
-        jLabel10.setToolTipText("");
-        jLabel10.setAutoscrolls(true);
-        jLabel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel10.setOpaque(true);
-
-        jLabel11.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Campeao");
-        jLabel11.setToolTipText("");
-        jLabel11.setAutoscrolls(true);
-        jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel11.setOpaque(true);
-
-        jLabel12.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Campeao");
-        jLabel12.setToolTipText("");
-        jLabel12.setAutoscrolls(true);
-        jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel12.setOpaque(true);
-
-        jLabel13.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Campeao");
-        jLabel13.setToolTipText("");
-        jLabel13.setAutoscrolls(true);
-        jLabel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel13.setOpaque(true);
-
-        jLabel14.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Campeao");
-        jLabel14.setToolTipText("");
-        jLabel14.setAutoscrolls(true);
-        jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel14.setOpaque(true);
-
-        jLabel15.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Campeao");
-        jLabel15.setToolTipText("");
-        jLabel15.setAutoscrolls(true);
-        jLabel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel15.setOpaque(true);
-
-        jLabel16.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("Campeao");
-        jLabel16.setToolTipText("");
-        jLabel16.setAutoscrolls(true);
-        jLabel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel16.setOpaque(true);
-
-        jLabel17.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("Campeao");
-        jLabel17.setToolTipText("");
-        jLabel17.setAutoscrolls(true);
-        jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel17.setOpaque(true);
-
-        jLabel18.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("Campeao");
-        jLabel18.setToolTipText("");
-        jLabel18.setAutoscrolls(true);
-        jLabel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel18.setOpaque(true);
-
         jLabel19.setBackground(new java.awt.Color(153, 255, 255));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Feitico");
@@ -254,213 +152,156 @@ public class InterfaceGraficaCamp extends javax.swing.JFrame {
         jLabel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel19.setOpaque(true);
 
-        jLayeredPane2.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel15, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel16, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel17, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel18, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        bntP1Carta12.setText("jButton2");
+
+        bntP1Carta15.setText("jButton2");
+        bntP1Carta15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta15ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta16.setText("jButton2");
+        bntP1Carta16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta16ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta17.setText("jButton2");
+        bntP1Carta17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta17ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta13.setText("jButton2");
+        bntP1Carta13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta13ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta14.setText("jButton2");
+        bntP1Carta14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta14ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta18.setText("jButton2");
+
+        bntP1Carta19.setText("jButton2");
+        bntP1Carta19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta19ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta20.setText("jButton2");
+        bntP1Carta20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta20ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta21.setText("jButton2");
+        bntP1Carta21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta21ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta22.setText("jButton2");
+        bntP1Carta22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta22ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta23.setText("jButton2");
+        bntP1Carta23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta23ActionPerformed(evt);
+            }
+        });
+
         jLayeredPane2.setLayer(jLabel19, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(bntP1Carta12, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(bntP1Carta15, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(bntP1Carta16, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(bntP1Carta17, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(bntP1Carta13, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(bntP1Carta14, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(bntP1Carta18, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(bntP1Carta19, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(bntP1Carta20, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(bntP1Carta21, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(bntP1Carta22, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(bntP1Carta23, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
         jLayeredPane2Layout.setHorizontalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(223, 223, 223))
+            .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addComponent(bntP1Carta18, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntP1Carta19, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntP1Carta22, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntP1Carta20, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntP1Carta21, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntP1Carta23, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addComponent(bntP1Carta12, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntP1Carta13, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntP1Carta16, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntP1Carta14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntP1Carta15, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntP1Carta17, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntP1Carta18, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntP1Carta19, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntP1Carta20, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntP1Carta21, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntP1Carta22, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntP1Carta23, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bntP1Carta12, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntP1Carta13, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntP1Carta14, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntP1Carta15, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntP1Carta16, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntP1Carta17, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jLabel20.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("Campeao");
-        jLabel20.setToolTipText("");
-        jLabel20.setAutoscrolls(true);
-        jLabel20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel20.setOpaque(true);
-
-        jLabel25.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel25.setText("Campeao");
-        jLabel25.setToolTipText("");
-        jLabel25.setAutoscrolls(true);
-        jLabel25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel25.setOpaque(true);
-
-        jLabel24.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel24.setText("Campeao");
-        jLabel24.setToolTipText("");
-        jLabel24.setAutoscrolls(true);
-        jLabel24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel24.setOpaque(true);
-
-        jLabel23.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel23.setText("Campeao");
-        jLabel23.setToolTipText("");
-        jLabel23.setAutoscrolls(true);
-        jLabel23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel23.setOpaque(true);
-
-        jLabel21.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel21.setText("Campeao");
-        jLabel21.setToolTipText("");
-        jLabel21.setAutoscrolls(true);
-        jLabel21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel21.setOpaque(true);
-
-        jLabel22.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel22.setText("Campeao");
-        jLabel22.setToolTipText("");
-        jLabel22.setAutoscrolls(true);
-        jLabel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel22.setOpaque(true);
-
-        jLabel38.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel38.setText("Campeao");
-        jLabel38.setToolTipText("");
-        jLabel38.setAutoscrolls(true);
-        jLabel38.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel38.setOpaque(true);
-
-        jLabel39.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel39.setText("Campeao");
-        jLabel39.setToolTipText("");
-        jLabel39.setAutoscrolls(true);
-        jLabel39.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel39.setOpaque(true);
-
-        jLabel40.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel40.setText("Campeao");
-        jLabel40.setToolTipText("");
-        jLabel40.setAutoscrolls(true);
-        jLabel40.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel40.setOpaque(true);
-
-        jLabel41.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel41.setText("Campeao");
-        jLabel41.setToolTipText("");
-        jLabel41.setAutoscrolls(true);
-        jLabel41.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel41.setOpaque(true);
-
-        jLabel42.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel42.setText("Campeao");
-        jLabel42.setToolTipText("");
-        jLabel42.setAutoscrolls(true);
-        jLabel42.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel42.setOpaque(true);
-
-        jLabel43.setBackground(new java.awt.Color(153, 255, 255));
-        jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel43.setText("Campeao");
-        jLabel43.setToolTipText("");
-        jLabel43.setAutoscrolls(true);
-        jLabel43.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel43.setOpaque(true);
-
-        bntP1Carta0.setText("jButton2");
-
-        bntP1Carta1.setText("jButton2");
-        bntP1Carta1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntP1Carta1ActionPerformed(evt);
-            }
-        });
-
-        bntP1Carta2.setText("jButton2");
-        bntP1Carta2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntP1Carta2ActionPerformed(evt);
-            }
-        });
-
-        bntP1Carta3.setText("jButton2");
-        bntP1Carta3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntP1Carta3ActionPerformed(evt);
-            }
-        });
-
-        bntP1Carta4.setText("jButton2");
-        bntP1Carta4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntP1Carta4ActionPerformed(evt);
-            }
-        });
-
-        bntP1Carta5.setText("jButton2");
-        bntP1Carta5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntP1Carta5ActionPerformed(evt);
-            }
-        });
+        bntP1_Mao_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5</html>");
 
         bntP2Carta1.setText("jButton2");
 
@@ -479,180 +320,266 @@ public class InterfaceGraficaCamp extends javax.swing.JFrame {
             }
         });
 
+        bntP2Carta7.setText("jButton2");
+
+        bntP2Carta8.setText("jButton2");
+
+        bntP2Carta9.setText("jButton2");
+
+        bntP2Carta10.setText("jButton2");
+
+        bntP2Carta11.setText("jButton2");
+
+        bntP2Carta12.setText("jButton2");
+        bntP2Carta12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP2Carta12ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta6.setText("jButton2");
+        bntP1Carta6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta6ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta7.setText("jButton2");
+        bntP1Carta7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta7ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta8.setText("jButton2");
+        bntP1Carta8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta8ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta9.setText("jButton2");
+        bntP1Carta9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta9ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta10.setText("jButton2");
+        bntP1Carta10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntP1Carta10ActionPerformed(evt);
+            }
+        });
+
+        bntP1Carta11.setText("jButton2");
+        
+        bntP1_Mao = new JButton();
+        bntP1_Mao.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1_Mao.setFont(new Font("Tahoma", Font.PLAIN, 9));
+        
+        bntP1_Mao_1 = new JButton();
+        bntP1_Mao_1.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1_Mao_1.setFont(new Font("Tahoma", Font.PLAIN, 9));
+        
+        bntP1_Mao_2 = new JButton();
+        bntP1_Mao_2.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1_Mao_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
+        
+        bntP1_Mao_3 = new JButton();
+        bntP1_Mao_3.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1_Mao_3.setFont(new Font("Tahoma", Font.PLAIN, 9));
+        
+        bntP1_Mao_4 = new JButton();
+        bntP1_Mao_4.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1_Mao_4.setFont(new Font("Tahoma", Font.PLAIN, 9));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addComponent(jblVidaNexusPlayer1))
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(jblVidaNexusPlayer2))
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(bntP2Carta1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(bntP2Carta2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(bntP2Carta3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(bntP2Carta4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(bntP2Carta5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(bntP2Carta6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(29, 29, 29)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(663, 663, 663)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jblTipoDeTurnoPlayer2)
-                                .addComponent(jLabel3))
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jblTipoDeTurnoPlayer1)
-                                .addComponent(jLabel4)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jblManaPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jblManaFeiticoPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jblManaFeiticoPlayer2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jblManaPlayer2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bntP1Carta0, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bntP1Carta1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bntP1Carta4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bntP1Carta2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bntP1Carta3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bntP1Carta5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addContainerGap()
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(layout.createSequentialGroup()
+        							.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        								.addGroup(layout.createSequentialGroup()
+        									.addGap(38)
+        									.addComponent(jblVidaNexusPlayer1))
+        								.addComponent(jLabel1)
+        								.addGroup(layout.createSequentialGroup()
+        									.addGap(39)
+        									.addComponent(jblVidaNexusPlayer2))
+        								.addComponent(jLabel2))
+        							.addGap(18)
+        							.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        								.addComponent(jLayeredPane2, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        								.addGroup(layout.createSequentialGroup()
+        									.addGap(31)
+        									.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        										.addGroup(layout.createSequentialGroup()
+        											.addComponent(bntP2Carta7, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        											.addGap(18)
+        											.addComponent(bntP2Carta8, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        											.addGap(18)
+        											.addComponent(bntP2Carta9, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        											.addGap(18)
+        											.addComponent(bntP2Carta10, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        											.addGap(18)
+        											.addComponent(bntP2Carta11, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        											.addGap(18)
+        											.addComponent(bntP2Carta12, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
+        										.addGroup(layout.createSequentialGroup()
+        											.addComponent(bntP2Carta1, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        											.addGap(18)
+        											.addComponent(bntP2Carta2, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        											.addGap(18)
+        											.addComponent(bntP2Carta3, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        											.addGap(18)
+        											.addComponent(bntP2Carta4, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        											.addGap(18)
+        											.addComponent(bntP2Carta5, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        											.addGap(18)
+        											.addComponent(bntP2Carta6, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)))
+        									.addGap(29)))
+        							.addGap(18)
+        							.addComponent(jButton1))
+        						.addGroup(layout.createSequentialGroup()
+        							.addGap(663)
+        							.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        								.addComponent(jLabel5, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+        								.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        									.addComponent(jblTipoDeTurnoPlayer2)
+        									.addComponent(jLabel3))
+        								.addComponent(jLabel6, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+        								.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        									.addComponent(jblTipoDeTurnoPlayer1)
+        									.addComponent(jLabel4)))))
+        					.addPreferredGap(ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+        					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        						.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        							.addComponent(jblManaPlayer1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(jblManaFeiticoPlayer1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+        						.addComponent(jblManaFeiticoPlayer2, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jblManaPlayer2, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        						.addGroup(layout.createSequentialGroup()
+        							.addGap(157)
+        							.addComponent(bntP1Carta11, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+        							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addComponent(bntP1_Mao_0, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+        							.addGap(17)))
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(layout.createSequentialGroup()
+        							.addGap(38)
+        							.addComponent(bntP1Carta6, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(bntP1Carta9, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(bntP1Carta7, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(bntP1Carta8, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(bntP1Carta10, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(layout.createSequentialGroup()
+        							.addGap(1)
+        							.addComponent(bntP1_Mao, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(bntP1_Mao_1, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(bntP1_Mao_2, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(bntP1_Mao_3, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(bntP1_Mao_4, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))
+        					.addGap(17)))
+        			.addGap(1))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntP2Carta1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntP2Carta2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntP2Carta3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntP2Carta4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntP2Carta5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntP2Carta6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jblVidaNexusPlayer2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel1)
-                            .addGap(35, 35, 35)
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jblVidaNexusPlayer1)
-                            .addGap(97, 97, 97)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jblTipoDeTurnoPlayer1)
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jblManaFeiticoPlayer2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jblManaPlayer2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(jblManaFeiticoPlayer1))
-                            .addComponent(jblManaPlayer1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(5, 5, 5)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jblTipoDeTurnoPlayer2)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntP1Carta0, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntP1Carta1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntP1Carta2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntP1Carta3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntP1Carta4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntP1Carta5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(20)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(bntP2Carta1, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP2Carta2, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP2Carta3, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP2Carta4, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP2Carta5, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP2Carta6, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(bntP2Carta7, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP2Carta8, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP2Carta9, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP2Carta10, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP2Carta11, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP2Carta12, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+        			.addGap(13)
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        				.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        					.addComponent(jLayeredPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addGroup(layout.createSequentialGroup()
+        						.addComponent(jblVidaNexusPlayer2)
+        						.addPreferredGap(ComponentPlacement.RELATED)
+        						.addComponent(jLabel1)
+        						.addGap(35)
+        						.addComponent(jLabel2)
+        						.addPreferredGap(ComponentPlacement.RELATED)
+        						.addComponent(jblVidaNexusPlayer1)
+        						.addGap(97)))
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(jblTipoDeTurnoPlayer1)
+        					.addGap(29)
+        					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        						.addGroup(layout.createSequentialGroup()
+        							.addComponent(jLabel4)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(jLabel6, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(layout.createSequentialGroup()
+        							.addComponent(jblManaFeiticoPlayer2)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(jblManaPlayer2)))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+        					.addGap(15)
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(layout.createSequentialGroup()
+        							.addGap(22)
+        							.addComponent(jblManaFeiticoPlayer1))
+        						.addComponent(jblManaPlayer1)
+        						.addGroup(layout.createSequentialGroup()
+        							.addComponent(jLabel5)
+        							.addGap(5)
+        							.addComponent(jLabel3)
+        							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addComponent(jblTipoDeTurnoPlayer2)))))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(bntP1Carta11, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP1Carta6, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP1Carta7, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP1Carta8, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP1Carta9, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP1Carta10, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(36)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(bntP1_Mao_0, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(bntP1_Mao, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(37)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(bntP1_Mao_1, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(bntP1_Mao_2, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(bntP1_Mao_3, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(bntP1_Mao_4, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))))
+        			.addContainerGap(70, Short.MAX_VALUE))
         );
+        getContentPane().setLayout(layout);
 
         pack();
     }// </editor-fold>                        
@@ -661,110 +588,114 @@ public class InterfaceGraficaCamp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                        
 
-    private void bntP1Carta1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
-
-    private void bntP1Carta2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
-
-    private void bntP1Carta3ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
-
-    private void bntP1Carta4ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
-
-    private void bntP1Carta5ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
-
     private void bntP2Carta6ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
     }                                           
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfaceGraficaCamp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfaceGraficaCamp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfaceGraficaCamp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfaceGraficaCamp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void bntP2Carta12ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InterfaceCampo().setVisible(true);
-            }
-        });
-    }
+    private void bntP1Carta6ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void bntP1Carta7ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void bntP1Carta8ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void bntP1Carta9ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void bntP1Carta10ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void bntP1Carta13ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void bntP1Carta14ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void bntP1Carta15ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void bntP1Carta16ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void bntP1Carta17ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void bntP1Carta19ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void bntP1Carta20ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void bntP1Carta21ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void bntP1Carta22ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void bntP1Carta23ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton bntP1Carta0;
-    private javax.swing.JButton bntP1Carta1;
-    private javax.swing.JButton bntP1Carta2;
-    private javax.swing.JButton bntP1Carta3;
-    private javax.swing.JButton bntP1Carta4;
-    private javax.swing.JButton bntP1Carta5;
+    private javax.swing.JButton bntP1_Mao_0;
+    private javax.swing.JButton bntP1Carta10;
+    private javax.swing.JButton bntP1Carta11;
+    private javax.swing.JButton bntP1Carta12;
+    private javax.swing.JButton bntP1Carta13;
+    private javax.swing.JButton bntP1Carta14;
+    private javax.swing.JButton bntP1Carta15;
+    private javax.swing.JButton bntP1Carta16;
+    private javax.swing.JButton bntP1Carta17;
+    private javax.swing.JButton bntP1Carta18;
+    private javax.swing.JButton bntP1Carta19;
+    private javax.swing.JButton bntP1Carta20;
+    private javax.swing.JButton bntP1Carta21;
+    private javax.swing.JButton bntP1Carta22;
+    private javax.swing.JButton bntP1Carta23;
+    private javax.swing.JButton bntP1Carta6;
+    private javax.swing.JButton bntP1Carta7;
+    private javax.swing.JButton bntP1Carta8;
+    private javax.swing.JButton bntP1Carta9;
     private javax.swing.JButton bntP2Carta1;
+    private javax.swing.JButton bntP2Carta10;
+    private javax.swing.JButton bntP2Carta11;
+    private javax.swing.JButton bntP2Carta12;
     private javax.swing.JButton bntP2Carta2;
     private javax.swing.JButton bntP2Carta3;
     private javax.swing.JButton bntP2Carta4;
     private javax.swing.JButton bntP2Carta5;
     private javax.swing.JButton bntP2Carta6;
+    private javax.swing.JButton bntP2Carta7;
+    private javax.swing.JButton bntP2Carta8;
+    private javax.swing.JButton bntP2Carta9;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLabel jblManaFeiticoPlayer1;
     private javax.swing.JLabel jblManaFeiticoPlayer2;
@@ -774,5 +705,9 @@ public class InterfaceGraficaCamp extends javax.swing.JFrame {
     private javax.swing.JLabel jblTipoDeTurnoPlayer2;
     private javax.swing.JLabel jblVidaNexusPlayer1;
     private javax.swing.JLabel jblVidaNexusPlayer2;
-    // End of variables declaration                   
+    private JButton bntP1_Mao;
+    private JButton bntP1_Mao_1;
+    private JButton bntP1_Mao_2;
+    private JButton bntP1_Mao_3;
+    private JButton bntP1_Mao_4;
 }

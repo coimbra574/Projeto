@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.unicamp.mc322.projeto.cartas.Carta;
+import com.unicamp.mc322.projeto.main.Campo;
 import com.unicamp.mc322.projeto.turno.Turno;
 
 public class Humano  extends Jogador{
 	private Scanner teclado = new Scanner(System.in);
 
-	Humano(Turno turnoInicial) {
+	public Humano(Turno turnoInicial) {
 		super(turnoInicial);
 	}
 
@@ -44,7 +45,7 @@ public class Humano  extends Jogador{
 	}
 
 	@Override
-	public void escolherCartaUtilizar() {
+	public void escolherCartaUtilizar(Campo campo) {
 		/*
 		 * O jogador deve escolher as cartas na mão que irá invocar ou ativar o efeito
 		 * 

@@ -26,13 +26,13 @@ public class InterfaceTerminal {
 			System.out.println("Digite [2] - Humano vs Computador");
 			System.out.println("Digite [3] - Computador vs Computador");
 			String comando = keyboard.nextLine();
-			if(comando == "1") {
+			if(comando.equals("1")) {
 				return ModoDeJogo.HUMANOXHUMANO;
 			}
-			else if(comando == "2") {
+			else if(comando.equals("2")) {
 				return ModoDeJogo.HUMANOXCOMPUTADOR;
 			}
-			else if(comando == "3") {
+			else if(comando.equals("3")) {
 				return ModoDeJogo.COMPUTADORXCOMPUTADOR;
 			}
 			else {
