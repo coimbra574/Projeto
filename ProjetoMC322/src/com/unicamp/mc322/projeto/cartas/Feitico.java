@@ -1,7 +1,7 @@
 package com.unicamp.mc322.projeto.cartas;
 
 import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
-import com.unicamp.mc322.projeto.main.Jogo;
+import com.unicamp.mc322.projeto.main.Campo;
 
 public class Feitico extends Carta {
 	Efeito efeito;
@@ -11,7 +11,7 @@ public class Feitico extends Carta {
 		this.efeito = efeito;
 	}
 
-	public void ativarCarta(Jogo jogo) {
-		efeito.ativarEfeito(jogo);
+	public void ativarCarta(Campo campo) {
+		efeito.ativarEfeito(campo);
 	}
 }

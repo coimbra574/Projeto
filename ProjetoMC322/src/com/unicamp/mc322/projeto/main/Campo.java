@@ -10,17 +10,45 @@
 package com.unicamp.mc322.projeto.main;
 
 import java.util.ArrayList;
+import com.unicamp.mc322.projeto.cartas.Caracteristica;
 import com.unicamp.mc322.projeto.cartas.Carta;
+import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.jogador.Jogador;
+import com.unicamp.mc322.projeto.turno.Turno;
 
 public class Campo {
-	Carta[][] unidadesEvocadas = new Carta[2][6];
-	//private Jogador p1,p2;
+	public final int LARGURA_CAMPO = 6;
+	private Seguidor[][] unidadesEvocadas = new Seguidor[2][LARGURA_CAMPO];
+	private int nexusP1, nexusP2;
+	private Jogador p1,p2;
+	private int numeroJogadorAtual;
 
 	public Campo(Jogador p1, Jogador p2) {
+		this.p1 = p1;
+		this.p2 = p2;
 		definirNumeroEmCampo(p1, p2);
+		nexusP1 = 20;
+		nexusP2 = 20;
+		numeroJogadorAtual = 1;  // Jogo começa com p1
+		//p1.setAtacante()  //Na primeira rodada p1 é atacante e p2 é defesa
+		//p2.set.Defesa 
 	}
 	
+	public int getNexus(int numeroJogador) {
+		if(numeroJogador == 1) {
+			return nexusP1;
+		} else {
+			return nexusP2;
+		}
+	}
+	
+	public void adicionarAoNexus(int numeroJogador, int valorAdicionado) {
+		if(numeroJogador == 1) {
+			nexusP1 += valorAdicionado;
+		} else {
+			nexusP2 = valorAdicionado;
+		}
+	}
 	
 	public void definirNumeroEmCampo(Jogador jogador1, Jogador jogador2) {
 		jogador1.setNumeroEmCampo(1);
@@ -28,7 +56,7 @@ public class Campo {
 	}
 	
 	
-	public void adicionarCartaEmCampo(int numeroJogador, int posicao, Carta carta) {
+	public void adicionarCartaEmCampo(int numeroJogador, int posicao, Seguidor carta) {
 		unidadesEvocadas[numeroJogador][posicao-1] = carta;
 	}
 	
@@ -38,16 +66,37 @@ public class Campo {
 	}
 	
 	
-	public ArrayList<Carta> selecionarUnidades(int numeroJogador, int ... unidades) {
-		ArrayList<Carta> unidadesSelecionadas = new ArrayList<Carta>();
-		for(int i : unidades) {
-			if(i > 0 && i < 7) {
-				unidadesSelecionadas.add(unidadesEvocadas[numeroJogador][i-1]);
-			} else {
-				System.out.println("Seleção fora dos limites do campo");
-			}
+	public void alterarCartaEmCampo(int numeroJogador, int posicao, Caracteristica caracteristica, int novoValor) {
+		if(caracteristica.equals(Caracteristica.PODER)) {
+			unidadesEvocadas[numeroJogador][posicao-1].setPoder(novoValor);
 		}
-		return unidadesSelecionadas;
+		else {
+			unidadesEvocadas[numeroJogador][posicao-1].setVida(novoValor);
+		}
 	}
+	
+
+	public Seguidor selecionarUnidade(int numeroJogador, int posicao) {
+		if(posicao > 0 && posicao <= LARGURA_CAMPO) {
+			return unidadesEvocadas[numeroJogador][posicao-1];
+		} else {
+			System.out.println("Seleção fora dos limites do campo");
+			return null;
+		}
+	}
+	
+	
+	public int getNumeroJogadorAtual() {
+		return numeroJogadorAtual;
+	}
+	
+	public int getNumeroJogadorOponente() {
+		if(numeroJogadorAtual == 1) {
+			return 2;
+		} else {
+			return 1;
+		}
+	}
+	
 
 }

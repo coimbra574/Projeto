@@ -7,21 +7,17 @@ import com.unicamp.mc322.projeto.cartas.tracos.Traco;
 public class Campeao extends Seguidor {
 	private Nivel nivel;
 	private int numeroAtaques=0, seguidoresMortos=0, danoCausado=0, danoAdicionado=0;
-	private int quantParaEvolucao;
-	private Condicao condicaoDeEvolucao;
-	private Campeao evolucao;
+	private DadosEvolucao evolucao;
+	private Traco traco; // SÓ 1 TRAÇO?
+	private ArrayList<Efeito> efeitos = new ArrayList<Efeito>();
 
-	public Campeao(String nome, int custo, int poder, int vida, Traco traco, Condicao condicaoDeEvolucao, int quantParaEvolucao, Campeao evolucao, Efeito ... efeitos) {
+	public Campeao(String nome, int custo, int poder, int vida, DadosEvolucao evolucao, Traco traco, Efeito ... efeitos) {
 		super(nome, custo, poder, vida, traco, efeitos);
-		this.condicaoDeEvolucao = condicaoDeEvolucao;
 		this.evolucao = evolucao;
-		this.quantParaEvolucao = quantParaEvolucao;
+		this.nivel = Nivel.NORMAL;
 		
-		// Se não tiver condição de evolução, já é um campeão de nível superior
-		if(condicaoDeEvolucao.equals(Condicao.SEM_EVOLUCAO)) {
-			nivel = Nivel.SUPERIOR;
-		} else {
-			nivel = Nivel.NORMAL;
+		for(Efeito aux : efeitos) {
+			this.efeitos.add(aux);
 		}
 	}
 	
@@ -49,6 +45,9 @@ public class Campeao extends Seguidor {
 	// Verifica se a condição de evolução foi atendida
 	public boolean chequeDeNivel(int n) {
 		boolean condicaoAtendida;
+		Condicao condicaoDeEvolucao = evolucao.getCondicaoEvolucao();
+		int quantParaEvolucao = evolucao.getQuantEvolucao();
+		
 		if(condicaoDeEvolucao.equals(Condicao.NUM_ATAQUE) && numeroAtaques >= quantParaEvolucao) {
 			condicaoAtendida = true;
 		}
@@ -68,9 +67,14 @@ public class Campeao extends Seguidor {
 	}
 	
 	
-	// Se durante o jogo o cheque de nível for true, então troca a carta pela sua evolução
-	public Carta subirNivel(int n) {
-		return evolucao;
+	public void subirNivel() {
+		setVida(getVida() + evolucao.getMaisVida());
+		setPoder(getPoder() + evolucao.getMaisPoder());
+		traco = evolucao.getNovoTraco();
+		
+		for(Efeito aux : evolucao.getNovosEfeitos()) {
+			efeitos.add(aux);
+		}
 	}
 	
 }

@@ -33,6 +33,10 @@ public abstract class Jogador {
 		return numeroJogadorNoCampo;
 	}
 	
+	public Turno getTurno() {
+		return turno;
+	}
+	
 	private ArrayList<Carta> obter4CartasIniciais() {
 		/*
 		 * Esse método deve ser responsável por obter as quatro cartas inciais do jogador
