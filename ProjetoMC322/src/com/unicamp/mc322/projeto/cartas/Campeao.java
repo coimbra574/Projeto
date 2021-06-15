@@ -10,6 +10,7 @@ public class Campeao extends Seguidor {
 	private DadosEvolucao evolucao;
 	private Traco traco; // SÓ 1 TRAÇO?
 	private ArrayList<Efeito> efeitos = new ArrayList<Efeito>();
+	final private String tipo = "CampeÃ£o";// Coloquei isso pq eu preciso saber qual tipo de carta Ã© pra invocÃ¡-la
 
 	public Campeao(String nome, int custo, int poder, int vida, DadosEvolucao evolucao, Traco traco, Efeito ... efeitos) {
 		super(nome, custo, poder, vida, traco, efeitos);
@@ -19,6 +20,11 @@ public class Campeao extends Seguidor {
 		for(Efeito aux : efeitos) {
 			this.efeitos.add(aux);
 		}
+	}
+	
+	@Override
+	public String getTipo() {
+		return tipo;
 	}
 	
 	public void setNivel(Nivel novoNivel) {
@@ -42,7 +48,7 @@ public class Campeao extends Seguidor {
 	}
 	
 
-	// Verifica se a condição de evolução foi atendida
+	// Verifica se a condiï¿½ï¿½o de evoluï¿½ï¿½o foi atendida
 	public boolean chequeDeNivel(int n) {
 		boolean condicaoAtendida;
 		Condicao condicaoDeEvolucao = evolucao.getCondicaoEvolucao();
@@ -67,9 +73,11 @@ public class Campeao extends Seguidor {
 	}
 	
 	
+
 	public void subirNivel() {
 		setVida(getVida() + evolucao.getMaisVida());
 		setPoder(getPoder() + evolucao.getMaisPoder());
+		nivel = Nivel.SUPERIOR;
 		traco = evolucao.getNovoTraco();
 		
 		for(Efeito aux : evolucao.getNovosEfeitos()) {
