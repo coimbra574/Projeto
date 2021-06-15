@@ -1,6 +1,8 @@
 package com.unicamp.mc322.projeto.jogador;
 
 import com.unicamp.mc322.projeto.cartas.*;
+import com.unicamp.mc322.projeto.deckFactory.Deck;
+import com.unicamp.mc322.projeto.deckFactory.DeckFactory;
 import com.unicamp.mc322.projeto.main.Campo;
 import com.unicamp.mc322.projeto.turno.*;
 import java.util.Scanner;
@@ -16,13 +18,15 @@ public abstract class Jogador {
 	protected Deck deckJogador;
 	private int numeroJogadorNoCampo=0;
 	
-	Jogador(Turno turnoInicial) {
+	Jogador(Turno turnoInicial, String tipoDeck) {
 		/*
 		 * Arranjar um meio de randomizar quem vai atacar primeiro
 		 */
+		//Ao inves de ser uma string o tipoDeck será que é melhor um enum??
 		super();
 		this.turno = turnoInicial;
-		//this.mao = obter4CartasIniciais();
+		this.deckJogador = DeckFactory.getDeck(tipoDeck);
+		this.mao = obter4CartasIniciais();
 	}
 	
 	public void setNumeroEmCampo(int n) {

@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import com.unicamp.mc322.projeto.ModoDeJogo;
 import com.unicamp.mc322.projeto.cartas.Carta;
-import com.unicamp.mc322.projeto.jogador.Deck;
+import com.unicamp.mc322.projeto.deckFactory.Deck;
 
 public class InterfaceTerminal {
 	private boolean exitSelected = false;

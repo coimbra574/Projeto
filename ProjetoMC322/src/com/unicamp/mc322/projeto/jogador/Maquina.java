@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.main.Campo;
+import com.unicamp.mc322.projeto.deckFactory.Deck;
 import com.unicamp.mc322.projeto.turno.Turno;
 import java.util.Random;
 
 public class Maquina extends Jogador{
 	Random geradorAleatorio = new Random();
 
-	public Maquina(Turno turnoInicial) {
-		super(turnoInicial);
+	public Maquina(Turno turnoInicial, String tipoDeck) {
+		super(turnoInicial, tipoDeck);
 		// TODO Auto-generated constructor stub
 	}
 

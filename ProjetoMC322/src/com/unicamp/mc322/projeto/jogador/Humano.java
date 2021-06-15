@@ -6,12 +6,13 @@ import java.util.Scanner;
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.main.Campo;
 import com.unicamp.mc322.projeto.turno.Turno;
+import com.unicamp.mc322.projeto.deckFactory.Deck;
 
 public class Humano  extends Jogador{
 	private Scanner teclado = new Scanner(System.in);
 
-	public Humano(Turno turnoInicial) {
-		super(turnoInicial);
+	public Humano(Turno turnoInicial, String tipoDeck) {
+		super(turnoInicial, tipoDeck);
 	}
 
 	@Override

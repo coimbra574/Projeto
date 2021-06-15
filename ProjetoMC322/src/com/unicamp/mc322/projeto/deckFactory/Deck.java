@@ -1,26 +1,22 @@
-package com.unicamp.mc322.projeto.jogador;
+package com.unicamp.mc322.projeto.deckFactory;
 
 import java.util.ArrayList;
 import com.unicamp.mc322.projeto.cartas.*;
 import java.util.Random;
 
-public class Deck {
-	private int numCartasDeck = 40;
-	private ArrayList<Carta> baralho = new ArrayList<Carta>();
-	private String tipoDeck;//Não sei se é necessário, acho q depende da nossa implementação se vamos usar mais cartas do q as recomendadas e tals
+public abstract class Deck {
+	protected ArrayList<Carta> baralho = new ArrayList<Carta>();
+	protected int numCartasDeck = 40;	
 	
-	
-	Deck(String tipoDeck) {
+	//Deck(String tipoDeck) {
+	protected Deck() {
 		super();
-		this.tipoDeck = tipoDeck;
-		contruirDeck(;)//deckFactory
+		//baralho = contruirDeck();//Eh aqui?? ou nas subclasses?
 	}
 	
-	private void contruirDeck() {
-		//por enquanto vou deixar como stub, pois não sei como fazer isso de deck factory. Além de precisar das cartas para contruir a carta
-	}
+	protected abstract ArrayList<Carta> construirDeck();
 	
-	ArrayList<Carta> obterCartasIniciais(ArrayList<Carta> mao){
+	public ArrayList<Carta> obterCartasIniciais(ArrayList<Carta> mao){
 		for(int i=0;i<4;i++) {
 			Carta carta = baralho.get(i);
 			mao.add(carta);
@@ -33,7 +29,7 @@ public class Deck {
 		return mao;
 	}
 	
-	Carta pegarCartaAleatoriaDeck() {
+	public Carta pegarCartaAleatoriaDeck() {
 		int numero;
 		Carta carta;
 		
@@ -45,7 +41,7 @@ public class Deck {
 		return carta;
 	}
 	
-	void recolocarNoBaralho(Carta carta) {
+	public void recolocarNoBaralho(Carta carta) {
 		int numero;
 		
 		Random geradorAleatorio = new Random();
@@ -54,7 +50,7 @@ public class Deck {
 		numCartasDeck+=1;
 	}
 	
-	Carta obterCartaDeck() {
+	public Carta obterCartaDeck() {
 		Carta carta;
 		
 		carta = baralho.get(0);
