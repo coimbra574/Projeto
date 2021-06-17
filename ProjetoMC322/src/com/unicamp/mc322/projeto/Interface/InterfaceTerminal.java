@@ -94,5 +94,9 @@ public class InterfaceTerminal {
 		}
 		return listaDeSubstituicao;
 	}
+	
+	public void unidadesEvocadas() {
+		
+	}
 
 }

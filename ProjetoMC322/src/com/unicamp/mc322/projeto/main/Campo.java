@@ -10,6 +10,8 @@
 package com.unicamp.mc322.projeto.main;
 
 import java.util.ArrayList;
+
+import com.unicamp.mc322.projeto.Interface.InterfaceGrafica;
 import com.unicamp.mc322.projeto.cartas.Caracteristica;
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
@@ -18,18 +20,23 @@ import com.unicamp.mc322.projeto.turno.Turno;
 
 public class Campo {
 	public final int LARGURA_CAMPO = 6;
-	private Seguidor[][] unidadesEvocadas = new Seguidor[2][LARGURA_CAMPO];
+	private Carta[][] unidadesEvocadas = new Carta[2][LARGURA_CAMPO];
 	private int nexusP1, nexusP2;
-	private Jogador p1,p2;
+	private Jogador player1,player2;
 	private int numeroJogadorAtual;
+	private InterfaceGrafica interfaceGrafica;
 
 	public Campo(Jogador p1, Jogador p2) {
-		this.p1 = p1;
-		this.p2 = p2;
+		this.player1 = p1;
+		this.player2 = p2;
+		this.interfaceGrafica = new InterfaceGrafica();
 		definirNumeroEmCampo(p1, p2);
 		nexusP1 = 20;
 		nexusP2 = 20;
 		numeroJogadorAtual = 1;  // Jogo começa com p1
+		
+		interfaceGrafica.iniciar(nexusP1, nexusP2, player1.getMao(), player2.getMao());
+		
 		//p1.setAtacante()  //Na primeira rodada p1 é atacante e p2 é defesa
 		//p2.set.Defesa 
 	}
@@ -56,7 +63,7 @@ public class Campo {
 	}
 	
 	
-	public void adicionarCartaEmCampo(int numeroJogador, int posicao, Seguidor carta) {
+	public void adicionarCartaEmCampo(int numeroJogador, int posicao, Carta carta) {
 		unidadesEvocadas[numeroJogador][posicao-1] = carta;
 	}
 	
@@ -68,15 +75,15 @@ public class Campo {
 	
 	public void alterarCartaEmCampo(int numeroJogador, int posicao, Caracteristica caracteristica, int novoValor) {
 		if(caracteristica.equals(Caracteristica.PODER)) {
-			unidadesEvocadas[numeroJogador][posicao-1].setPoder(novoValor);
+	//		unidadesEvocadas[numeroJogador][posicao-1].setPoder(novoValor);
 		}
 		else {
-			unidadesEvocadas[numeroJogador][posicao-1].setVida(novoValor);
+	//		unidadesEvocadas[numeroJogador][posicao-1].setVida(novoValor);
 		}
 	}
 	
 
-	public Seguidor selecionarUnidade(int numeroJogador, int posicao) {
+	public Carta selecionarUnidade(int numeroJogador, int posicao) {
 		if(posicao > 0 && posicao <= LARGURA_CAMPO) {
 			return unidadesEvocadas[numeroJogador][posicao-1];
 		} else {
