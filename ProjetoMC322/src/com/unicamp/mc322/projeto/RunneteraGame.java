@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.unicamp.mc322.projeto.Interface.*;
 import com.unicamp.mc322.projeto.deckFactory.Deck;
 import com.unicamp.mc322.projeto.jogador.*;
-import com.unicamp.mc322.projeto.main.Campo;
 import com.unicamp.mc322.projeto.turno.Turno;
 
 public class RunneteraGame {
@@ -50,16 +49,16 @@ public class RunneteraGame {
 	
 	private void criarJogadores() {
 		if(modoDeJogo == ModoDeJogo.HUMANOXHUMANO) {
-			player1 = new Humano(Turno.ATAQUE);
-			player2 = new Humano(Turno.DEFESA);
+			player1 = new Humano(Turno.ATAQUE,"Magico");
+			player2 = new Humano(Turno.DEFESA,"Lutador");
 		}
 		else if(modoDeJogo == ModoDeJogo.HUMANOXCOMPUTADOR) {
-			player1 = new Humano(Turno.ATAQUE);
-			player2 = new Maquina(Turno.DEFESA);
+			player1 = new Humano(Turno.ATAQUE,"Magico");
+			player2 = new Maquina(Turno.DEFESA,"Lutador");
 		}
 		else {
-			player1 = new Maquina(Turno.ATAQUE);
-			player2 = new Maquina(Turno.DEFESA);
+			player1 = new Maquina(Turno.ATAQUE,"Lutador");
+			player2 = new Maquina(Turno.DEFESA,"Lutador");
 		}
 	}
 }

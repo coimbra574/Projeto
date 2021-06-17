@@ -1,7 +1,7 @@
 package com.unicamp.mc322.projeto.cartas;
 
+import com.unicamp.mc322.projeto.Campo;
 import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
-import com.unicamp.mc322.projeto.main.Campo;
 
 public class Feitico extends Carta {
 	Efeito efeito;

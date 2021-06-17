@@ -1,9 +1,9 @@
 package com.unicamp.mc322.projeto.jogador;
 
+import com.unicamp.mc322.projeto.Campo;
 import com.unicamp.mc322.projeto.cartas.*;
 import com.unicamp.mc322.projeto.deckFactory.Deck;
 import com.unicamp.mc322.projeto.deckFactory.DeckFactory;
-import com.unicamp.mc322.projeto.main.Campo;
 import com.unicamp.mc322.projeto.turno.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public abstract class Jogador {
 	private int nexus = 20;
 	private int manaDeFeitico = 0;
 	private Turno turno;
-	//private Scanner teclado = new Scanner(System.in);
+	private Scanner teclado = new Scanner(System.in);
 	protected ArrayList<Carta> mao = new ArrayList<Carta>();  //Irá representar as cartas na mão do jogador
 	protected Deck deckJogador;
 	private int numeroJogadorNoCampo=0;
@@ -39,6 +39,14 @@ public abstract class Jogador {
 	
 	public Turno getTurno() {
 		return turno;
+	}
+	
+	public int getNexus() {
+		return nexus;
+	}
+	
+	public void adicionarAoNexus(int valorAdicionado) {
+		nexus += valorAdicionado;
 	}
 	
 	private ArrayList<Carta> obter4CartasIniciais() {
@@ -88,7 +96,10 @@ public abstract class Jogador {
 		}
 	}
 	
+	
+	// Escolhe cartas invocadas para utilizar
 	public abstract void escolherCartaUtilizar(Campo campo);
+	
 	
 	protected boolean verificarCarta(Carta carta) {
 		/*
@@ -124,27 +135,26 @@ public abstract class Jogador {
 		this.nexus-=dano;
 	}
 	
-	// Deixar essa parte de combate aqui ou na classe Jogo/Game?
-	public void atacar(Jogador oponente, Campo campo, int... posicaoUnidades) {
-		/*
-		 * Esse metodo tem acesso ao campo de invocações para selecionar os combatentes, após isso chama a 
-		 * instancia da classe combate onde será feita a batalha
-		 */
-		ArrayList<Carta> unidadesCombatentes = campo.selecionarUnidades(numeroJogadorNoCampo, posicaoUnidades);
-		ArrayList<Carta> unidadesDefensoras = oponente.defender(campo, posicaoUnidades);  // 
-		//combate(unidadesCombatentes, unidadesDefensoras);
-		acabarTurno();
-	}
-	
-	ArrayList<Carta> defender(Campo campo, int...posicaoUnidades) {
-		/*
-		 * Esse metodo deve ser responsavel pela escolha das cartas que irao defender o jogador e chamar a instancia de combate
-		 */
-		ArrayList<Carta> unidadesDefensoras = campo.selecionarUnidades(numeroJogadorNoCampo, posicaoUnidades);
-		return unidadesDefensoras;
+
+	/* public void atacar(Jogador oponente, Campo campo) {
 		
-	}
+		  //Esse metodo tem acesso ao campo de invocações para selecionar os combatentes, após isso chama a 
+		  //instancia da classe combate onde será feita a batalha
+		 
+		ArrayList<Carta> unidadesCombatentes = escolherCartaUtilizar(campo);
+		ArrayList<Carta> unidadesDefensoras = oponente.defender(campo);  
+		campo.combater(unidadesCombatentes, unidadesDefensoras);
+		acabarTurno(); 
+	} */
 	
+	/*ArrayList<Carta> defender(Campo campo, int...posicaoUnidades) {
+		
+		 //Esse metodo deve ser responsavel pela escolha das cartas que irao defender o jogador e chamar a instancia de combate
+		 
+		ArrayList<Carta> unidadesDefensoras = escolherCartaUtilizar(campo);
+		return unidadesDefensoras;
+	}*/
+
 	public void acabarTurno() {
 		if(mana<=3) {
 			manaDeFeitico = mana;
