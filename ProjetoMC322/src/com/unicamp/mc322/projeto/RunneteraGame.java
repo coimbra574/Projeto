@@ -37,28 +37,28 @@ public class RunneteraGame {
 		
 		this.campoBatalha = new Campo(player1, player2);
 		
-		InterfaceGraficaCamp compoGrafico = new InterfaceGraficaCamp();
-		compoGrafico.setVisible(true);
+		//InterfaceGrafica compoGrafico = new InterfaceGrafica();
+		//compoGrafico.setVisible(true);
 		
-		while(compoGrafico.isVisible()) {
-			// Rodando o jogo
-			//System.out.println("Rodando");
-		}
+		//while(compoGrafico.isVisible()) {
+		//	// Rodando o jogo
+		//	//System.out.println("Rodando");
+		//}
 		interfaceTerminal.exitGame();
 	}
 	
 	private void criarJogadores() {
 		if(modoDeJogo == ModoDeJogo.HUMANOXHUMANO) {
-			player1 = new Humano(Turno.ATAQUE,"Magico");
-			player2 = new Humano(Turno.DEFESA,"Lutador");
+			player1 = new Humano(Turno.ATAQUE, "Lutador");
+			player2 = new Humano(Turno.DEFESA, "Lutador");
 		}
 		else if(modoDeJogo == ModoDeJogo.HUMANOXCOMPUTADOR) {
-			player1 = new Humano(Turno.ATAQUE,"Magico");
-			player2 = new Maquina(Turno.DEFESA,"Lutador");
+			player1 = new Humano(Turno.ATAQUE, "Lutador");
+			player2 = new Maquina(Turno.DEFESA, "Lutador");
 		}
 		else {
-			player1 = new Maquina(Turno.ATAQUE,"Lutador");
-			player2 = new Maquina(Turno.DEFESA,"Lutador");
+			player1 = new Maquina(Turno.ATAQUE, "Lutador");
+			player2 = new Maquina(Turno.DEFESA, "Lutador");
 		}
 	}
 }
