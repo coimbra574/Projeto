@@ -41,6 +41,10 @@ public abstract class Jogador {
 		return turno;
 	}
 	
+	public ArrayList<Carta> getMao() {
+		return mao;
+	}
+	
 	private ArrayList<Carta> obter4CartasIniciais() {
 		/*
 		 * Esse método deve ser responsável por obter as quatro cartas inciais do jogador
@@ -130,21 +134,21 @@ public abstract class Jogador {
 		 * Esse metodo tem acesso ao campo de invocações para selecionar os combatentes, após isso chama a 
 		 * instancia da classe combate onde será feita a batalha
 		 */
-		ArrayList<Carta> unidadesCombatentes = campo.selecionarUnidades(numeroJogadorNoCampo, posicaoUnidades);
+	//	ArrayList<Carta> unidadesCombatentes = campo.selecionarUnidades(numeroJogadorNoCampo, posicaoUnidades);
 		ArrayList<Carta> unidadesDefensoras = oponente.defender(campo, posicaoUnidades);  // 
 		//combate(unidadesCombatentes, unidadesDefensoras);
 		acabarTurno();
 	}
 	
-	ArrayList<Carta> defender(Campo campo, int...posicaoUnidades) {
-		/*
+//	ArrayList<Carta> defender(Campo campo, int...posicaoUnidades) {
+//		/*
 		 * Esse metodo deve ser responsavel pela escolha das cartas que irao defender o jogador e chamar a instancia de combate
 		 */
-		ArrayList<Carta> unidadesDefensoras = campo.selecionarUnidades(numeroJogadorNoCampo, posicaoUnidades);
-		return unidadesDefensoras;
+//		ArrayList<Carta> unidadesDefensoras = campo.selecionarUnidades(numeroJogadorNoCampo, posicaoUnidades);
+//		return unidadesDefensoras;
 		
-	}
-	
+//	}
+//	
 	public void acabarTurno() {
 		if(mana<=3) {
 			manaDeFeitico = mana;

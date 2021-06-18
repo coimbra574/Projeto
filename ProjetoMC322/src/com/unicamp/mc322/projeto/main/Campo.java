@@ -29,13 +29,13 @@ public class Campo {
 	public Campo(Jogador p1, Jogador p2) {
 		this.player1 = p1;
 		this.player2 = p2;
-		this.interfaceGrafica = new InterfaceGrafica();
+		this.interfaceGrafica = new InterfaceGrafica(this);
 		definirNumeroEmCampo(p1, p2);
 		nexusP1 = 20;
 		nexusP2 = 20;
 		numeroJogadorAtual = 1;  // Jogo começa com p1
 		
-		interfaceGrafica.iniciar(nexusP1, nexusP2, player1.getMao(), player2.getMao());
+		interfaceGrafica.iniciar(player1.getMao(), player2.getMao());
 		
 		//p1.setAtacante()  //Na primeira rodada p1 é atacante e p2 é defesa
 		//p2.set.Defesa 
@@ -55,6 +55,7 @@ public class Campo {
 		} else {
 			nexusP2 = valorAdicionado;
 		}
+		interfaceGrafica.atualizarNexus();
 	}
 	
 	public void definirNumeroEmCampo(Jogador jogador1, Jogador jogador2) {

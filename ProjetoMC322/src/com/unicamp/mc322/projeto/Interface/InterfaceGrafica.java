@@ -8,6 +8,7 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.unicamp.mc322.projeto.cartas.Carta;
+import com.unicamp.mc322.projeto.main.Campo;
 
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -17,6 +18,7 @@ import javax.swing.JPanel;
 
 
 public class InterfaceGrafica extends javax.swing.JFrame {
+	private Campo campo;
 	private ArrayList<JButton> maoP1 = new ArrayList<JButton>();
 	private ArrayList<JButton> maoP2 = new ArrayList<JButton>();
 	private ArrayList<JButton> evocadasP1 = new ArrayList<JButton>();
@@ -24,14 +26,14 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 	private ArrayList<JButton> emCampoP1 = new ArrayList<JButton>();
 	private ArrayList<JButton> emCampoP2 = new ArrayList<JButton>();
 
-    public InterfaceGrafica() {
+    public InterfaceGrafica(Campo campo) {
     	getContentPane().setFont(new Font("Arial", Font.PLAIN, 10));
         initComponents();
+        this.campo = campo;
     }
     
-	public void iniciar(int nexusP1, int nexusP2, ArrayList<Carta> maoPlayer1, ArrayList<Carta> maoPlayer2) {
-		setVidaNexusP1(nexusP1);
-		setVidaNexusP2(nexusP2);
+	public void iniciar(ArrayList<Carta> maoPlayer1, ArrayList<Carta> maoPlayer2) {
+		atualizarNexus();
 		
 		for(int i = 0; i < maoP1.size(); i++) {
 			maoP1.get(i).setVisible(false);
@@ -46,11 +48,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 		atualizarMaoP2(maoPlayer2);
 	}
 	
-	public void setVidaNexusP1(int valor) {
-		jblP1VidaNexus.setText(Integer.toString(valor));
-	}
-	public void setVidaNexusP2(int valor) {
-		jblP2VidaNexus.setText(Integer.toString(valor));
+	public void atualizarNexus() {
+		int nexusP1 = campo.getNexus(1);
+		int nexusP2 = campo.getNexus(2);
+		jblP1VidaNexus.setText(Integer.toString(nexusP1));
+		jblP2VidaNexus.setText(Integer.toString(nexusP2));
 	}
 	
 	public void atualizarMaoP1(ArrayList<Carta> mao) {
@@ -377,6 +379,8 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP2Mao_5 = new JButton();
         bntP2Mao_5.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
         bntP2Mao_5.setFont(new Font("Tahoma", Font.PLAIN, 9));
+        
+        JButton btnInformacoes = new JButton("<html><center>Informacoes<br />Sobre<br />Cartas</center></html>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
@@ -428,9 +432,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         									.addComponent(bntP2Evocada_5, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))))
         						.addGroup(layout.createSequentialGroup()
         							.addGap(1)
-        							.addComponent(jLayeredPane2, GroupLayout.PREFERRED_SIZE, 674, GroupLayout.PREFERRED_SIZE))))
-        				.addGroup(layout.createSequentialGroup()
-        					.addGap(140)
+        							.addComponent(jLayeredPane2, GroupLayout.PREFERRED_SIZE, 674, GroupLayout.PREFERRED_SIZE)))
+        					.addPreferredGap(ComponentPlacement.UNRELATED))
+        				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+        					.addContainerGap(144, Short.MAX_VALUE)
         					.addGroup(layout.createParallelGroup(Alignment.LEADING)
         						.addComponent(bntP1Mao_0, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
         						.addComponent(bntP1Evocada_0, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
@@ -456,40 +461,40 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         							.addGap(18)
         							.addComponent(bntP1Evocada_4, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
         							.addGap(18)
-        							.addComponent(bntP1Evocada_5, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))))
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addComponent(bntP1Evocada_5, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))
+        					.addGap(60)))
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(jLabel7)
-        						.addComponent(bntAvancarTurno)
-        						.addComponent(jLabel6, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(jLabel5, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
-        					.addGroup(layout.createSequentialGroup()
-        						.addGap(39)
-        						.addComponent(jblP1Mana, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-        					.addGroup(layout.createSequentialGroup()
-        						.addGap(41)
-        						.addComponent(jblP1ManaFeitico, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-        					.addGroup(layout.createSequentialGroup()
-        						.addGap(8)
-        						.addComponent(jLabel4))
-        					.addGroup(layout.createSequentialGroup()
-        						.addGap(19)
-        						.addComponent(jblTipoDeTurnoPlayer1))
-        					.addGroup(layout.createSequentialGroup()
-        						.addGap(43)
-        						.addComponent(jblP2Mana, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-        					.addGroup(layout.createSequentialGroup()
-        						.addGap(41)
-        						.addComponent(jblP2ManaFeitico, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
+        				.addComponent(jLabel7)
+        				.addComponent(bntAvancarTurno)
+        				.addComponent(jLabel6, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jLabel5, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(39)
+        					.addComponent(jblP1Mana, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(41)
+        					.addComponent(jblP1ManaFeitico, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(8)
+        					.addComponent(jLabel4))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(19)
+        					.addComponent(jblTipoDeTurnoPlayer1))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(43)
+        					.addComponent(jblP2Mana, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(41)
+        					.addComponent(jblP2ManaFeitico, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
         				.addGroup(layout.createSequentialGroup()
         					.addGap(17)
-        					.addComponent(jblTipoDeTurnoPlayer2)))
-        			.addContainerGap(601, Short.MAX_VALUE))
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(btnInformacoes)
+        						.addComponent(jblTipoDeTurnoPlayer2))))
+        			.addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-        	layout.createParallelGroup(Alignment.TRAILING)
+        	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
         				.addGroup(layout.createSequentialGroup()
@@ -541,39 +546,38 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         								.addComponent(bntP1Mao_5, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
         								.addComponent(bntP1Mao_1, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)))))
         				.addComponent(bntP1Evocada_1, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(bntP1Evocada_0, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
         				.addComponent(bntP1Evocada_2, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
         				.addComponent(bntP1Evocada_3, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
         				.addComponent(bntP1Evocada_4, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(bntP1Evocada_5, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
-        			.addContainerGap(174, Short.MAX_VALUE))
-        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+        				.addComponent(bntP1Evocada_5, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(bntP1Evocada_0, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+        			.addContainerGap(22, Short.MAX_VALUE))
+        		.addGroup(layout.createSequentialGroup()
         			.addGap(203)
-        			.addGroup(layout.createSequentialGroup()
-        				.addComponent(jblTipoDeTurnoPlayer1)
-        				.addPreferredGap(ComponentPlacement.RELATED)
-        				.addComponent(jblP2ManaFeitico)
-        				.addPreferredGap(ComponentPlacement.RELATED)
-        				.addComponent(jLabel4)
-        				.addPreferredGap(ComponentPlacement.RELATED)
-        				.addComponent(jblP2Mana)
-        				.addPreferredGap(ComponentPlacement.RELATED)
-        				.addComponent(jLabel5, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-        				.addPreferredGap(ComponentPlacement.UNRELATED)
-        				.addComponent(bntAvancarTurno, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-        				.addGap(8)
-        				.addComponent(jLabel6)
-        				.addGap(4)
-        				.addComponent(jblP1Mana)
-        				.addPreferredGap(ComponentPlacement.RELATED)
-        				.addComponent(jLabel7)
-        				.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        				.addComponent(jblP1ManaFeitico)
-        				.addPreferredGap(ComponentPlacement.RELATED))
-        			.addGroup(layout.createSequentialGroup()
-        				.addPreferredGap(ComponentPlacement.RELATED)
-        				.addComponent(jblTipoDeTurnoPlayer2))
-        			.addGap(391))
+        			.addComponent(jblTipoDeTurnoPlayer1)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jblP2ManaFeitico)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jLabel4)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jblP2Mana)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jLabel5, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(bntAvancarTurno, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+        			.addGap(8)
+        			.addComponent(jLabel6)
+        			.addGap(4)
+        			.addComponent(jblP1Mana)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jLabel7)
+        			.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        			.addComponent(jblP1ManaFeitico)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jblTipoDeTurnoPlayer2)
+        			.addGap(57)
+        			.addComponent(btnInformacoes)
+        			.addGap(107))
         );
         getContentPane().setLayout(layout);
 
