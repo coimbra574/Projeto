@@ -1,9 +1,9 @@
 package com.unicamp.mc322.projeto.jogador;
 
+import com.unicamp.mc322.projeto.Campo;
 import com.unicamp.mc322.projeto.cartas.*;
 import com.unicamp.mc322.projeto.deckFactory.Deck;
 import com.unicamp.mc322.projeto.deckFactory.DeckFactory;
-import com.unicamp.mc322.projeto.main.Campo;
 import com.unicamp.mc322.projeto.turno.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public abstract class Jogador {
 	private int nexus = 20;
 	private int manaDeFeitico = 0;
 	private Turno turno;
-	//private Scanner teclado = new Scanner(System.in);
+	private Scanner teclado = new Scanner(System.in);
 	protected ArrayList<Carta> mao = new ArrayList<Carta>();  //Irá representar as cartas na mão do jogador
 	protected Deck deckJogador;
 	private int numeroJogadorNoCampo=0;
@@ -43,6 +43,12 @@ public abstract class Jogador {
 	
 	public ArrayList<Carta> getMao() {
 		return mao;
+	public int getNexus() {
+		return nexus;
+	}
+	
+	public void adicionarAoNexus(int valorAdicionado) {
+		nexus += valorAdicionado;
 	}
 	
 	private ArrayList<Carta> obter4CartasIniciais() {
@@ -92,7 +98,10 @@ public abstract class Jogador {
 		}
 	}
 	
+	
+	// Escolhe cartas invocadas para utilizar
 	public abstract void escolherCartaUtilizar(Campo campo);
+	
 	
 	protected boolean verificarCarta(Carta carta) {
 		/*

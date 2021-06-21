@@ -3,11 +3,9 @@
  */
 package com.unicamp.mc322.projeto.cartas.efeitos;
 
-import java.util.Scanner;
-
-import com.unicamp.mc322.projeto.cartas.Caracteristica;
+import com.unicamp.mc322.projeto.Campo;
+import com.unicamp.mc322.projeto.Rodada;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
-import com.unicamp.mc322.projeto.main.Campo;
 
 public class GolpeAoNexus extends Efeito {
 	private int unidade;
@@ -16,7 +14,8 @@ public class GolpeAoNexus extends Efeito {
 	@Override
 	public void ativarEfeito(Campo campo) {
 		this.unidade = usuarioEscolherUnidade("Selecione a unidade o qual deseja ativar o efeito: ");
-		Seguidor cartaSelecionada = campo.selecionarUnidade(campo.getNumeroJogadorAtual(), unidade);
+		Rodada rodada = campo.getRodada();
+		Seguidor cartaSelecionada = (Seguidor) campo.selecionarUmaUnidade(rodada.getNumeroJogadorAtual(), unidade);
 		golpeNexus = new GolpeAoNexusLimitado(cartaSelecionada.getPoder());
 		golpeNexus.ativarEfeito(campo);
 	}

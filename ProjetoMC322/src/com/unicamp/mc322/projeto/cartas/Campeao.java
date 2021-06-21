@@ -73,7 +73,7 @@ public class Campeao extends Seguidor {
 	}
 	
 	
-
+	
 	public void subirNivel() {
 		setVida(getVida() + evolucao.getMaisVida());
 		setPoder(getPoder() + evolucao.getMaisPoder());

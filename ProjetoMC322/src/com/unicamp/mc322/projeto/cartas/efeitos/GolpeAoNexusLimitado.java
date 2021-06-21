@@ -4,7 +4,8 @@
 
 package com.unicamp.mc322.projeto.cartas.efeitos;
 
-import com.unicamp.mc322.projeto.main.Campo;
+import com.unicamp.mc322.projeto.Campo;
+import com.unicamp.mc322.projeto.Rodada;
 
 public class GolpeAoNexusLimitado extends Efeito {
 	private int n;
@@ -15,7 +16,7 @@ public class GolpeAoNexusLimitado extends Efeito {
 	
 	@Override
 	public void ativarEfeito(Campo campo) {
-		campo.adicionarAoNexus(campo.getNumeroJogadorOponente(), -n);
+		Rodada rodada = campo.getRodada();
+		campo.adicionarAoNexusJogador(rodada.getNumeroJogadorOponente(), -n);
 	}
-
 }

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.unicamp.mc322.projeto.Interface.*;
 import com.unicamp.mc322.projeto.deckFactory.Deck;
 import com.unicamp.mc322.projeto.jogador.*;
-import com.unicamp.mc322.projeto.main.Campo;
 import com.unicamp.mc322.projeto.turno.Turno;
 
 public class RunneteraGame {
