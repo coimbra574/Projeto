@@ -27,38 +27,31 @@ public class RunneteraGame {
 		modoDeJogo = interfaceTerminal.escolherModo();
 		criarJogadores();
 		
-		//Escolha dos decks:
-		//player1.setDeck(interfaceTerminal.escolherDeck("Jogador 1", listaDecks));
-		//player2.setDeck(interfaceTerminal.escolherDeck("Jogador 2", listaDecks));
-		
 		//Escolha das cartas iniciais:
-		//player1.substituirCartas(interfaceTerminal.substituirCartasIniciais(player1.getMao()));
-		//player2.substituirCartas(interfaceTerminal.substituirCartasIniciais(player2.getMao()));
+		player1.substituirCartas(interfaceTerminal.substituirCartasIniciais(player1.getMao()));
+		player2.substituirCartas(interfaceTerminal.substituirCartasIniciais(player2.getMao()));
 		
 		this.campoBatalha = new Campo(player1, player2);
 		
-		//InterfaceGrafica compoGrafico = new InterfaceGrafica();
-		//compoGrafico.setVisible(true);
+		while(campoBatalha.getExit() != false) {
+			
+		}
 		
-		//while(compoGrafico.isVisible()) {
-		//	// Rodando o jogo
-		//	//System.out.println("Rodando");
-		//}
 		interfaceTerminal.exitGame();
 	}
 	
 	private void criarJogadores() {
 		if(modoDeJogo == ModoDeJogo.HUMANOXHUMANO) {
-			player1 = new Humano(Turno.ATAQUE, "Lutador");
-			player2 = new Humano(Turno.DEFESA, "Lutador");
+			player1 = new Humano(Turno.ATAQUE, interfaceTerminal.escolherDeck("Jogador 1", listaDecks));
+			player2 = new Humano(Turno.DEFESA, interfaceTerminal.escolherDeck("Jogador 2", listaDecks));
 		}
 		else if(modoDeJogo == ModoDeJogo.HUMANOXCOMPUTADOR) {
-			player1 = new Humano(Turno.ATAQUE, "Lutador");
-			player2 = new Maquina(Turno.DEFESA, "Lutador");
+			player1 = new Humano(Turno.ATAQUE, interfaceTerminal.escolherDeck("Jogador 1", listaDecks));
+			player2 = new Maquina(Turno.DEFESA, interfaceTerminal.escolherDeck("Jogador 2", listaDecks));
 		}
 		else {
-			player1 = new Maquina(Turno.ATAQUE, "Lutador");
-			player2 = new Maquina(Turno.DEFESA, "Lutador");
+			player1 = new Maquina(Turno.ATAQUE, interfaceTerminal.escolherDeck("Jogador 1", listaDecks));
+			player2 = new Maquina(Turno.DEFESA, interfaceTerminal.escolherDeck("Jogador 2", listaDecks));
 		}
 	}
 }

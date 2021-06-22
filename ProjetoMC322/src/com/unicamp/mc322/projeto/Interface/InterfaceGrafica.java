@@ -1,14 +1,15 @@
 package com.unicamp.mc322.projeto.Interface;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import com.unicamp.mc322.projeto.Campo;
 import com.unicamp.mc322.projeto.cartas.Carta;
-import com.unicamp.mc322.projeto.main.Campo;
 
 import javax.swing.JButton;
 import javax.swing.SwingConstants;

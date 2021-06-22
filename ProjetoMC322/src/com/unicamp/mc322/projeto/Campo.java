@@ -10,6 +10,8 @@
 package com.unicamp.mc322.projeto;
 
 import java.util.ArrayList;
+
+import com.unicamp.mc322.projeto.Interface.InterfaceGrafica;
 import com.unicamp.mc322.projeto.cartas.Caracteristica;
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
@@ -21,14 +23,36 @@ public class Campo {
 	private Seguidor[][] unidadesEvocadas = new Seguidor[2][LARGURA_CAMPO];
 	private Jogador p1,p2;
 	private Rodada rodada;
+	private int nexusP1, nexusP2;
+	private InterfaceGrafica interfaceGrafica;
 
 	public Campo(Jogador p1, Jogador p2) {
 		this.p1 = p1;
 		this.p2 = p2;
+		this.nexusP1 = 20;
+		this.nexusP2 = 20;
 		definirNumeroEmCampo(p1, p2);
-		rodada = new Rodada(p1,p2);
+		this.rodada = new Rodada(p1,p2);
+		this.interfaceGrafica = new InterfaceGrafica(this);
+		interfaceGrafica.iniciar(p1.getMao(), p2.getMao());
 	}
 	
+	public int getNexus(int numeroJogador) {
+		if(numeroJogador == 1) {
+			return nexusP1;
+		} else {
+			return nexusP2;
+		}
+	}
+	
+	public void adicionarAoNexus(int numeroJogador, int valorAdicionado) {
+		if(numeroJogador == 1) {
+			nexusP1 += valorAdicionado;
+		} else {
+			nexusP2 = valorAdicionado;
+		}
+		interfaceGrafica.atualizarNexus();
+	}
 	
 	public Rodada getRodada() {
 		return rodada;
@@ -138,7 +162,4 @@ public class Campo {
 			p2.adicionarAoNexus(valorAdicionado);
 		}
 	}
-
-	
-	
 }
