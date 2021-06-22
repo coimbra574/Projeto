@@ -3,11 +3,13 @@ package com.unicamp.mc322.projeto.cartas;
 import java.util.ArrayList;
 
 import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
+import com.unicamp.mc322.projeto.cartas.tracos.TipoTraco;
 import com.unicamp.mc322.projeto.cartas.tracos.Traco;
+import com.unicamp.mc322.projeto.jogador.Jogador;
 
 public class Seguidor extends Carta {
 	private int poder, vida, vidaTotal;
-	private Traco traco;
+	private Traco traco=null;
 	final private String tipo = "Seguidor";// Coloquei isso pq eu preciso saber qual tipo de carta é pra invocá-la
 	private ArrayList<Efeito> listaEfeitos = new ArrayList<Efeito>();
 
@@ -36,6 +38,10 @@ public class Seguidor extends Carta {
 		poder = novoPoder;
 	}
 	
+	public void aumentarPoder(int n) {//Para o traco da furia. Ele acrescenta, nao muda. Por isso acho q é diferente de setPoder
+		poder+=n;
+	}
+	
 	public int getVida() {
 		return vida;
 	}
@@ -44,9 +50,29 @@ public class Seguidor extends Carta {
 		vida = novaVida;
 	}
 	
+	public void aumentarVida(int m) {//Para o traco da furia. Ele acrescenta, nao muda. Por isso acho q é diferente de setVida
+		vida+=m;
+	}
+	
 	public int getVidaTotal() {
 		return vidaTotal;
 	}
+	
+	public void ativacaoTraco(Seguidor cartaDefensor, Jogador defensor) {//Para ativar o traco
+		traco.ativarTraco(this, cartaDefensor, defensor);
+	}
+	
+	public boolean getHaTraco() {
+		if(traco!=null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public TipoTraco getTipoTraco() {
+		return traco.getTraco();
+	}
+	
 	
 }
 	

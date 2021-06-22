@@ -1,7 +1,7 @@
 /* 
  * 								   Matriz de Unidades Evocadas
  * 								 -------------------------------
- * 											Posição
+ * 											Posiï¿½ï¿½o
  *  unidades evocadas jogador 1    |1|  |2|  |3|  |4|  |5|  |6|
  *  unidades evocadas jogador 2	   |1|  |2|  |3|  |4|  |5|  |6|
  * 
@@ -89,7 +89,7 @@ public class Campo {
 		if(posicao > 0 && posicao <= LARGURA_CAMPO) {
 			return unidadesEvocadas[numeroJogador][posicao-1];
 		} else {
-			System.out.println("Seleção fora dos limites do campo");
+			System.out.println("Seleï¿½ï¿½o fora dos limites do campo");
 			return null;
 		}
 	}
@@ -113,17 +113,23 @@ public class Campo {
 		for(int i=0; i<unidadesCombatentes.size(); i++) {
 			indexCartaAtaque = procurarCartaEmCampo(atacante.getNumeroEmCampo(), unidadesCombatentes.get(i));
 			Seguidor cartaAtacante = (Seguidor) unidadesEvocadas[atacante.getNumeroEmCampo()][indexCartaAtaque];
+			Seguidor cartaDefensora=null;//Inicia a cartaDefensora como null para que possa saber no traco se ele vai atacar o nexus ou 
+										//um seguidor.
+			
 			
 			// Se existir uma unidade defensora para esse ataque, combatem
 			if(!unidadesDefensoras.get(i).equals(null)) {  
 				indexCartaDefesa = procurarCartaEmCampo(defensor.getNumeroEmCampo(), unidadesDefensoras.get(i));
-				Seguidor cartaDefensora = (Seguidor) unidadesEvocadas[defensor.getNumeroEmCampo()][indexCartaDefesa];
+				cartaDefensora = (Seguidor) unidadesEvocadas[defensor.getNumeroEmCampo()][indexCartaDefesa];
 				cartaAtacante.setVida(cartaAtacante.getVida() - cartaDefensora.getPoder());
-				cartaDefensora.setVida(cartaAtacante.getVida() - cartaDefensora.getPoder());
+				cartaDefensora.setVida(cartaAtacante.getVida() - cartaDefensora.getPoder());//$-Nao seria cartaDefensora.getVida() - cartaAtacante.getPoder()-$
 			}
-			// Se não tiver carta de defesa, ataca diretamente o nexus
+			// Se nï¿½o tiver carta de defesa, ataca diretamente o nexus
 			if(indexCartaDefesa == -1) {
 				defensor.adicionarAoNexus(-1*cartaAtacante.getPoder());
+			}
+			if(cartaAtacante.getHaTraco()) {
+				cartaAtacante.ativacaoTraco(cartaDefensora, defensor);//coloquei isso aqui para ativar o traco
 			}
 		}
 		verificarCartasComVida();

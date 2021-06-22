@@ -3,24 +3,20 @@ package com.unicamp.mc322.projeto.cartas.tracos;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.jogador.Jogador;
 
-public class Furia extends Traco {
-	private int n, m;
-	
-	public Furia(int n, int m) {
-		this.n = n;//pontos de poder
-		this.m = m;//pontos de vida
-	}
+public class AtaqueDuplo extends Traco{
 
 	@Override
 	public void ativarTraco(Seguidor cartaAtacante, Seguidor cartaDefensor, Jogador defensor) {
-		if(cartaDefensor.getVida()<=0) {
-			cartaAtacante.aumentarPoder(n);
-			cartaAtacante.aumentarVida(m);
+		if(cartaDefensor==null){
+			defensor.adicionarAoNexus(-1*cartaAtacante.getPoder());
+		}else {
+			cartaDefensor.setVida(cartaDefensor.getVida() - cartaAtacante.getPoder());
 		}
+	
 	}
-
+	
 	@Override
 	public TipoTraco getTraco() {
-		return TipoTraco.FURIA;
+		return TipoTraco.ATAQUEDUPLO;
 	}
 }
