@@ -21,14 +21,14 @@ import com.unicamp.mc322.projeto.turno.Turno;
 public class Campo {
 	public final int LARGURA_CAMPO = 6;
 	private Seguidor[][] unidadesEvocadas = new Seguidor[2][LARGURA_CAMPO];
-	private Jogador p1,p2;
+	private Jogador jogador1,jogador2;
 	private Rodada rodada;
 	private int nexusP1, nexusP2;
 	private InterfaceGrafica interfaceGrafica;
 
 	public Campo(Jogador p1, Jogador p2) {
-		this.p1 = p1;
-		this.p2 = p2;
+		this.jogador1 = p1;
+		this.jogador2 = p2;
 		this.nexusP1 = 20;
 		this.nexusP2 = 20;
 		definirNumeroEmCampo(p1, p2);
@@ -103,39 +103,6 @@ public class Campo {
 		return cartasSelecionadas;
 	}
 	
-/*	
-	// Refazer - criar uma classe combate?
-	public void combater(Jogador atacante, Jogador defensor) {
-		ArrayList<Carta> unidadesCombatentes = atacante.escolherCartaUtilizar(this);
-		ArrayList<Carta> unidadesDefensoras = defensor.escolherCartaUtilizar(this);
-		int indexCartaAtaque=-1, indexCartaDefesa=-1;
-		
-		for(int i=0; i<unidadesCombatentes.size(); i++) {
-			indexCartaAtaque = procurarCartaEmCampo(atacante.getNumeroEmCampo(), unidadesCombatentes.get(i));
-			Seguidor cartaAtacante = (Seguidor) unidadesEvocadas[atacante.getNumeroEmCampo()][indexCartaAtaque];
-			Seguidor cartaDefensora=null;//Inicia a cartaDefensora como null para que possa saber no traco se ele vai atacar o nexus ou 
-										//um seguidor.
-			
-			
-			// Se existir uma unidade defensora para esse ataque, combatem
-			if(!unidadesDefensoras.get(i).equals(null)) {  
-				indexCartaDefesa = procurarCartaEmCampo(defensor.getNumeroEmCampo(), unidadesDefensoras.get(i));
-				cartaDefensora = (Seguidor) unidadesEvocadas[defensor.getNumeroEmCampo()][indexCartaDefesa];
-				cartaAtacante.setVida(cartaAtacante.getVida() - cartaDefensora.getPoder());
-				cartaDefensora.setVida(cartaAtacante.getVida() - cartaDefensora.getPoder());//$-Nao seria cartaDefensora.getVida() - cartaAtacante.getPoder()-$
-			}
-			// Se n�o tiver carta de defesa, ataca diretamente o nexus
-			if(indexCartaDefesa == -1) {
-				defensor.adicionarAoNexus(-1*cartaAtacante.getPoder());
-			}
-			if(cartaAtacante.getHaTraco()) {
-				cartaAtacante.ativacaoTraco(cartaDefensora, defensor);//coloquei isso aqui para ativar o traco
-			}
-		}
-		verificarCartasComVida();
-		rodada.terminarRodada();
-	}
-*/	
 	
 	public int procurarCartaEmCampo(int numeroJogador, Carta carta) {
 		int indexCarta = -1;
@@ -149,13 +116,10 @@ public class Campo {
 	
 	
 	// Remove cartas sem vida em campo
-	private void verificarCartasComVida() {
-		int i;
-		for(int j=0; j<2; j++) {
-			for(i=0; i<LARGURA_CAMPO; i++) {
-				if(unidadesEvocadas[j][i].getVida() <= 0) {
-					removerCartaEmCampo(j,i);
-				}
+	public void verificarCartasComVida(int numeroJogador) {
+		for(int i=0; i<LARGURA_CAMPO; i++) {
+			if(unidadesEvocadas[numeroJogador][i].getVida() <= 0) {
+				removerCartaEmCampo(numeroJogador,i);
 			}
 		}
 	}
@@ -163,9 +127,9 @@ public class Campo {
 	
 	public void adicionarAoNexusJogador(int numeroJogador, int valorAdicionado) {
 		if(numeroJogador == 1) {
-			p1.adicionarAoNexus(valorAdicionado);
+			jogador1.adicionarAoNexus(valorAdicionado);
 		} else {
-			p2.adicionarAoNexus(valorAdicionado);
+			jogador2.adicionarAoNexus(valorAdicionado);
 		}
 	}
 }

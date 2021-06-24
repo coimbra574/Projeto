@@ -4,21 +4,19 @@
 package com.unicamp.mc322.projeto.cartas.efeitos;
 
 import com.unicamp.mc322.projeto.Campo;
+import com.unicamp.mc322.projeto.Combate;
 import com.unicamp.mc322.projeto.Rodada;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
+import com.unicamp.mc322.projeto.jogador.Jogador;
 
 public class Desafio extends Efeito {
 	private int unidadeAliada, unidadeOponente;
 	
 	@Override
-	public void ativarEfeito(Campo campo) {
-		this.unidadeAliada = usuarioEscolherUnidade("Selecione uma unidade aliada para o combate: ");
-		this.unidadeOponente = usuarioEscolherUnidade("Selecione uma unidade oponente para o combate: ");
-		
+	public void ativarEfeito(Campo campo) {		
 		Rodada rodada = campo.getRodada();
-		Seguidor cartaSelecionadaAliada = (Seguidor) campo.selecionarUmaUnidade(rodada.getNumeroJogadorAtual(), unidadeAliada);
-		Seguidor cartaSelecionadaOponente = (Seguidor) campo.selecionarUmaUnidade(rodada.getNumeroJogadorOponente(), unidadeOponente);
-		
-		//combate(cartaSelecionadaAliada, cartaSelecionadaOponente);
+		Jogador jogadorAtual = rodada.getJogador(rodada.getNumeroJogadorAtual());
+		Jogador jogadorOponente = rodada.getJogador(rodada.getNumeroJogadorOponente());
+		Combate novoCombate = new Combate(campo, jogadorAtual, jogadorOponente);
 	}
 }

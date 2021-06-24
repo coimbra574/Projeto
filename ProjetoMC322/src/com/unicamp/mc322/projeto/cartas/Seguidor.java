@@ -12,6 +12,7 @@ public class Seguidor extends Carta {
 	private Traco traco=null;
 	final private String tipo = "Seguidor";// Coloquei isso pq eu preciso saber qual tipo de carta é pra invocá-la
 	private ArrayList<Efeito> listaEfeitos = new ArrayList<Efeito>();
+	private boolean matouUmSeguidor = false;  // Alterado na classe combate
 
 	public Seguidor(String nome, int custo, int poder, int vidaTotal, Traco traco, Efeito... efeitos) {
 		super(nome,custo);
@@ -58,6 +59,14 @@ public class Seguidor extends Carta {
 		return vidaTotal;
 	}
 	
+	public void setMatouUmSeguidor(boolean matouUmSeguidor) {
+		this.matouUmSeguidor = matouUmSeguidor;
+	}
+	
+	public boolean getMatouUmSeguidor() {
+		return matouUmSeguidor;
+	}
+	
 	public void ativacaoTraco(Seguidor cartaDefensor, Jogador defensor) {//Para ativar o traco
 		traco.ativarTraco(this, cartaDefensor, defensor);
 	}
@@ -72,6 +81,7 @@ public class Seguidor extends Carta {
 	public TipoTraco getTipoTraco() {
 		return traco.getTraco();
 	}
+	
 	
 	@Override
 	public String toString() {
