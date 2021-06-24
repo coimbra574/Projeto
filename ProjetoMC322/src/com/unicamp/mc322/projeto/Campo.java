@@ -103,7 +103,7 @@ public class Campo {
 		return cartasSelecionadas;
 	}
 	
-	
+/*	
 	// Refazer - criar uma classe combate?
 	public void combater(Jogador atacante, Jogador defensor) {
 		ArrayList<Carta> unidadesCombatentes = atacante.escolherCartaUtilizar(this);
@@ -135,7 +135,7 @@ public class Campo {
 		verificarCartasComVida();
 		rodada.terminarRodada();
 	}
-	
+*/	
 	
 	public int procurarCartaEmCampo(int numeroJogador, Carta carta) {
 		int indexCarta = -1;

@@ -1,6 +1,7 @@
 package com.unicamp.mc322.projeto;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.unicamp.mc322.projeto.Interface.*;
 import com.unicamp.mc322.projeto.deckFactory.Deck;
@@ -27,31 +28,38 @@ public class RunneteraGame {
 		modoDeJogo = interfaceTerminal.escolherModo();
 		criarJogadores();
 		
-		//Escolha das cartas iniciais:
-		player1.substituirCartas(interfaceTerminal.substituirCartasIniciais(player1.getMao()));
-		player2.substituirCartas(interfaceTerminal.substituirCartasIniciais(player2.getMao()));
-		
 		this.campoBatalha = new Campo(player1, player2);
-		
-		while(campoBatalha.getExit() != false) {
-			
-		}
 		
 		interfaceTerminal.exitGame();
 	}
 	
 	private void criarJogadores() {
+		Turno turno[] = turnoInicial();
 		if(modoDeJogo == ModoDeJogo.HUMANOXHUMANO) {
-			player1 = new Humano(Turno.ATAQUE, interfaceTerminal.escolherDeck("Jogador 1", listaDecks));
-			player2 = new Humano(Turno.DEFESA, interfaceTerminal.escolherDeck("Jogador 2", listaDecks));
+			player1 = new Humano(turno[0]);
+			player2 = new Humano(turno[1]);
 		}
 		else if(modoDeJogo == ModoDeJogo.HUMANOXCOMPUTADOR) {
-			player1 = new Humano(Turno.ATAQUE, interfaceTerminal.escolherDeck("Jogador 1", listaDecks));
-			player2 = new Maquina(Turno.DEFESA, interfaceTerminal.escolherDeck("Jogador 2", listaDecks));
+			player1 = new Humano(turno[0]);
+			player2 = new Maquina(turno[1]);
 		}
 		else {
-			player1 = new Maquina(Turno.ATAQUE, interfaceTerminal.escolherDeck("Jogador 1", listaDecks));
-			player2 = new Maquina(Turno.DEFESA, interfaceTerminal.escolherDeck("Jogador 2", listaDecks));
+			player1 = new Maquina(turno[0]);
+			player2 = new Maquina(turno[1]);
 		}
+	}
+	
+	private Turno[] turnoInicial() {
+		Random geradorAleatorio = new Random();
+		Turno[] turno = new Turno[2];
+		int aleatorio = geradorAleatorio.nextInt(100);
+		if(aleatorio >= 50) {
+			turno[0] = Turno.ATAQUE;
+			turno[1] = Turno.DEFESA;
+			return turno;
+		}
+		turno[0] = Turno.DEFESA;
+		turno[1] = Turno.ATAQUE;
+		return turno;
 	}
 }

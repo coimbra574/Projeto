@@ -73,6 +73,41 @@ public class Seguidor extends Carta {
 		return traco.getTraco();
 	}
 	
+	@Override
+	public String toString() {
+		String texto = this.tipo + " " + this.nome + ", Custo: " + this.custo;
+		texto += ", Vida: " + this.vida + ", Poder: " + this.poder;
+		return texto;
+	}
 	
+	@Override
+	public String toStringCompra() {
+		String texto = "<html>";
+		texto += this.nome + "<br />";
+		texto += "Vida: " + Integer.toString(this.vida) + "<br />";
+		texto += "Poder: " + Integer.toString(this.poder) + "<br />";
+		texto += "Custo: " + Integer.toString(this.custo);
+		texto += "</html>";
+		return texto;
+	}
+	
+	@Override
+	public String toStringEvocada() {
+		String texto = "";
+		return texto;
+	}
+	
+	@Override
+	public String toStringEmCampo() {
+		String texto = "";
+		return texto;
+	}
+	
+	@Override
+	public String toStringDetalhes() {
+		String texto = this.tipo + this.nome + ", Custo: " + this.custo;
+		texto += ", Vida: " + this.vida + ", Poder: " + this.poder;
+		return texto;
+	}
 }
 	

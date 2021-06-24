@@ -2,13 +2,17 @@ package com.unicamp.mc322.projeto.deckFactory;
 
 import com.unicamp.mc322.projeto.cartas.Campeao;
 import com.unicamp.mc322.projeto.cartas.Carta;
+import com.unicamp.mc322.projeto.cartas.Condicao;
+import com.unicamp.mc322.projeto.cartas.DadosEvolucao;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
+import com.unicamp.mc322.projeto.cartas.efeitos.*;
+import com.unicamp.mc322.projeto.cartas.tracos.*;
 import com.unicamp.mc322.projeto.cartas.Feitico;
 import java.util.ArrayList;
 
 
 public class ListaCartas {
-	private Campeao garen = new Campeao("Garen", 5, 5, 5, null, null, null);//tem que ser private?
+	private Campeao garen;
 	
 	private Seguidor tiana = new Seguidor("Tiana", 8, 7, 7, null, null, null);
 	private Seguidor vanguarda = new Seguidor("Vanguarda", 4, 3, 3, null, null, null);
@@ -29,6 +33,9 @@ public class ListaCartas {
 	
 	ListaCartas() {
 		super();
+		DadosEvolucao evolucaoGaren = new DadosEvolucao(Condicao.NUM_DANO_ADD, 2, 1, 1, new Elusivo());
+		this.garen = new Campeao("Garen", 5, 5, 5, evolucaoGaren, null, new Regeneracao());
+		
 		listaCampeoes.add(garen);
 		
 		listaSeguidores.add(tiana);

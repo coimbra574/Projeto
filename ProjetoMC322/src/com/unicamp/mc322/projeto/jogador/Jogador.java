@@ -29,7 +29,7 @@ public abstract class Jogador {
 		TipoDeck tipoDeck = InterfaceTerminal.EscolhaTipoDeck();
 		this.turno = turnoInicial;
 		this.deckJogador = DeckFactory.getDeck(tipoDeck);
-		this.mao = obter4CartasIniciais();
+		obter4CartasIniciais();
 	}
 	
 	public void setNumeroEmCampo(int n) {
@@ -46,6 +46,8 @@ public abstract class Jogador {
 	
 	public ArrayList<Carta> getMao() {
 		return mao;
+	}
+	
 	public int getNexus() {
 		return nexus;
 	}
@@ -54,14 +56,13 @@ public abstract class Jogador {
 		nexus += valorAdicionado;
 	}
 	
-	private ArrayList<Carta> obter4CartasIniciais() {
+	private void obter4CartasIniciais() {
 		/*
 		 * Esse método deve ser responsável por obter as quatro cartas inciais do jogador
 		 */
 		//Mostrar as cartas para o jogador
-		mao = deckJogador.obterCartasIniciais(mao);		
-		mao = substituirCartas(mao);
-		return mao;
+		this.mao = deckJogador.obterCartasIniciais();		
+		this.mao = substituirCartas(mao);
 	}
 	
 	protected abstract ArrayList<Carta> substituirCartas(ArrayList<Carta> mao);
@@ -141,26 +142,26 @@ public abstract class Jogador {
 	}
 	
 	// Deixar essa parte de combate aqui ou na classe Jogo/Game?
-	public void atacar(Jogador oponente, Campo campo, int... posicaoUnidades) {
-		/*
-		 * Esse metodo tem acesso ao campo de invocações para selecionar os combatentes, após isso chama a 
-		 * instancia da classe combate onde será feita a batalha
-		 */
-	//	ArrayList<Carta> unidadesCombatentes = campo.selecionarUnidades(numeroJogadorNoCampo, posicaoUnidades);
-		ArrayList<Carta> unidadesDefensoras = oponente.defender(campo, posicaoUnidades);  // 
-		//combate(unidadesCombatentes, unidadesDefensoras);
-		acabarTurno();
-	}
+//	public void atacar(Jogador oponente, Campo campo, int... posicaoUnidades) {
+//		/*
+//		 * Esse metodo tem acesso ao campo de invocações para selecionar os combatentes, após isso chama a 
+//		 * instancia da classe combate onde será feita a batalha
+//		 */
+//	//	ArrayList<Carta> unidadesCombatentes = campo.selecionarUnidades(numeroJogadorNoCampo, posicaoUnidades);
+//		ArrayList<Carta> unidadesDefensoras = oponente.defender(campo, posicaoUnidades);  // 
+//		//combate(unidadesCombatentes, unidadesDefensoras);
+//		acabarTurno();
+//	}
 	
 //	ArrayList<Carta> defender(Campo campo, int...posicaoUnidades) {
 //		/*
-		 * Esse metodo deve ser responsavel pela escolha das cartas que irao defender o jogador e chamar a instancia de combate
-		 */
+//		 * Esse metodo deve ser responsavel pela escolha das cartas que irao defender o jogador e chamar a instancia de combate
+//		 */
 //		ArrayList<Carta> unidadesDefensoras = campo.selecionarUnidades(numeroJogadorNoCampo, posicaoUnidades);
 //		return unidadesDefensoras;
-		
+//		
 //	}
-//	
+	
 	public void acabarTurno() {
 		if(mana<=3) {
 			manaDeFeitico = mana;

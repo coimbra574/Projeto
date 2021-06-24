@@ -10,7 +10,7 @@ import com.unicamp.mc322.projeto.deckFactory.TipoDeck;
 
 public class InterfaceTerminal {
 	private boolean exitSelected = false;
-	private Scanner keyboard = new Scanner(System.in);
+	private static Scanner keyboard = new Scanner(System.in);
 	
 	public void GameStart() {
 		System.out.println("Bem Vindo ao Jogo!");
@@ -47,38 +47,37 @@ public class InterfaceTerminal {
 		
 	}
 	
-	public ArrayList<Carta> substituirCartasIniciais(ArrayList<Carta> listaCartas) {
+	public static ArrayList<Integer> substituirCartasIniciais(ArrayList<Carta> listaCartas) {
 		ArrayList<Integer> comandosDigitados = new ArrayList<Integer>();
-		ArrayList<Carta> listaDeSubstituicao = new ArrayList<Carta>();
 		String comando;
+		Integer comandoInt;
 		
 		System.out.println("Deseja substituir algumas das seguintes cartas iniciais?");
 		for(int i = 0; i < listaCartas.size(); i++) {
 			System.out.printf("Digite [%d] - Para substituir a carta:", i+1);
 			System.out.println(listaCartas.get(i).toString());
 		}
-		do {
-			System.out.println("Digite um numero ou [OK] para confirmar:");
-			comando = keyboard.nextLine();
-			if(Integer.parseInt(comando) >= 1 && Integer.parseInt(comando) <= listaCartas.size()) {
-				if(comandosDigitados.contains(Integer.parseInt(comando)-1)) {
-					comandosDigitados.remove(Integer.parseInt(comando)-1);
-					System.out.printf("Carta [%d] nao sera trocada.\n", Integer.parseInt(comando));
+		System.out.println("Digite um numero ou [OK] para confirmar:");
+		comando = keyboard.nextLine();
+		while(!comando.equals("OK")) {
+			comandoInt = Integer.parseInt(comando)-1;
+			if(comandoInt >= 0 && comandoInt < listaCartas.size()) {
+				if(comandosDigitados.contains(comandoInt)) {
+					comandosDigitados.remove(comandoInt);
+					System.out.printf("Carta [%d] nao sera trocada.\n", comandoInt+1);
 				}
 				else {
-					comandosDigitados.add(Integer.parseInt(comando)-1, Integer.parseInt(comando)-1);
-					System.out.printf("Carta [%d] sera trocada.\n", Integer.parseInt(comando));
+					comandosDigitados.add(comandoInt);
+					System.out.printf("Carta [%d] sera trocada.\n", comandoInt+1);
 				}
 			}
-			else if(!comando.equals("OK")){
+			else {
 				System.out.println("Entrada Invalida!");
 			}
-		}while(!comando.equals("OK"));
-		
-		for(int i: comandosDigitados) {
-			listaDeSubstituicao.add(listaCartas.get(i));
+			comando = keyboard.nextLine();
 		}
-		return listaDeSubstituicao;
+		
+		return comandosDigitados;
 	}
 	
 	public void unidadesEvocadas() {
@@ -88,24 +87,21 @@ public class InterfaceTerminal {
 	public static TipoDeck EscolhaTipoDeck() {
 		int escolha;
 		TipoDeck[] Decks = TipoDeck.values();
-		Scanner teclado = new Scanner(System.in);
 		boolean continuar = true;
 		while(continuar) {
 			continuar = false;
 			System.out.println("Qual deck escolhera? ");
 			System.out.println("Digite 0 para ajuda (Ver decks disponiveis)");
-			escolha = Integer.valueOf(teclado.nextLine());
+			escolha = Integer.valueOf(keyboard.nextLine());
 			if(escolha == 0) {
 				ajudaEscolhaDeck(Decks);
 				continuar = true;
 			}else if(escolha-1 < Decks.length){
-				teclado.close();
 				return Decks[escolha-1];
 			}
 		}
 		System.out.println("Foi fornecido um argumento invalido para escolha do deck");
 		System.out.println("Por padrao sera criado um deck do tipo Lutador");
-		teclado.close();
 		return TipoDeck.LUTADOR;
 	}
 		 

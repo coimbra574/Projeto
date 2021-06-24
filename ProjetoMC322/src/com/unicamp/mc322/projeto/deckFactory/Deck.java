@@ -16,7 +16,8 @@ public abstract class Deck {
 	
 	protected abstract ArrayList<Carta> construirDeck();
 	
-	public ArrayList<Carta> obterCartasIniciais(ArrayList<Carta> mao){
+	public ArrayList<Carta> obterCartasIniciais(){
+		ArrayList<Carta> mao = new ArrayList<Carta>();
 		for(int i=0;i<4;i++) {
 			Carta carta = baralho.get(i);
 			mao.add(carta);

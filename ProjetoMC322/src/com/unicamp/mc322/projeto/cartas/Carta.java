@@ -1,8 +1,8 @@
 package com.unicamp.mc322.projeto.cartas;
 
 public abstract class Carta {
-	private int custo;
-	private String nome;
+	protected int custo;
+	protected String nome;
 
 	public Carta(String nome, int custo) {
 		this.nome = nome;

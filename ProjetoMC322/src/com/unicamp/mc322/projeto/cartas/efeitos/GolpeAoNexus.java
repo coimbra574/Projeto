@@ -19,5 +19,11 @@ public class GolpeAoNexus extends Efeito {
 		golpeNexus = new GolpeAoNexusLimitado(cartaSelecionada.getPoder());
 		golpeNexus.ativarEfeito(campo);
 	}
+	
+	@Override
+	public String toString() {
+		String texto = "";
+		return texto;
+	}
 
 }

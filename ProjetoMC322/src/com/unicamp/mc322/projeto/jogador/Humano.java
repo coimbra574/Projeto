@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.unicamp.mc322.projeto.Campo;
+import com.unicamp.mc322.projeto.Interface.InterfaceTerminal;
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.turno.Turno;
 import com.unicamp.mc322.projeto.deckFactory.Deck;
@@ -18,32 +19,14 @@ public class Humano  extends Jogador{
 
 	@Override
 	protected ArrayList<Carta> substituirCartas(ArrayList<Carta> mao) {
-			/*
-			 * Esse método deverá ser responsável por substituir as cartas que o jogador não desejar
-			 */
-			int indiceCarta;
-			int numCartas;
-			
-			do {
-				System.out.print("Quantas cartas deseja substituir? ");
-				numCartas =  Integer.valueOf(teclado.nextLine());
-				if(numCartas>4) {
-					System.out.println("Digite um número de cartas válido!!! Até 4 cartas");
-				}	
-			}while(numCartas>4);
-			
-			
-			for(int i=0;i<numCartas;i++) {
-				Carta novaCarta;
-				
-				System.out.print("Qual carta deseja substituir? ");
-				indiceCarta =  Integer.valueOf(teclado.nextLine());
-				novaCarta = deckJogador.pegarCartaAleatoriaDeck(); // Esses três métodos a serem chamados serão da classe deck, imagino
-				deckJogador.recolocarNoBaralho(mao.get(indiceCarta));
-				mao.add(indiceCarta, novaCarta);
-			}
-			
-			return mao;
+		ArrayList<Integer> listaDeSubstituicao = InterfaceTerminal.substituirCartasIniciais(mao);
+		
+		for(int i: listaDeSubstituicao) {
+			Carta novaCarta = deckJogador.pegarCartaAleatoriaDeck();
+			deckJogador.recolocarNoBaralho(mao.get(i));
+			mao.add(i, novaCarta);
+		}
+		return mao;
 	}
 
 	@Override
