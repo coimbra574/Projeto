@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.unicamp.mc322.projeto.ModoDeJogo;
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.deckFactory.Deck;
+import com.unicamp.mc322.projeto.deckFactory.TipoDeck;
 
 public class InterfaceTerminal {
 	private boolean exitSelected = false;
@@ -45,21 +46,6 @@ public class InterfaceTerminal {
 		System.out.println("Fim de Jogo!");
 		
 	}
-
-	public Deck escolherDeck(String nomePlayer, Deck[] listaDecks) {
-		while(true) {
-			System.out.printf("Escolha um deck para o %s\n", nomePlayer);
-			for(int i = 0; i < listaDecks.length; i++) {
-				System.out.printf("Digite [%d] - Para o Deck:\n", i+1);
-				System.out.println(listaDecks[i].toString());
-				System.out.println();
-			}
-			String comando = keyboard.nextLine();
-			if(Integer.parseInt(comando) >= 1 && Integer.parseInt(comando) <= listaDecks.length) {
-				return listaDecks[Integer.parseInt(comando)-1];
-			}
-		}
-	}
 	
 	public ArrayList<Carta> substituirCartasIniciais(ArrayList<Carta> listaCartas) {
 		ArrayList<Integer> comandosDigitados = new ArrayList<Integer>();
@@ -98,5 +84,37 @@ public class InterfaceTerminal {
 	public void unidadesEvocadas() {
 		
 	}
+	
+	public static TipoDeck EscolhaTipoDeck() {
+		int escolha;
+		TipoDeck[] Decks = TipoDeck.values();
+		Scanner teclado = new Scanner(System.in);
+		boolean continuar = true;
+		while(continuar) {
+			continuar = false;
+			System.out.println("Qual deck escolhera? ");
+			System.out.println("Digite 0 para ajuda (Ver decks disponiveis)");
+			escolha = Integer.valueOf(teclado.nextLine());
+			if(escolha == 0) {
+				ajudaEscolhaDeck(Decks);
+				continuar = true;
+			}else if(escolha-1 < Decks.length){
+				teclado.close();
+				return Decks[escolha-1];
+			}
+		}
+		System.out.println("Foi fornecido um argumento invalido para escolha do deck");
+		System.out.println("Por padrao sera criado um deck do tipo Lutador");
+		teclado.close();
+		return TipoDeck.LUTADOR;
+	}
+		 
+	private static void ajudaEscolhaDeck(TipoDeck[] Decks) {
+		for(int i = 0; i < Decks.length; i++) {
+			System.out.printf("Para criar um deck do tipo %s digite: %d\n", Decks[i].toString(), i+1);
+		}
+		System.out.print("Qualquer outro valor resultarao em um deck padrao do tipo Lutador\n");
+	}
+	
 
 }

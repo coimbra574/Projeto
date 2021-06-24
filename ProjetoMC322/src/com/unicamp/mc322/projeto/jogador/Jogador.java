@@ -1,6 +1,7 @@
 package com.unicamp.mc322.projeto.jogador;
 
 import com.unicamp.mc322.projeto.Campo;
+import com.unicamp.mc322.projeto.Interface.InterfaceTerminal;
 import com.unicamp.mc322.projeto.cartas.*;
 import com.unicamp.mc322.projeto.deckFactory.Deck;
 import com.unicamp.mc322.projeto.deckFactory.DeckFactory;
@@ -25,8 +26,7 @@ public abstract class Jogador {
 		 */
 		//Ao inves de ser uma string o tipoDeck será que é melhor um enum??
 		super();
-		EscolhaTipoDeck escolhaDeck = new EscolhaTipoDeck();
-		TipoDeck tipoDeck = escolhaDeck.LeituraTipo();
+		TipoDeck tipoDeck = InterfaceTerminal.EscolhaTipoDeck();
 		this.turno = turnoInicial;
 		this.deckJogador = DeckFactory.getDeck(tipoDeck);
 		this.mao = obter4CartasIniciais();
