@@ -88,109 +88,93 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
         panelCampo.setBackground(new java.awt.Color(153, 255, 153));
         panelCampo.setOpaque(true);
-        bntP1EmCampo_0 = new javax.swing.JButton();
-        
-                bntP1EmCampo_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5</html>");
-                panelCampo.setLayer(bntP1EmCampo_0, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        
-        bntP1EmCampo_1 = new JButton();
-        bntP1EmCampo_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5</html>");
-        
-        bntP1EmCampo_2 = new JButton();
-        bntP1EmCampo_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5</html>");
-        
-        bntP1EmCampo_3 = new JButton();
-        bntP1EmCampo_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5</html>");
-        
-        bntP1EmCampo_4 = new JButton();
-        bntP1EmCampo_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5</html>");
-        
-        bntP1EmCampo_5 = new JButton();
-        bntP1EmCampo_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5</html>");
-        
-        bntP2EmCampo_0 = new JButton();
-        bntP2EmCampo_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5</html>");
-        
-        bntP2EmCampo_1 = new JButton();
-        bntP2EmCampo_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5</html>");
-        
-        bntP2EmCampo_2 = new JButton();
-        bntP2EmCampo_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5</html>");
-        
-        bntP2EmCampo_3 = new JButton();
-        bntP2EmCampo_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5</html>");
-        
-        bntP2EmCampo_4 = new JButton();
-        bntP2EmCampo_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5</html>");
-        
-        bntP2EmCampo_5 = new JButton();
-        bntP2EmCampo_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5</html>");
         
         bntFeitico = new JButton();
         bntFeitico.setText("<html>Feitico</html>");
+        
+        panelCampoP1 = new JLayeredPane();
+        
+        panelCampoP2 = new JLayeredPane();
+        
+        bntP2EmCampo_1 = new JButton();
+        bntP2EmCampo_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_1.setBounds(230, 19, 104, 61);
+        panelCampoP2.add(bntP2EmCampo_1);
+        
+        bntP2EmCampo_2 = new JButton();
+        bntP2EmCampo_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_2.setBounds(450, 19, 104, 61);
+        panelCampoP2.add(bntP2EmCampo_2);
+        
+        bntP2EmCampo_3 = new JButton();
+        bntP2EmCampo_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_3.setBounds(120, 19, 104, 61);
+        panelCampoP2.add(bntP2EmCampo_3);
+        
+        bntP2EmCampo_0 = new JButton();
+        bntP2EmCampo_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_0.setBounds(340, 19, 104, 61);
+        panelCampoP2.add(bntP2EmCampo_0);
+        
+        bntP2EmCampo_4 = new JButton();
+        bntP2EmCampo_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_4.setBounds(560, 19, 104, 61);
+        panelCampoP2.add(bntP2EmCampo_4);
+        
+        bntP2EmCampo_5 = new JButton();
+        bntP2EmCampo_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_5.setBounds(10, 19, 104, 61);
+        panelCampoP2.add(bntP2EmCampo_5);
 
         javax.swing.GroupLayout gl_panelCampo = new javax.swing.GroupLayout(panelCampo);
         gl_panelCampo.setHorizontalGroup(
         	gl_panelCampo.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_panelCampo.createSequentialGroup()
-        			.addGroup(gl_panelCampo.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_panelCampo.createSequentialGroup()
-        					.addContainerGap()
-        					.addGroup(gl_panelCampo.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_panelCampo.createSequentialGroup()
-        							.addComponent(bntP2EmCampo_0, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-        							.addGap(6)
-        							.addComponent(bntP2EmCampo_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-        							.addGap(6)
-        							.addComponent(bntP2EmCampo_2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-        							.addGap(6)
-        							.addComponent(bntP2EmCampo_3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-        							.addGap(6)
-        							.addComponent(bntP2EmCampo_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-        							.addGap(6)
-        							.addComponent(bntP2EmCampo_5, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(gl_panelCampo.createSequentialGroup()
-        							.addGroup(gl_panelCampo.createParallelGroup(Alignment.LEADING)
-        								.addGroup(gl_panelCampo.createSequentialGroup()
-        									.addGap(110)
-        									.addComponent(bntP1EmCampo_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-        									.addPreferredGap(ComponentPlacement.RELATED)
-        									.addComponent(bntP1EmCampo_2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-        									.addPreferredGap(ComponentPlacement.RELATED)
-        									.addComponent(bntP1EmCampo_3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
-        								.addComponent(bntP1EmCampo_0, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(bntP1EmCampo_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(bntP1EmCampo_5, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))))
-        				.addGroup(gl_panelCampo.createSequentialGroup()
-        					.addGap(282)
-        					.addComponent(bntFeitico, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)))
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        			.addGap(282)
+        			.addComponent(bntFeitico, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(16, Short.MAX_VALUE))
+        		.addComponent(panelCampoP1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+        		.addComponent(panelCampoP2, GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
         );
         gl_panelCampo.setVerticalGroup(
-        	gl_panelCampo.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(Alignment.LEADING, gl_panelCampo.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(gl_panelCampo.createParallelGroup(Alignment.LEADING)
-        				.addComponent(bntP2EmCampo_0, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(bntP2EmCampo_1, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(bntP2EmCampo_2, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(bntP2EmCampo_3, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(bntP2EmCampo_4, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(bntP2EmCampo_5, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE))
-        			.addGap(26)
+        	gl_panelCampo.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panelCampo.createSequentialGroup()
+        			.addComponent(panelCampoP2, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
         			.addComponent(bntFeitico, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-        			.addGroup(gl_panelCampo.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(bntP1EmCampo_0)
-        				.addComponent(bntP1EmCampo_1, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(bntP1EmCampo_2, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(bntP1EmCampo_3, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(bntP1EmCampo_4, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(bntP1EmCampo_5, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE))
-        			.addContainerGap())
+        			.addGap(18)
+        			.addComponent(panelCampoP1, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
         );
+        
+        bntP1EmCampo_1 = new JButton();
+        bntP1EmCampo_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_1.setBounds(230, 0, 104, 61);
+        panelCampoP1.add(bntP1EmCampo_1);
+        
+        bntP1EmCampo_2 = new JButton();
+        bntP1EmCampo_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_2.setBounds(450, 0, 104, 61);
+        panelCampoP1.add(bntP1EmCampo_2);
+        
+        bntP1EmCampo_3 = new JButton();
+        bntP1EmCampo_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_3.setBounds(120, 0, 104, 61);
+        panelCampoP1.add(bntP1EmCampo_3);
+        
+        bntP1EmCampo_0 = new JButton();
+        bntP1EmCampo_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_0.setBounds(340, 0, 104, 61);
+        panelCampoP1.add(bntP1EmCampo_0);
+        
+        bntP1EmCampo_4 = new JButton();
+        bntP1EmCampo_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_4.setBounds(560, 0, 104, 61);
+        panelCampoP1.add(bntP1EmCampo_4);
+        
+        bntP1EmCampo_5 = new JButton();
+        bntP1EmCampo_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_5.setBounds(10, 0, 104, 61);
+        panelCampoP1.add(bntP1EmCampo_5);
         panelCampo.setLayout(gl_panelCampo);
         
         JLayeredPane layeredPane = new JLayeredPane();
@@ -577,19 +561,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         emCampoP2.add(bntP2EmCampo_4);
         emCampoP2.add(bntP2EmCampo_5);
     }// </editor-fold>                        
-    private javax.swing.JButton bntP1EmCampo_0;
     private javax.swing.JLayeredPane panelCampo;
-    private JButton bntP1EmCampo_1;
-    private JButton bntP1EmCampo_2;
-    private JButton bntP1EmCampo_3;
-    private JButton bntP1EmCampo_4;
-    private JButton bntP1EmCampo_5;
-    private JButton bntP2EmCampo_0;
-    private JButton bntP2EmCampo_1;
-    private JButton bntP2EmCampo_2;
-    private JButton bntP2EmCampo_3;
-    private JButton bntP2EmCampo_4;
-    private JButton bntP2EmCampo_5;
     private JButton bntFeitico;
     private JLayeredPane panelEvocadasP1;
     private JLayeredPane panelMaoP1;
@@ -639,4 +611,18 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private JLabel jblP2ManaFeitico;
     private JButton btnInformacoes;
     private JLabel jblTipoDeTurnoPlayer2;
+    private JLayeredPane panelCampoP1;
+    private JButton bntP1EmCampo_1;
+    private JButton bntP1EmCampo_2;
+    private JButton bntP1EmCampo_3;
+    private JButton bntP1EmCampo_0;
+    private JButton bntP1EmCampo_4;
+    private JButton bntP1EmCampo_5;
+    private JLayeredPane panelCampoP2;
+    private JButton bntP2EmCampo_1;
+    private JButton bntP2EmCampo_2;
+    private JButton bntP2EmCampo_3;
+    private JButton bntP2EmCampo_0;
+    private JButton bntP2EmCampo_4;
+    private JButton bntP2EmCampo_5;
 }
