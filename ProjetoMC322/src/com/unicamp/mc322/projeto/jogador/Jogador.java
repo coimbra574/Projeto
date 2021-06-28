@@ -1,6 +1,7 @@
 package com.unicamp.mc322.projeto.jogador;
 
 import com.unicamp.mc322.projeto.Campo;
+import com.unicamp.mc322.projeto.Interface.InterfaceGrafica;
 import com.unicamp.mc322.projeto.Interface.InterfaceTerminal;
 import com.unicamp.mc322.projeto.cartas.*;
 import com.unicamp.mc322.projeto.deckFactory.Deck;
@@ -16,7 +17,8 @@ public abstract class Jogador {
 	private int manaDeFeitico = 0;
 	private Turno turno;
 	private Scanner teclado = new Scanner(System.in);
-	protected ArrayList<Carta> mao = new ArrayList<Carta>();  //Irá representar as cartas na mão do jogador
+	protected ArrayList<Carta> mao = new ArrayList<Carta>();  //Ira representar as cartas que podem ser compradas pelo jogador
+	protected ArrayList<Seguidor> evocadas = new ArrayList<Seguidor>();  //Ira representar as cartas compradas
 	protected Deck deckJogador;
 	private int numeroJogadorNoCampo=0;
 	
@@ -46,6 +48,10 @@ public abstract class Jogador {
 	
 	public ArrayList<Carta> getMao() {
 		return mao;
+	}
+	
+	public ArrayList<Seguidor> getEvocadas() {
+		return evocadas;
 	}
 	
 	public int getNexus() {
@@ -80,17 +86,6 @@ public abstract class Jogador {
 		}
 	}
 	
-	private void mudarTurno() {
-		/*
-		 * Deve mudar a indicação de se o jogador esta no turno de ataque ou o turno de defesa
-		 */
-		if(turno == Turno.DEFESA) {
-			turno = Turno.ATAQUE;
-		}else {
-			turno = Turno.DEFESA;
-		}
-	}
-	
 	public void atualizarMana(int numRodada) {
 		/*
 		 * O método deve atualizar a quantidade de mana do jogador a cada rodada
@@ -118,15 +113,35 @@ public abstract class Jogador {
 		}
 	}
 	
-	protected void invocarCarta(Carta carta, Campo campo, int posicaoNoCampo) {
+	public boolean comprarCarta(int posicaoMao, Campo campo) {
 		/*
-		 * Esse método depende da implementação do campo de invocações, deverá invocá-lo nele 
+		 * Esse metodo eh chamado quando o jogador tenta comprar uma carta, retorna true se a compra foi possivel.
 		 */
+		Carta carta = mao.get(posicaoMao);
+		
 		if(verificarCarta(carta)) {
-			mana -= carta.getMana();
-			campo.adicionarCartaEmCampo(numeroJogadorNoCampo, posicaoNoCampo, carta);
+			if(carta.getTipo() == TipoCarta.FEITICO) {
+				Feitico feitico = (Feitico) mao.get(posicaoMao);
+				if(feitico.ehPossivel(campo)) {
+					mana -= feitico.getMana();
+					feitico.ativarCarta(campo);
+					mao.remove(posicaoMao);
+					return true;
+				}
+				else {
+					return false;
+				}
+				
+			}
+			else {
+				mana -= carta.getMana();
+				evocadas.add((Seguidor) carta);
+				mao.remove(posicaoMao);
+				return true;
+			}
 		} else {
 			System.out.println("Sem mana suficiente para invocar esta carta");
+			return false;
 		}
 	}
 	
@@ -162,7 +177,7 @@ public abstract class Jogador {
 //		
 //	}
 	
-	public void acabarTurno() {
+	public void acabarRodada() {
 		if(mana<=3) {
 			manaDeFeitico = mana;
 			mana=0;
@@ -170,7 +185,12 @@ public abstract class Jogador {
 			manaDeFeitico = 3;
 			mana=0;
 		}
-		mudarTurno();
+		if(turno == Turno.DEFESA) {
+			turno = Turno.ATAQUE;
+		}else {
+			turno = Turno.DEFESA;
+		}
 	}
+	
 	
 }

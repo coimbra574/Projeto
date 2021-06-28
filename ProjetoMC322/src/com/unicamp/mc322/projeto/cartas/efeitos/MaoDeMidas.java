@@ -11,6 +11,7 @@ import com.unicamp.mc322.projeto.jogador.Jogador;
 public class MaoDeMidas extends Efeito {
 	
 	public MaoDeMidas() {
+		super(true, false);
 		super.setTipoEfeito(TipoEfeito.AUTOMATICO);
 	}
 

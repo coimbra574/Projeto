@@ -11,6 +11,7 @@ public class GolpeAoNexusLimitado extends Efeito {
 	private int n;
 	
 	public GolpeAoNexusLimitado(int n) {
+		super(false, false);
 		this.n = n;
 	}
 	

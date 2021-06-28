@@ -9,7 +9,11 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.unicamp.mc322.projeto.Campo;
+import com.unicamp.mc322.projeto.Rodada;
+import com.unicamp.mc322.projeto.TipoRodada;
+import com.unicamp.mc322.projeto.numeroJogador;
 import com.unicamp.mc322.projeto.cartas.Carta;
+import com.unicamp.mc322.projeto.cartas.Seguidor;
 
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -22,6 +26,9 @@ import javax.swing.JLayeredPane;
 
 public class InterfaceGrafica extends javax.swing.JFrame {
 	private Campo campo;
+	private Rodada rodada;
+	private boolean aguardandoClique;
+	private Carta cartaEscolhida;
 	private ArrayList<JButton> maoP1 = new ArrayList<JButton>();
 	private ArrayList<JButton> maoP2 = new ArrayList<JButton>();
 	private ArrayList<JButton> evocadasP1 = new ArrayList<JButton>();
@@ -29,27 +36,95 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 	private ArrayList<JButton> emCampoP1 = new ArrayList<JButton>();
 	private ArrayList<JButton> emCampoP2 = new ArrayList<JButton>();
 
-    public InterfaceGrafica(Campo campo) {
+    public InterfaceGrafica(Campo campo, Rodada rodada) {
     	getContentPane().setFont(new Font("Arial", Font.PLAIN, 10));
         initComponents();
         this.campo = campo;
+        this.rodada = rodada;
+        this.setVisible(true);
+		this.aguardandoClique = false;
+		
+		desativarTudo();
+		
+		atualizarMao();
+		atualizarEvocadas();
+		atualizarNexus();
     }
     
-	public void iniciar(ArrayList<Carta> maoPlayer1, ArrayList<Carta> maoPlayer2) {
-		this.setVisible(true);
-		atualizarNexus();
-		
+	public void iniciarTurno() {
+		//Vez do jogador1
+		if(rodada.getNumeroJogadorAtual() == numeroJogador.PLAYER1) {
+			if(rodada.getTipo() == TipoRodada.COMPRA_DE_CARTAS) {
+				ativarMaoP1();
+				ativarEvocadasP1();
+			}
+			else {
+				ativarEvocadasP1();
+			}
+		}
+		//Vez do jogador2
+		else {
+			if(rodada.getTipo() == TipoRodada.COMPRA_DE_CARTAS) {
+				ativarMaoP2();
+				ativarEvocadasP2();
+			}
+			else {
+				ativarEvocadasP2();
+			}
+		}
+	}
+	
+	private void desativarTudo() {
 		for(int i = 0; i < maoP1.size(); i++) {
 			maoP1.get(i).setVisible(false);
+			maoP1.get(i).setEnabled(false);
 			maoP2.get(i).setVisible(false);
+			maoP2.get(i).setEnabled(false);
 			evocadasP1.get(i).setVisible(false);
+			evocadasP1.get(i).setEnabled(false);
 			evocadasP2.get(i).setVisible(false);
+			evocadasP2.get(i).setEnabled(false);
 			emCampoP1.get(i).setVisible(false);
+			emCampoP1.get(i).setEnabled(false);
 			emCampoP2.get(i).setVisible(false);
+			emCampoP2.get(i).setEnabled(false);
 		}
-		
-		atualizarMaoP1(maoPlayer1);
-		atualizarMaoP2(maoPlayer2);
+	}
+	
+	private void ativarMaoP1() {
+		for(int i = 0; i < maoP1.size(); i++) {
+			maoP1.get(i).setEnabled(true);
+		}
+	}
+	
+	private void ativarMaoP2() {
+		for(int i = 0; i < maoP2.size(); i++) {
+			maoP2.get(i).setEnabled(true);
+		}
+	}
+	
+	private void ativarEvocadasP1() {
+		for(int i = 0; i < evocadasP1.size(); i++) {
+			evocadasP1.get(i).setEnabled(true);
+		}
+	}
+	
+	private void ativarEvocadasP2() {
+		for(int i = 0; i < evocadasP2.size(); i++) {
+			evocadasP2.get(i).setEnabled(true);
+		}
+	}
+	
+	private void ativarEmCampoP1() {
+		for(int i = 0; i < emCampoP1.size(); i++) {
+			emCampoP1.get(i).setEnabled(true);
+		}
+	}
+	
+	private void ativarEmCampoP2() {
+		for(int i = 0; i < emCampoP2.size(); i++) {
+			emCampoP2.get(i).setEnabled(true);
+		}
 	}
 	
 	public void atualizarNexus() {
@@ -59,17 +134,54 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 		jblP2VidaNexus.setText(Integer.toString(nexusP2));
 	}
 	
-	public void atualizarMaoP1(ArrayList<Carta> mao) {
-		for(int i = 0; i < mao.size() && i < maoP1.size(); i++) {
-			maoP1.get(i).setText(mao.get(i).toStringCompra());
+	public void atualizarMao() {
+		ArrayList<Carta> maoPlayer1 = campo.getP1().getMao();
+		ArrayList<Carta> maoPlayer2 = campo.getP2().getMao();
+		
+		for(int i = 0; i < maoPlayer1.size() && i < maoP1.size(); i++) {
+			maoP1.get(i).setText(maoPlayer1.get(i).toStringCompra());
 			maoP1.get(i).setVisible(true);
 		}
-	}
-	public void atualizarMaoP2(ArrayList<Carta> mao) {
-		for(int i = 0; i < mao.size() && i < maoP2.size(); i++) {
-			maoP2.get(i).setText(mao.get(i).toStringCompra());
+		for(int i = 0; i < maoPlayer2.size() && i < maoP2.size(); i++) {
+			maoP2.get(i).setText(maoPlayer2.get(i).toStringCompra());
 			maoP2.get(i).setVisible(true);
 		}
+	}
+	
+	public void atualizarEvocadas() {
+		ArrayList<Seguidor> evocadasPlayer1 = campo.getP1().getEvocadas();
+		ArrayList<Seguidor> evocadasPlayer2 = campo.getP2().getEvocadas();
+		
+		for(int i = 0; i < evocadasPlayer1.size() && i < maoP1.size(); i++) {
+			evocadasP1.get(i).setText(evocadasPlayer1.get(i).toStringCompra());
+			evocadasP1.get(i).setVisible(true);
+		}
+		for(int i = 0; i < evocadasPlayer2.size() && i < maoP2.size(); i++) {
+			evocadasP2.get(i).setText(evocadasPlayer2.get(i).toStringCompra());
+			evocadasP2.get(i).setVisible(true);
+		}
+	}
+	
+	public Seguidor selecionarCartaP1() {
+		ativarEvocadasP1();
+		ativarEmCampoP1();
+		aguardandoClique = true;
+		while(aguardandoClique != false) {
+			//Espera
+		}
+		
+		return (Seguidor) cartaEscolhida;
+	}
+	
+	public Seguidor selecionarCartaP2() {
+		ativarEvocadasP2();
+		ativarEmCampoP2();
+		aguardandoClique = true;
+		while(aguardandoClique != false) {
+			//Espera
+		}
+		
+		return (Seguidor) cartaEscolhida;
 	}
 
     /**
@@ -89,90 +201,141 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         panelCampo.setBackground(new java.awt.Color(153, 255, 153));
         panelCampo.setOpaque(true);
         
-        bntFeitico = new JButton();
-        bntFeitico.setText("<html>Feitico</html>");
-        
         panelCampoP1 = new JLayeredPane();
         
         panelCampoP2 = new JLayeredPane();
         
         bntP2EmCampo_1 = new JButton();
         bntP2EmCampo_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2EmCampo_1ActionPerformed(evt);
+            }
+        });
         bntP2EmCampo_1.setBounds(230, 19, 104, 61);
         panelCampoP2.add(bntP2EmCampo_1);
         
         bntP2EmCampo_2 = new JButton();
         bntP2EmCampo_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2EmCampo_2ActionPerformed(evt);
+            }
+        });
         bntP2EmCampo_2.setBounds(450, 19, 104, 61);
         panelCampoP2.add(bntP2EmCampo_2);
         
         bntP2EmCampo_3 = new JButton();
         bntP2EmCampo_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2EmCampo_3ActionPerformed(evt);
+            }
+        });
         bntP2EmCampo_3.setBounds(120, 19, 104, 61);
         panelCampoP2.add(bntP2EmCampo_3);
         
         bntP2EmCampo_0 = new JButton();
         bntP2EmCampo_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2EmCampo_0ActionPerformed(evt);
+            }
+        });
         bntP2EmCampo_0.setBounds(340, 19, 104, 61);
         panelCampoP2.add(bntP2EmCampo_0);
         
         bntP2EmCampo_4 = new JButton();
         bntP2EmCampo_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2EmCampo_4ActionPerformed(evt);
+            }
+        });
         bntP2EmCampo_4.setBounds(560, 19, 104, 61);
         panelCampoP2.add(bntP2EmCampo_4);
         
         bntP2EmCampo_5 = new JButton();
         bntP2EmCampo_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2EmCampo_5ActionPerformed(evt);
+            }
+        });
         bntP2EmCampo_5.setBounds(10, 19, 104, 61);
         panelCampoP2.add(bntP2EmCampo_5);
 
         javax.swing.GroupLayout gl_panelCampo = new javax.swing.GroupLayout(panelCampo);
         gl_panelCampo.setHorizontalGroup(
         	gl_panelCampo.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_panelCampo.createSequentialGroup()
-        			.addGap(282)
-        			.addComponent(bntFeitico, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(16, Short.MAX_VALUE))
         		.addComponent(panelCampoP1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
-        		.addComponent(panelCampoP2, GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+        		.addComponent(panelCampoP2, GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
         );
         gl_panelCampo.setVerticalGroup(
         	gl_panelCampo.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_panelCampo.createSequentialGroup()
         			.addComponent(panelCampoP2, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-        			.addComponent(bntFeitico, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-        			.addGap(18)
+        			.addPreferredGap(ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
         			.addComponent(panelCampoP1, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
         );
         
         bntP1EmCampo_1 = new JButton();
         bntP1EmCampo_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1EmCampo_1ActionPerformed(evt);
+            }
+        });
         bntP1EmCampo_1.setBounds(230, 0, 104, 61);
         panelCampoP1.add(bntP1EmCampo_1);
         
         bntP1EmCampo_2 = new JButton();
         bntP1EmCampo_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1EmCampo_2ActionPerformed(evt);
+            }
+        });
         bntP1EmCampo_2.setBounds(450, 0, 104, 61);
         panelCampoP1.add(bntP1EmCampo_2);
         
         bntP1EmCampo_3 = new JButton();
         bntP1EmCampo_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1EmCampo_3ActionPerformed(evt);
+            }
+        });
         bntP1EmCampo_3.setBounds(120, 0, 104, 61);
         panelCampoP1.add(bntP1EmCampo_3);
         
         bntP1EmCampo_0 = new JButton();
         bntP1EmCampo_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1EmCampo_0ActionPerformed(evt);
+            }
+        });
         bntP1EmCampo_0.setBounds(340, 0, 104, 61);
         panelCampoP1.add(bntP1EmCampo_0);
         
         bntP1EmCampo_4 = new JButton();
         bntP1EmCampo_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1EmCampo_4ActionPerformed(evt);
+            }
+        });
         bntP1EmCampo_4.setBounds(560, 0, 104, 61);
         panelCampoP1.add(bntP1EmCampo_4);
         
         bntP1EmCampo_5 = new JButton();
         bntP1EmCampo_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1EmCampo_5ActionPerformed(evt);
+            }
+        });
         bntP1EmCampo_5.setBounds(10, 0, 104, 61);
         panelCampoP1.add(bntP1EmCampo_5);
         panelCampo.setLayout(gl_panelCampo);
@@ -187,36 +350,66 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         
         bntP2Evocada_0 = new JButton();
         bntP2Evocada_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
+        bntP2Evocada_0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2Evocada_0ActionPerformed(evt);
+            }
+        });
         bntP2Evocada_0.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP2Evocada_0.setBounds(160, 0, 80, 90);
         panelEvocadasP2.add(bntP2Evocada_0);
         
         bntP2Evocada_1 = new JButton();
         bntP2Evocada_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
+        bntP2Evocada_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2Evocada_1ActionPerformed(evt);
+            }
+        });
         bntP2Evocada_1.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP2Evocada_1.setBounds(250, 0, 80, 90);
         panelEvocadasP2.add(bntP2Evocada_1);
         
         bntP2Evocada_2 = new JButton();
         bntP2Evocada_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
+        bntP2Evocada_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2Evocada_2ActionPerformed(evt);
+            }
+        });
         bntP2Evocada_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP2Evocada_2.setBounds(340, 0, 80, 90);
         panelEvocadasP2.add(bntP2Evocada_2);
         
         bntP2Evocada_3 = new JButton();
         bntP2Evocada_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
+        bntP2Evocada_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2Evocada_3ActionPerformed(evt);
+            }
+        });
         bntP2Evocada_3.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP2Evocada_3.setBounds(430, 0, 80, 90);
         panelEvocadasP2.add(bntP2Evocada_3);
         
         bntP2Evocada_4 = new JButton();
         bntP2Evocada_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
+        bntP2Evocada_4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2Evocada_4ActionPerformed(evt);
+            }
+        });
         bntP2Evocada_4.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP2Evocada_4.setBounds(70, 0, 80, 90);
         panelEvocadasP2.add(bntP2Evocada_4);
         
         bntP2Evocada_5 = new JButton();
         bntP2Evocada_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
+        bntP2Evocada_5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2Evocada_5ActionPerformed(evt);
+            }
+        });
         bntP2Evocada_5.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP2Evocada_5.setBounds(520, 0, 80, 90);
         panelEvocadasP2.add(bntP2Evocada_5);
@@ -225,36 +418,66 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         
         bntP2Mao_0 = new JButton();
         bntP2Mao_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
+        bntP2Mao_0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2Mao_0ActionPerformed(evt);
+            }
+        });
         bntP2Mao_0.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP2Mao_0.setBounds(160, 0, 80, 90);
         panelMaoP2.add(bntP2Mao_0);
         
         bntP2Mao_1 = new JButton();
         bntP2Mao_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
+        bntP2Mao_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2Mao_1ActionPerformed(evt);
+            }
+        });
         bntP2Mao_1.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP2Mao_1.setBounds(250, 0, 80, 90);
         panelMaoP2.add(bntP2Mao_1);
         
         bntP2Mao_2 = new JButton();
         bntP2Mao_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
+        bntP2Mao_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2Mao_2ActionPerformed(evt);
+            }
+        });
         bntP2Mao_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP2Mao_2.setBounds(340, 0, 80, 90);
         panelMaoP2.add(bntP2Mao_2);
         
         bntP2Mao_3 = new JButton();
         bntP2Mao_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
+        bntP2Mao_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2Mao_3ActionPerformed(evt);
+            }
+        });
         bntP2Mao_3.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP2Mao_3.setBounds(430, 0, 80, 90);
         panelMaoP2.add(bntP2Mao_3);
         
         bntP2Mao_4 = new JButton();
         bntP2Mao_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
+        bntP2Mao_4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2Mao_4ActionPerformed(evt);
+            }
+        });
         bntP2Mao_4.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP2Mao_4.setBounds(70, 0, 80, 90);
         panelMaoP2.add(bntP2Mao_4);
         
         bntP2Mao_5 = new JButton();
         bntP2Mao_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
+        bntP2Mao_5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP2Mao_5ActionPerformed(evt);
+            }
+        });
         bntP2Mao_5.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP2Mao_5.setBounds(520, 0, 80, 90);
         panelMaoP2.add(bntP2Mao_5);
@@ -446,72 +669,132 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         
         bntP1Evocada_0 = new JButton();
         bntP1Evocada_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
+        bntP1Evocada_0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1Evocada_0ActionPerformed(evt);
+            }
+        });
         bntP1Evocada_0.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP1Evocada_0.setBounds(160, 0, 80, 90);
         panelEvocadasP1.add(bntP1Evocada_0);
         
         bntP1Evocada_1 = new JButton();
         bntP1Evocada_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
+        bntP1Evocada_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1Evocada_1ActionPerformed(evt);
+            }
+        });
         bntP1Evocada_1.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP1Evocada_1.setBounds(250, 0, 80, 90);
         panelEvocadasP1.add(bntP1Evocada_1);
         
         bntP1Evocada_2 = new JButton();
         bntP1Evocada_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
+        bntP1Evocada_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1Evocada_2ActionPerformed(evt);
+            }
+        });
         bntP1Evocada_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP1Evocada_2.setBounds(340, 0, 80, 90);
         panelEvocadasP1.add(bntP1Evocada_2);
         
         bntP1Evocada_3 = new JButton();
         bntP1Evocada_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
+        bntP1Evocada_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1Evocada_3ActionPerformed(evt);
+            }
+        });
         bntP1Evocada_3.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP1Evocada_3.setBounds(430, 0, 80, 90);
         panelEvocadasP1.add(bntP1Evocada_3);
         
         bntP1Evocada_4 = new JButton();
         bntP1Evocada_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
+        bntP1Evocada_4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1Evocada_4ActionPerformed(evt);
+            }
+        });
         bntP1Evocada_4.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP1Evocada_4.setBounds(70, 0, 80, 90);
         panelEvocadasP1.add(bntP1Evocada_4);
         
         bntP1Evocada_5 = new JButton();
         bntP1Evocada_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
+        bntP1Evocada_5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1Evocada_5ActionPerformed(evt);
+            }
+        });
         bntP1Evocada_5.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP1Evocada_5.setBounds(520, 0, 80, 90);
         panelEvocadasP1.add(bntP1Evocada_5);
         
         bntP1Mao_0 = new JButton();
         bntP1Mao_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
+        bntP1Mao_0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1Mao_0ActionPerformed(evt);
+            }
+        });
         bntP1Mao_0.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP1Mao_0.setBounds(160, 0, 80, 90);
         panelMaoP1.add(bntP1Mao_0);
         
         bntP1Mao_1 = new JButton();
         bntP1Mao_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
+        bntP1Mao_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1Mao_1ActionPerformed(evt);
+            }
+        });
         bntP1Mao_1.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP1Mao_1.setBounds(250, 0, 80, 90);
         panelMaoP1.add(bntP1Mao_1);
         
         bntP1Mao_2 = new JButton();
         bntP1Mao_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
+        bntP1Mao_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1Mao_2ActionPerformed(evt);
+            }
+        });
         bntP1Mao_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP1Mao_2.setBounds(340, 0, 80, 90);
         panelMaoP1.add(bntP1Mao_2);
         
         bntP1Mao_3 = new JButton();
         bntP1Mao_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
+        bntP1Mao_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1Mao_3ActionPerformed(evt);
+            }
+        });
         bntP1Mao_3.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP1Mao_3.setBounds(430, 0, 80, 90);
         panelMaoP1.add(bntP1Mao_3);
         
         bntP1Mao_4 = new JButton();
         bntP1Mao_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
+        bntP1Mao_4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1Mao_4ActionPerformed(evt);
+            }
+        });
         bntP1Mao_4.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP1Mao_4.setBounds(70, 0, 80, 90);
         panelMaoP1.add(bntP1Mao_4);
         
         bntP1Mao_5 = new JButton();
         bntP1Mao_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
+        bntP1Mao_5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntP1Mao_5ActionPerformed(evt);
+            }
+        });
         bntP1Mao_5.setFont(new Font("Tahoma", Font.PLAIN, 9));
         bntP1Mao_5.setBounds(520, 0, 80, 90);
         panelMaoP1.add(bntP1Mao_5);
@@ -561,8 +844,123 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         emCampoP2.add(bntP2EmCampo_4);
         emCampoP2.add(bntP2EmCampo_5);
     }// </editor-fold>                        
+    
+//=========================================================================================================================
+/*												Clique de Botoes							  							 */
+    private void bntP1Mao_0ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }
+    private void bntP1Mao_1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }
+    private void bntP1Mao_2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }
+    private void bntP1Mao_3ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }
+    private void bntP1Mao_4ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }
+    private void bntP1Mao_5ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }
+    private void bntP2Mao_0ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }
+    private void bntP2Mao_1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }
+    private void bntP2Mao_2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }
+    private void bntP2Mao_3ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }
+    private void bntP2Mao_4ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }
+    private void bntP2Mao_5ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }
+    
+    private void bntP1Evocada_0ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP1Evocada_1ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP1Evocada_2ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP1Evocada_3ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP1Evocada_4ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP1Evocada_5ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP2Evocada_0ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP2Evocada_1ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP2Evocada_2ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP2Evocada_3ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP2Evocada_4ActionPerformed(java.awt.event.ActionEvent evt) {
+	
+	}
+    private void bntP2Evocada_5ActionPerformed(java.awt.event.ActionEvent evt) {
+	
+    }
+    
+    private void bntP1EmCampo_0ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP1EmCampo_1ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP1EmCampo_2ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP1EmCampo_3ActionPerformed(java.awt.event.ActionEvent evt) {
+	
+    }
+    private void bntP1EmCampo_4ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP1EmCampo_5ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP2EmCampo_0ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP2EmCampo_1ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP2EmCampo_2ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP2EmCampo_3ActionPerformed(java.awt.event.ActionEvent evt) {
+	
+    }
+    private void bntP2EmCampo_4ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    private void bntP2EmCampo_5ActionPerformed(java.awt.event.ActionEvent evt) {
+    	
+    }
+    
+//=========================================================================================================================    
+    
     private javax.swing.JLayeredPane panelCampo;
-    private JButton bntFeitico;
     private JLayeredPane panelEvocadasP1;
     private JLayeredPane panelMaoP1;
     private JButton bntP1Mao_0;

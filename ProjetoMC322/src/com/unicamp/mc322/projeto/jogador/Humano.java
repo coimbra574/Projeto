@@ -51,7 +51,7 @@ public class Humano  extends Jogador{
 					do {
 						posicaoNoCampo = Integer.valueOf(teclado.nextLine());
 					}while(posicaoNoCampo>6);
-					invocarCarta(mao.get(cartaParaJogar), campo, posicaoNoCampo);//como eu instancio o campo dentro do jogador??
+					//invocarCarta(mao.get(cartaParaJogar), campo, posicaoNoCampo);//como eu instancio o campo dentro do jogador??
 				}else {
 					ativarEfeito(mao.get(cartaParaJogar));
 				}

@@ -21,6 +21,8 @@ import com.unicamp.mc322.projeto.turno.Turno;
 public class Campo {
 	public final int LARGURA_CAMPO = 6;
 	private Seguidor[][] unidadesEvocadas = new Seguidor[2][LARGURA_CAMPO];
+	private ArrayList<Seguidor> evocadasP1 = new ArrayList<Seguidor>();
+	private ArrayList<Seguidor> evocadasP2 = new ArrayList<Seguidor>();
 	private Jogador jogador1,jogador2;
 	private Rodada rodada;
 	private int nexusP1, nexusP2;
@@ -33,9 +35,10 @@ public class Campo {
 		this.nexusP2 = 20;
 		definirNumeroEmCampo(p1, p2);
 		this.rodada = new Rodada(p1,p2);
-		this.interfaceGrafica = new InterfaceGrafica(this);
-		interfaceGrafica.iniciar(p1.getMao(), p2.getMao());
+		this.interfaceGrafica = new InterfaceGrafica(this, rodada);
+		interfaceGrafica.iniciarTurno();
 	}
+
 	
 	public int getNexus(int numeroJogador) {
 		if(numeroJogador == 1) {
@@ -64,7 +67,6 @@ public class Campo {
 		jogador2.setNumeroEmCampo(2);
 	}
 	
-	
 	public void adicionarCartaEmCampo(int numeroJogador, int posicao, Carta carta) {
 		unidadesEvocadas[numeroJogador][posicao-1] = (Seguidor) carta;
 	}
@@ -75,33 +77,45 @@ public class Campo {
 	}
 	
 	
-	public void alterarCartaEmCampo(int numeroJogador, int posicao, Caracteristica caracteristica, int novoValor) {
+	public void alterarCartaEmCampo(numeroJogador numeroJogador, int posicao, Caracteristica caracteristica, int novoValor) {
 		if(caracteristica.equals(Caracteristica.PODER)) {
-			unidadesEvocadas[numeroJogador][posicao-1].setPoder(novoValor);
+			//unidadesEvocadas[numeroJogador][posicao-1].setPoder(novoValor);
 		}
 		else {
-			unidadesEvocadas[numeroJogador][posicao-1].setVida(novoValor);
+			//unidadesEvocadas[numeroJogador][posicao-1].setVida(novoValor);
 		}
 	}
 	
+	public boolean possuiCartaEscolhivel(numeroJogador numJogador) {
+		return false;
+	}
 	
-	public Carta selecionarUmaUnidade(int numeroJogador, int posicao) {
-		if(posicao > 0 && posicao <= LARGURA_CAMPO) {
-			return unidadesEvocadas[numeroJogador][posicao-1];
-		} else {
-			System.out.println("Sele��o fora dos limites do campo");
-			return null;
+	public Seguidor selecionarUmaUnidadeAliada() {
+		if(rodada.getNumeroJogadorAtual() == numeroJogador.PLAYER1) {
+			return interfaceGrafica.selecionarCartaP1();
+		}
+		else {
+			return interfaceGrafica.selecionarCartaP2();
+		}
+	}
+	
+	public Seguidor selecionarUmaUnidadeInimiga() {
+		if(rodada.getNumeroJogadorAtual() == numeroJogador.PLAYER1) {
+			return interfaceGrafica.selecionarCartaP2();
+		}
+		else {
+			return interfaceGrafica.selecionarCartaP1();
 		}
 	}
 	
 
-	public ArrayList<Carta> selecionarUnidades(int numeroJogador, int ...posicoes) {
+	/*public ArrayList<Carta> selecionarUnidades(int numeroJogador, int ...posicoes) {
 		ArrayList<Carta> cartasSelecionadas = null;
 		for(int posicaoAux : posicoes) {
 			cartasSelecionadas.add(selecionarUmaUnidade(numeroJogador, posicaoAux));
 		}
 		return cartasSelecionadas;
-	}
+	}*/
 	
 	
 	public int procurarCartaEmCampo(int numeroJogador, Carta carta) {
@@ -125,11 +139,32 @@ public class Campo {
 	}
 	
 	
-	public void adicionarAoNexusJogador(int numeroJogador, int valorAdicionado) {
-		if(numeroJogador == 1) {
+	public void adicionarAoNexusJogador(numeroJogador numeroJogador, int valorAdicionado) {
+		if(numeroJogador == numeroJogador.PLAYER1) {
 			jogador1.adicionarAoNexus(valorAdicionado);
 		} else {
 			jogador2.adicionarAoNexus(valorAdicionado);
+		}
+	}
+	
+	public Jogador getP1() {
+		return jogador1;
+	}
+	
+	public Jogador getP2() {
+		return jogador2;
+	}
+	
+	public void terminarTurno() {
+		
+	}
+
+
+	public ArrayList<Seguidor> getEvocadas(numeroJogador numeroJogador) {
+		if(numeroJogador == numeroJogador.PLAYER1) {
+			return evocadasP1;
+		} else {
+			return evocadasP2;
 		}
 	}
 }

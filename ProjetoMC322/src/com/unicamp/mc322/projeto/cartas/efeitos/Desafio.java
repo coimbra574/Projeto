@@ -10,6 +10,11 @@ import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.jogador.Jogador;
 
 public class Desafio extends Efeito {
+	
+	public Desafio() {
+		super(true, true);
+	}
+
 	private int unidadeAliada, unidadeOponente;
 	
 	@Override

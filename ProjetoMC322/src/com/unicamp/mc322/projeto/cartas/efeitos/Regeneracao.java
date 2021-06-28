@@ -13,12 +13,16 @@ import com.unicamp.mc322.projeto.cartas.Seguidor;
 
 public class Regeneracao extends Efeito {
 	private int unidade;
-
+	
+	public Regeneracao() {
+		super(true, false);
+	}
+	
 	@Override
 	public void ativarEfeito(Campo campo) {
 		Rodada rodada = campo.getRodada();
-		this.unidade = usuarioEscolherUnidade("Selecione a unidade o qual deseja ativar o efeito: ");
-		Seguidor cartaSelecionada = (Seguidor) campo.selecionarUmaUnidade(rodada.getNumeroJogadorAtual(), unidade);
+		usuarioEscolherUnidade("Selecione a unidade o qual deseja ativar o efeito: ");
+		Seguidor cartaSelecionada = campo.selecionarUmaUnidadeAliada();
 		
 		if(cartaSelecionada != null) {
 			int novaVida = cartaSelecionada.getVidaTotal();

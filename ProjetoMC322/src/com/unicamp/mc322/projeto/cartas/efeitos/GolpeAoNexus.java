@@ -11,11 +11,15 @@ public class GolpeAoNexus extends Efeito {
 	private int unidade;
 	private GolpeAoNexusLimitado golpeNexus;
 	
+	public GolpeAoNexus() {
+		super(true, false);
+	}
+	
 	@Override
 	public void ativarEfeito(Campo campo) {
-		this.unidade = usuarioEscolherUnidade("Selecione a unidade o qual deseja ativar o efeito: ");
+		//this.unidade = usuarioEscolherUnidade("Selecione a unidade o qual deseja ativar o efeito: ");
 		Rodada rodada = campo.getRodada();
-		Seguidor cartaSelecionada = (Seguidor) campo.selecionarUmaUnidade(rodada.getNumeroJogadorAtual(), unidade);
+		Seguidor cartaSelecionada = campo.selecionarUmaUnidadeAliada();
 		golpeNexus = new GolpeAoNexusLimitado(cartaSelecionada.getPoder());
 		golpeNexus.ativarEfeito(campo);
 	}

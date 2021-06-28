@@ -5,20 +5,28 @@ import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
 
 public class Feitico extends Carta {
 	Efeito efeito;
-	final private String tipo = "Feitico";// Coloquei isso pq eu preciso saber qual tipo de carta é pra invocá-la
 	
 	public Feitico(String nome, int custo, Efeito efeito) {
-		super(nome,custo);
+		super(nome,custo, TipoCarta.FEITICO);
 		this.efeito = efeito;
-	}
-	
-	@Override
-	public String getTipo() {
-		return tipo;
 	}
 
 	public void ativarCarta(Campo campo) {
 		efeito.ativarEfeito(campo);
+	}
+	
+	public boolean ehPossivel(Campo campo) {
+		if(efeito.requerCartaAliada()) {
+			if(campo.possuiCartaEscolhivel(campo.getRodada().getNumeroJogadorAtual()) == false) {
+				return false;
+			}
+		}
+		if(efeito.requerCartaInimiga()) {
+			if(campo.possuiCartaEscolhivel(campo.getRodada().getNumeroJogadorOponente()) == false) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override
@@ -54,4 +62,5 @@ public class Feitico extends Carta {
 		String texto = "";
 		return texto;
 	}
+
 }

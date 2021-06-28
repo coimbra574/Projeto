@@ -16,13 +16,13 @@ public class Combate {
 		this.defensor = defensor;
 		this.campo = campo;
 		
-		prepararCombate();
-		for(int i=0; i<unidadesCombatentes.size(); i++) {
-			iniciarCombateEntreCartas(i);
-		}
-		terminarCombate();
+//		prepararCombate();
+//		for(int i=0; i<unidadesCombatentes.size(); i++) {
+//			iniciarCombateEntreCartas(i);
+//		}
+//		terminarCombate();
 	}
-	
+/*	
 	public void prepararCombate() {
 		//ArrayList<Carta> unidadesCombatentes = atacante.escolherCartaUtilizar(campo);
 		//ArrayList<Carta> unidadesDefensoras = defensor.escolherCartaUtilizar(campo);
@@ -57,7 +57,7 @@ public class Combate {
 		campo.verificarCartasComVida(1);  // Verifica cartas jogador 1
 		campo.verificarCartasComVida(2);  // verifica cartas jogador 2
 		Rodada rodada = campo.getRodada();
-		rodada.terminarRodada();
+		rodada.finalizarTurno();
 	}
-	
+*/	
 }

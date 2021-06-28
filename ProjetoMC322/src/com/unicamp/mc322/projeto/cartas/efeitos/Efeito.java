@@ -6,13 +6,18 @@ import com.unicamp.mc322.projeto.Campo;
 
 public abstract class Efeito {
 	private TipoEfeito tipoEfeito = TipoEfeito.SELECIONADO;
+	private boolean usaCartaAliada;
+	private boolean usaCartaInimiga;
+	
+	public Efeito(boolean usaCartaAliada, boolean usaCartaInimiga) {
+		this.usaCartaAliada = usaCartaAliada;
+		this.usaCartaInimiga = usaCartaInimiga;
+	}
 	
 	public abstract void ativarEfeito(Campo campo);
 	
-	protected int usuarioEscolherUnidade(String mensagemAoUsuario) {
-		Scanner recebeUnidade = new Scanner(System.in);    //System.in is a standard input stream  
-		System.out.print(mensagemAoUsuario);  
-		return recebeUnidade.nextInt();
+	protected void usuarioEscolherUnidade(String mensagemAoUsuario) {
+		System.out.print(mensagemAoUsuario);
 	}
 	
 	public TipoEfeito getTipoEfeito() {
@@ -21,5 +26,13 @@ public abstract class Efeito {
 	
 	protected void setTipoEfeito(TipoEfeito tipo) {
 		tipoEfeito = tipo;
+	}
+
+	public boolean requerCartaAliada() {
+		return usaCartaAliada;
+	}
+
+	public boolean requerCartaInimiga() {
+		return usaCartaInimiga;
 	}
 }

@@ -15,15 +15,16 @@ public class Melhoria extends Efeito {
 	int n, m, unidade;
 	
 	public Melhoria(int n, int m) {
+		super(true, false);
 		this.n = n;
 		this.m = m;
 	}
 
 	@Override
 	public void ativarEfeito(Campo campo) {
-		this.unidade = usuarioEscolherUnidade("Selecione a unidade o qual deseja ativar o efeito: ");
+		usuarioEscolherUnidade("Selecione a unidade o qual deseja ativar o efeito: ");
 		Rodada rodada = campo.getRodada();
-		Seguidor cartaSelecionada = (Seguidor) campo.selecionarUmaUnidade(rodada.getNumeroJogadorAtual(), unidade);
+		Seguidor cartaSelecionada = campo.selecionarUmaUnidadeAliada();
 		
 		if(cartaSelecionada != null) {
 			int novoPoder = cartaSelecionada.getPoder() + n;

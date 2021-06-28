@@ -3,10 +3,12 @@ package com.unicamp.mc322.projeto.cartas;
 public abstract class Carta {
 	protected int custo;
 	protected String nome;
+	protected TipoCarta tipo;
 
-	public Carta(String nome, int custo) {
+	public Carta(String nome, int custo, TipoCarta tipo) {
 		this.nome = nome;
 		this.custo = custo;
+		this.tipo = tipo;
 	}
 
 	public String getNome() {
@@ -17,7 +19,9 @@ public abstract class Carta {
 		return custo;
 	}
 	
-	public abstract String getTipo();
+	public TipoCarta getTipo() {
+		return tipo;
+	}
 	
 	public void setMana(int novoCusto) {
 		custo = novoCusto;

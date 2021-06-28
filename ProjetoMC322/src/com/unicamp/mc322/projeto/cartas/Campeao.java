@@ -10,21 +10,15 @@ public class Campeao extends Seguidor {
 	private DadosEvolucao evolucao;
 	private Traco traco; // S” 1 TRA«O?
 	private ArrayList<Efeito> efeitos = new ArrayList<Efeito>();
-	final private String tipo = "Campe√£o";// Coloquei isso pq eu preciso saber qual tipo de carta √© pra invoc√°-la
 
 	public Campeao(String nome, int custo, int poder, int vida, DadosEvolucao evolucao, Traco traco, Efeito ... efeitos) {
-		super(nome, custo, poder, vida, traco, efeitos);
+		super(nome, custo, TipoCarta.CAMPEAO, poder, vida, traco, efeitos);
 		this.evolucao = evolucao;
 		this.nivel = Nivel.NORMAL;
 		
 		for(Efeito aux : efeitos) {
 			this.efeitos.add(aux);
 		}
-	}
-	
-	@Override
-	public String getTipo() {
-		return tipo;
 	}
 	
 	public void setNivel(Nivel novoNivel) {

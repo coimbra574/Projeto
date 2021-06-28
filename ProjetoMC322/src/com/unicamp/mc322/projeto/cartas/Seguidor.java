@@ -10,12 +10,11 @@ import com.unicamp.mc322.projeto.jogador.Jogador;
 public class Seguidor extends Carta {
 	private int poder, vida, vidaTotal;
 	private Traco traco=null;
-	final private String tipo = "Seguidor";// Coloquei isso pq eu preciso saber qual tipo de carta é pra invocá-la
 	private ArrayList<Efeito> listaEfeitos = new ArrayList<Efeito>();
 	private boolean matouUmSeguidor = false;  // Alterado na classe combate
 
 	public Seguidor(String nome, int custo, int poder, int vidaTotal, Traco traco, Efeito... efeitos) {
-		super(nome,custo);
+		super(nome,custo, TipoCarta.SEGUIDOR);
 		this.poder = poder;
 		this.vidaTotal = vidaTotal;
 		this.traco = traco;
@@ -26,9 +25,16 @@ public class Seguidor extends Carta {
 		}
 	}
 	
-	@Override
-	public String getTipo() {
-		return tipo;
+	public Seguidor(String nome, int custo, TipoCarta tipo, int poder, int vidaTotal, Traco traco, Efeito... efeitos) {
+		super(nome,custo, tipo);
+		this.poder = poder;
+		this.vidaTotal = vidaTotal;
+		this.traco = traco;
+		vida = vidaTotal;
+		
+		for(Efeito aux : efeitos) {
+			listaEfeitos.add(aux);
+		}
 	}
 	
 	public int getPoder() {

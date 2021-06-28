@@ -10,7 +10,8 @@ import com.unicamp.mc322.projeto.jogador.Jogador;
 
 public class TrocaJusta extends Efeito {
 	
-	public void TrocaJusta() {
+	public TrocaJusta() {
+		super(true, false);
 		super.setTipoEfeito(TipoEfeito.AUTOMATICO);
 	}
 

@@ -58,7 +58,7 @@ public class Maquina extends Jogador{
 				if(mao.get(cartaParaJogar).getTipo().equals("Campeão") || mao.get(cartaParaJogar).getTipo().equals("Seguidor")) {
 					int posicaoNoCampo;
 					posicaoNoCampo = geradorAleatorio.nextInt(6);
-					invocarCarta(mao.get(cartaParaJogar), campo, posicaoNoCampo);//como eu instancio o campo dentro do jogador??
+//					invocarCarta(mao.get(cartaParaJogar), campo, posicaoNoCampo);//como eu instancio o campo dentro do jogador??
 				}else {
 					ativarEfeito(mao.get(cartaParaJogar));
 				}

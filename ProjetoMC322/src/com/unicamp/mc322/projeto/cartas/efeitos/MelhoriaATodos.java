@@ -4,6 +4,8 @@
 
 package com.unicamp.mc322.projeto.cartas.efeitos;
 
+import java.util.ArrayList;
+
 import com.unicamp.mc322.projeto.Campo;
 import com.unicamp.mc322.projeto.Rodada;
 import com.unicamp.mc322.projeto.cartas.Caracteristica;
@@ -15,21 +17,22 @@ public class MelhoriaATodos extends Efeito {
 	int n, m;
 	
 	public MelhoriaATodos(int n, int m) {
+		super(true, false);
 		this.n = n;
 		this.m = m;
 	}
 
 	@Override
 	public void ativarEfeito(Campo campo) {
+		int novoPoder;
+		int novaVida;
 		Rodada rodada = campo.getRodada();
-		for(int i=1; i<=campo.LARGURA_CAMPO; i++) {  // Tá certo chamar uma constante publica assim?
-			Seguidor cartaSelecionada = (Seguidor) campo.selecionarUmaUnidade(rodada.getNumeroJogadorAtual(), i);
-			if(cartaSelecionada != null) {
-				int novoPoder = cartaSelecionada.getPoder() + n;
-				int novaVida = cartaSelecionada.getVida() + m;
-				campo.alterarCartaEmCampo(rodada.getNumeroJogadorAtual(), i, Caracteristica.PODER, novoPoder);
-				campo.alterarCartaEmCampo(rodada.getNumeroJogadorAtual(), i, Caracteristica.VIDA, novaVida);
-			}
+		ArrayList<Seguidor> evocadas = campo.getEvocadas(rodada.getNumeroJogadorAtual());
+		for(Seguidor carta: evocadas) {
+			novoPoder = carta.getPoder() + n;
+			novaVida = carta.getVida() + m;
+			carta.setPoder(novoPoder);
+			carta.setVida(novaVida);
 		}
 	}
 
