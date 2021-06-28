@@ -14,6 +14,7 @@ import com.unicamp.mc322.projeto.TipoRodada;
 import com.unicamp.mc322.projeto.numeroJogador;
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
+import com.unicamp.mc322.projeto.turno.Turno;
 
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -27,8 +28,11 @@ import javax.swing.JLayeredPane;
 public class InterfaceGrafica extends javax.swing.JFrame {
 	private Campo campo;
 	private Rodada rodada;
-	private boolean aguardandoClique;
+	private boolean aguardandoCarta;
+	private boolean aguardandoIndex;
 	private Carta cartaEscolhida;
+	private int indexEscolhido;
+	private boolean realizouAcao;
 	private ArrayList<JButton> maoP1 = new ArrayList<JButton>();
 	private ArrayList<JButton> maoP2 = new ArrayList<JButton>();
 	private ArrayList<JButton> evocadasP1 = new ArrayList<JButton>();
@@ -42,33 +46,50 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         this.campo = campo;
         this.rodada = rodada;
         this.setVisible(true);
-		this.aguardandoClique = false;
+		this.aguardandoCarta = false;
+		this.aguardandoIndex = false;
 		
 		desativarTudo();
-		
-		atualizarMao();
-		atualizarEvocadas();
-		atualizarNexus();
     }
     
 	public void iniciarTurno() {
+		this.realizouAcao = false;
+		atualizarNexus();
+		atualizarMao();
+		atualizarEvocadas();
+		atualizarEmCampo();
+		atualizarMana();
+		atualizarTurno();
+		
 		//Vez do jogador1
 		if(rodada.getNumeroJogadorAtual() == numeroJogador.PLAYER1) {
+			desativarMaoP2();
+			desativarEvocadasP2();
 			if(rodada.getTipo() == TipoRodada.COMPRA_DE_CARTAS) {
+				bntAvancarTurno.setText("<html>Passar</html>");
 				ativarMaoP1();
-				ativarEvocadasP1();
+				if(campo.getP1().getTurno() == Turno.ATAQUE) {
+					ativarEvocadasP1();
+				}
 			}
 			else {
+				bntAvancarTurno.setText("<html>Nao Defender</html>");
 				ativarEvocadasP1();
 			}
 		}
 		//Vez do jogador2
 		else {
+			desativarMaoP1();
+			desativarEvocadasP1();
 			if(rodada.getTipo() == TipoRodada.COMPRA_DE_CARTAS) {
+				bntAvancarTurno.setText("<html>Passar</html>");
 				ativarMaoP2();
-				ativarEvocadasP2();
+				if(campo.getP2().getTurno() == Turno.ATAQUE) {
+					ativarEvocadasP2();
+				}
 			}
 			else {
+				bntAvancarTurno.setText("<html>Nao Defender</html>");
 				ativarEvocadasP2();
 			}
 		}
@@ -91,6 +112,18 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 		}
 	}
 	
+	private void desativarMaoP1() {
+		for(int i = 0; i < maoP1.size(); i++) {
+			maoP1.get(i).setEnabled(false);
+		}
+	}
+	
+	private void desativarMaoP2() {
+		for(int i = 0; i < maoP2.size(); i++) {
+			maoP2.get(i).setEnabled(false);
+		}
+	}
+	
 	private void ativarMaoP1() {
 		for(int i = 0; i < maoP1.size(); i++) {
 			maoP1.get(i).setEnabled(true);
@@ -100,6 +133,18 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 	private void ativarMaoP2() {
 		for(int i = 0; i < maoP2.size(); i++) {
 			maoP2.get(i).setEnabled(true);
+		}
+	}
+	
+	private void desativarEvocadasP1() {
+		for(int i = 0; i < evocadasP1.size(); i++) {
+			evocadasP1.get(i).setEnabled(false);
+		}
+	}
+	
+	private void desativarEvocadasP2() {
+		for(int i = 0; i < evocadasP2.size(); i++) {
+			evocadasP2.get(i).setEnabled(false);
 		}
 	}
 	
@@ -115,9 +160,59 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 		}
 	}
 	
+	private void desativarEmCampoP1() {
+		for(int i = 0; i < emCampoP1.size(); i++) {
+			emCampoP1.get(i).setEnabled(false);
+		}
+	}
+	
+	private void desativarEmCampoP2() {
+		for(int i = 0; i < emCampoP2.size(); i++) {
+			emCampoP2.get(i).setEnabled(false);
+		}
+	}
+	
 	private void ativarEmCampoP1() {
 		for(int i = 0; i < emCampoP1.size(); i++) {
 			emCampoP1.get(i).setEnabled(true);
+		}
+	}
+	
+	private void ativarCampoSelecionavelP1() {
+		if(rodada.getTipo() == TipoRodada.COMPRA_DE_CARTAS) {
+			for(int i = 0; i < emCampoP1.size(); i++) {
+				if(emCampoP1.get(i).isVisible() == false) {
+					emCampoP1.get(i).setVisible(true);
+					emCampoP1.get(i).setEnabled(true);
+				}
+			}
+		}
+		else {
+			for(int i = 0; i < emCampoP1.size(); i++) {
+				if(emCampoP1.get(i).isVisible() == false && emCampoP2.get(i).isVisible() == true) {
+					emCampoP1.get(i).setVisible(true);
+					emCampoP1.get(i).setEnabled(true);
+				}
+			}
+		}
+	}
+	
+	private void ativarCampoSelecionavelP2() {
+		if(rodada.getTipo() == TipoRodada.COMPRA_DE_CARTAS) {
+			for(int i = 0; i < emCampoP2.size(); i++) {
+				if(emCampoP2.get(i).isVisible() == false) {
+					emCampoP2.get(i).setVisible(true);
+					emCampoP2.get(i).setEnabled(true);
+				}
+			}
+		}
+		else {
+			for(int i = 0; i < emCampoP2.size(); i++) {
+				if(emCampoP2.get(i).isVisible() == false && emCampoP1.get(i).isVisible() == true) {
+					emCampoP2.get(i).setVisible(true);
+					emCampoP2.get(i).setEnabled(true);
+				}
+			}
 		}
 	}
 	
@@ -138,6 +233,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 		ArrayList<Carta> maoPlayer1 = campo.getP1().getMao();
 		ArrayList<Carta> maoPlayer2 = campo.getP2().getMao();
 		
+		for(int i = 0; i < maoP1.size() && i < maoP1.size(); i++) {
+			maoP1.get(i).setVisible(false);
+			maoP2.get(i).setVisible(false);
+		}
+		
 		for(int i = 0; i < maoPlayer1.size() && i < maoP1.size(); i++) {
 			maoP1.get(i).setText(maoPlayer1.get(i).toStringCompra());
 			maoP1.get(i).setVisible(true);
@@ -152,6 +252,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 		ArrayList<Seguidor> evocadasPlayer1 = campo.getP1().getEvocadas();
 		ArrayList<Seguidor> evocadasPlayer2 = campo.getP2().getEvocadas();
 		
+		for(int i = 0; i < evocadasP1.size() && i < maoP1.size(); i++) {
+			evocadasP1.get(i).setVisible(false);
+			evocadasP2.get(i).setVisible(false);
+		}
+		
 		for(int i = 0; i < evocadasPlayer1.size() && i < maoP1.size(); i++) {
 			evocadasP1.get(i).setText(evocadasPlayer1.get(i).toStringCompra());
 			evocadasP1.get(i).setVisible(true);
@@ -162,11 +267,54 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 		}
 	}
 	
+	public void atualizarEmCampo() {
+		ArrayList<Seguidor> emCampoPlayer1 = campo.getP1().getEmCampo();
+		ArrayList<Seguidor> emCampoPlayer2 = campo.getP2().getEmCampo();
+		
+		for(int i = 0; i < emCampoP1.size() && i < maoP1.size(); i++) {
+			emCampoP1.get(i).setVisible(false);
+			emCampoP1.get(i).setText("<html>Selecionar</html>");
+			emCampoP2.get(i).setVisible(false);
+			emCampoP2.get(i).setText("<html>Selecionar</html>");
+		}
+		
+		for(int i = 0; i < emCampoPlayer1.size() && i < maoP1.size(); i++) {
+			if(emCampoPlayer1.get(i) != null) {
+				emCampoP1.get(i).setText(emCampoPlayer1.get(i).toStringEmCampo());
+				emCampoP1.get(i).setVisible(true);
+			}
+		}
+		for(int i = 0; i < emCampoPlayer2.size() && i < maoP2.size(); i++) {
+			if(emCampoPlayer2.get(i) != null) {
+				emCampoP2.get(i).setText(emCampoPlayer2.get(i).toStringEmCampo());
+				emCampoP2.get(i).setVisible(true);
+			}
+		}
+	}
+	
+	private void atualizarMana() {
+		jblP1Mana.setText(Integer.toString(campo.getP1().getMana()));
+		jblP2Mana.setText(Integer.toString(campo.getP2().getMana()));
+		jblP1ManaFeitico.setText(Integer.toString(campo.getP2().getManaDeFeitico()));
+		jblP2ManaFeitico.setText(Integer.toString(campo.getP1().getManaDeFeitico()));
+	}
+	
+	private void atualizarTurno() {
+		if(campo.getP1().getTurno() == Turno.ATAQUE) {
+			jblTipoDeTurnoPlayer1.setText("Ataque");
+			jblTipoDeTurnoPlayer2.setText("Defesa");
+		}
+		else {
+			jblTipoDeTurnoPlayer1.setText("Defesa");
+			jblTipoDeTurnoPlayer2.setText("Ataque");
+		}
+	}
+	
 	public Seguidor selecionarCartaP1() {
 		ativarEvocadasP1();
 		ativarEmCampoP1();
-		aguardandoClique = true;
-		while(aguardandoClique != false) {
+		aguardandoCarta = true;
+		while(aguardandoCarta != false) {
 			//Espera
 		}
 		
@@ -176,8 +324,8 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 	public Seguidor selecionarCartaP2() {
 		ativarEvocadasP2();
 		ativarEmCampoP2();
-		aguardandoClique = true;
-		while(aguardandoClique != false) {
+		aguardandoCarta = true;
+		while(aguardandoCarta == true) {
 			//Espera
 		}
 		
@@ -206,60 +354,60 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         panelCampoP2 = new JLayeredPane();
         
         bntP2EmCampo_1 = new JButton();
-        bntP2EmCampo_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_1.setText("<html>Selecionar</html>");
         bntP2EmCampo_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2EmCampo_1ActionPerformed(evt);
+            	bntP2EmCampoActionPerformed(evt, 1);
             }
         });
         bntP2EmCampo_1.setBounds(230, 19, 104, 61);
         panelCampoP2.add(bntP2EmCampo_1);
         
         bntP2EmCampo_2 = new JButton();
-        bntP2EmCampo_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_2.setText("<html>Selecionar</html>");
         bntP2EmCampo_2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2EmCampo_2ActionPerformed(evt);
+            	bntP2EmCampoActionPerformed(evt, 2);
             }
         });
         bntP2EmCampo_2.setBounds(450, 19, 104, 61);
         panelCampoP2.add(bntP2EmCampo_2);
         
         bntP2EmCampo_3 = new JButton();
-        bntP2EmCampo_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_3.setText("<html>Selecionar</html>");
         bntP2EmCampo_3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2EmCampo_3ActionPerformed(evt);
+            	bntP2EmCampoActionPerformed(evt, 3);
             }
         });
         bntP2EmCampo_3.setBounds(120, 19, 104, 61);
         panelCampoP2.add(bntP2EmCampo_3);
         
         bntP2EmCampo_0 = new JButton();
-        bntP2EmCampo_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_0.setText("<html>Selecionar</html>");
         bntP2EmCampo_0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2EmCampo_0ActionPerformed(evt);
+            	bntP2EmCampoActionPerformed(evt, 0);
             }
         });
         bntP2EmCampo_0.setBounds(340, 19, 104, 61);
         panelCampoP2.add(bntP2EmCampo_0);
         
         bntP2EmCampo_4 = new JButton();
-        bntP2EmCampo_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_4.setText("<html>Selecionar</html>");
         bntP2EmCampo_4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2EmCampo_4ActionPerformed(evt);
+            	bntP2EmCampoActionPerformed(evt, 4);
             }
         });
         bntP2EmCampo_4.setBounds(560, 19, 104, 61);
         panelCampoP2.add(bntP2EmCampo_4);
         
         bntP2EmCampo_5 = new JButton();
-        bntP2EmCampo_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP2EmCampo_5.setText("<html>Selecionar</html>");
         bntP2EmCampo_5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2EmCampo_5ActionPerformed(evt);
+            	bntP2EmCampoActionPerformed(evt, 5);
             }
         });
         bntP2EmCampo_5.setBounds(10, 19, 104, 61);
@@ -280,30 +428,30 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         );
         
         bntP1EmCampo_1 = new JButton();
-        bntP1EmCampo_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_1.setText("<html>Selecionar</html>");
         bntP1EmCampo_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1EmCampo_1ActionPerformed(evt);
+            	bntP1EmCampoActionPerformed(evt, 1);
             }
         });
         bntP1EmCampo_1.setBounds(230, 0, 104, 61);
         panelCampoP1.add(bntP1EmCampo_1);
         
         bntP1EmCampo_2 = new JButton();
-        bntP1EmCampo_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_2.setText("<html>Selecionar</html>");
         bntP1EmCampo_2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1EmCampo_2ActionPerformed(evt);
+            	bntP1EmCampoActionPerformed(evt, 2);
             }
         });
         bntP1EmCampo_2.setBounds(450, 0, 104, 61);
         panelCampoP1.add(bntP1EmCampo_2);
         
         bntP1EmCampo_3 = new JButton();
-        bntP1EmCampo_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_3.setText("<html>Selecionar</html>");
         bntP1EmCampo_3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1EmCampo_3ActionPerformed(evt);
+            	bntP1EmCampoActionPerformed(evt, 3);
             }
         });
         bntP1EmCampo_3.setBounds(120, 0, 104, 61);
@@ -313,27 +461,27 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP1EmCampo_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5</html>");
         bntP1EmCampo_0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1EmCampo_0ActionPerformed(evt);
+            	bntP1EmCampoActionPerformed(evt, 0);
             }
         });
         bntP1EmCampo_0.setBounds(340, 0, 104, 61);
         panelCampoP1.add(bntP1EmCampo_0);
         
         bntP1EmCampo_4 = new JButton();
-        bntP1EmCampo_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_4.setText("<html>Selecionar</html>");
         bntP1EmCampo_4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1EmCampo_4ActionPerformed(evt);
+            	bntP1EmCampoActionPerformed(evt, 4);
             }
         });
         bntP1EmCampo_4.setBounds(560, 0, 104, 61);
         panelCampoP1.add(bntP1EmCampo_4);
         
         bntP1EmCampo_5 = new JButton();
-        bntP1EmCampo_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_5.setText("<html>Selecionar</html>");
         bntP1EmCampo_5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1EmCampo_5ActionPerformed(evt);
+            	bntP1EmCampoActionPerformed(evt, 5);
             }
         });
         bntP1EmCampo_5.setBounds(10, 0, 104, 61);
@@ -352,7 +500,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP2Evocada_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
         bntP2Evocada_0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2Evocada_0ActionPerformed(evt);
+            	bntP2EvocadaActionPerformed(evt, 0);
             }
         });
         bntP2Evocada_0.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -363,7 +511,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP2Evocada_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
         bntP2Evocada_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2Evocada_1ActionPerformed(evt);
+            	bntP2EvocadaActionPerformed(evt, 1);
             }
         });
         bntP2Evocada_1.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -374,7 +522,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP2Evocada_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
         bntP2Evocada_2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2Evocada_2ActionPerformed(evt);
+            	bntP2EvocadaActionPerformed(evt, 2);
             }
         });
         bntP2Evocada_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -385,7 +533,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP2Evocada_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
         bntP2Evocada_3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2Evocada_3ActionPerformed(evt);
+            	bntP2EvocadaActionPerformed(evt, 3);
             }
         });
         bntP2Evocada_3.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -396,7 +544,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP2Evocada_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
         bntP2Evocada_4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2Evocada_4ActionPerformed(evt);
+            	bntP2EvocadaActionPerformed(evt, 4);
             }
         });
         bntP2Evocada_4.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -407,7 +555,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP2Evocada_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
         bntP2Evocada_5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2Evocada_5ActionPerformed(evt);
+            	bntP2EvocadaActionPerformed(evt, 5);
             }
         });
         bntP2Evocada_5.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -420,7 +568,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP2Mao_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
         bntP2Mao_0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2Mao_0ActionPerformed(evt);
+            	bntP2MaoActionPerformed(evt, 0);
             }
         });
         bntP2Mao_0.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -431,7 +579,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP2Mao_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
         bntP2Mao_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2Mao_1ActionPerformed(evt);
+            	bntP2MaoActionPerformed(evt, 1);
             }
         });
         bntP2Mao_1.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -442,7 +590,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP2Mao_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
         bntP2Mao_2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2Mao_2ActionPerformed(evt);
+            	bntP2MaoActionPerformed(evt, 2);
             }
         });
         bntP2Mao_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -453,7 +601,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP2Mao_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
         bntP2Mao_3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2Mao_3ActionPerformed(evt);
+            	bntP2MaoActionPerformed(evt, 3);
             }
         });
         bntP2Mao_3.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -464,7 +612,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP2Mao_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
         bntP2Mao_4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2Mao_4ActionPerformed(evt);
+            	bntP2MaoActionPerformed(evt, 4);
             }
         });
         bntP2Mao_4.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -475,7 +623,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP2Mao_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
         bntP2Mao_5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP2Mao_5ActionPerformed(evt);
+            	bntP2MaoActionPerformed(evt, 5);
             }
         });
         bntP2Mao_5.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -495,7 +643,12 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         panelInformacoes.add(jLabel7);
         
         bntAvancarTurno = new JButton();
-        bntAvancarTurno.setText("Turno do Oponente");
+        bntAvancarTurno.setText("Finalizar Turno");
+        bntAvancarTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bntAvancarTurnoActionPerformed(evt);
+            }
+        });
         bntAvancarTurno.setBounds(0, 330, 124, 70);
         panelInformacoes.add(bntAvancarTurno);
         
@@ -540,9 +693,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         panelInformacoes.add(jLabel4);
         
         jblTipoDeTurnoPlayer1 = new JLabel();
+        jblTipoDeTurnoPlayer1.setHorizontalAlignment(SwingConstants.CENTER);
         jblTipoDeTurnoPlayer1.setText("Defesa");
         jblTipoDeTurnoPlayer1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-        jblTipoDeTurnoPlayer1.setBounds(25, 541, 73, 29);
+        jblTipoDeTurnoPlayer1.setBounds(0, 541, 124, 29);
         panelInformacoes.add(jblTipoDeTurnoPlayer1);
         
         jblP2Mana = new JLabel();
@@ -566,9 +720,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         panelInformacoes.add(btnInformacoes);
         
         jblTipoDeTurnoPlayer2 = new JLabel();
+        jblTipoDeTurnoPlayer2.setHorizontalAlignment(SwingConstants.CENTER);
         jblTipoDeTurnoPlayer2.setText("Ataque");
         jblTipoDeTurnoPlayer2.setFont(new Font("Tahoma", Font.PLAIN, 24));
-        jblTipoDeTurnoPlayer2.setBounds(25, 147, 75, 29);
+        jblTipoDeTurnoPlayer2.setBounds(0, 147, 124, 29);
         panelInformacoes.add(jblTipoDeTurnoPlayer2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -671,7 +826,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP1Evocada_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
         bntP1Evocada_0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1Evocada_0ActionPerformed(evt);
+            	bntP1EvocadaActionPerformed(evt, 0);
             }
         });
         bntP1Evocada_0.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -682,7 +837,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP1Evocada_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
         bntP1Evocada_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1Evocada_1ActionPerformed(evt);
+            	bntP1EvocadaActionPerformed(evt, 1);
             }
         });
         bntP1Evocada_1.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -693,7 +848,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP1Evocada_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
         bntP1Evocada_2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1Evocada_2ActionPerformed(evt);
+            	bntP1EvocadaActionPerformed(evt, 2);
             }
         });
         bntP1Evocada_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -704,7 +859,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP1Evocada_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
         bntP1Evocada_3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1Evocada_3ActionPerformed(evt);
+            	bntP1EvocadaActionPerformed(evt, 3);
             }
         });
         bntP1Evocada_3.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -715,7 +870,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP1Evocada_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
         bntP1Evocada_4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1Evocada_4ActionPerformed(evt);
+            	bntP1EvocadaActionPerformed(evt, 4);
             }
         });
         bntP1Evocada_4.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -726,7 +881,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP1Evocada_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
         bntP1Evocada_5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1Evocada_5ActionPerformed(evt);
+            	bntP1EvocadaActionPerformed(evt, 5);
             }
         });
         bntP1Evocada_5.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -737,7 +892,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP1Mao_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
         bntP1Mao_0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1Mao_0ActionPerformed(evt);
+            	bntP1MaoActionPerformed(evt, 0);
             }
         });
         bntP1Mao_0.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -748,7 +903,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP1Mao_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
         bntP1Mao_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1Mao_1ActionPerformed(evt);
+            	bntP1MaoActionPerformed(evt, 1);
             }
         });
         bntP1Mao_1.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -759,7 +914,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP1Mao_2.setText("<html>Campeao 2<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
         bntP1Mao_2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1Mao_2ActionPerformed(evt);
+            	bntP1MaoActionPerformed(evt, 2);
             }
         });
         bntP1Mao_2.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -770,7 +925,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP1Mao_3.setText("<html>Campeao 3<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
         bntP1Mao_3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1Mao_3ActionPerformed(evt);
+            	bntP1MaoActionPerformed(evt, 3);
             }
         });
         bntP1Mao_3.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -781,7 +936,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP1Mao_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
         bntP1Mao_4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1Mao_4ActionPerformed(evt);
+            	bntP1MaoActionPerformed(evt, 4);
             }
         });
         bntP1Mao_4.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -792,7 +947,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP1Mao_5.setText("<html>Campeao 5<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
         bntP1Mao_5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bntP1Mao_5ActionPerformed(evt);
+            	bntP1MaoActionPerformed(evt, 5);
             }
         });
         bntP1Mao_5.setFont(new Font("Tahoma", Font.PLAIN, 9));
@@ -847,115 +1002,140 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     
 //=========================================================================================================================
 /*												Clique de Botoes							  							 */
-    private void bntP1Mao_0ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }
-    private void bntP1Mao_1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }
-    private void bntP1Mao_2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }
-    private void bntP1Mao_3ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }
-    private void bntP1Mao_4ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }
-    private void bntP1Mao_5ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }
-    private void bntP2Mao_0ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }
-    private void bntP2Mao_1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }
-    private void bntP2Mao_2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }
-    private void bntP2Mao_3ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }
-    private void bntP2Mao_4ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }
-    private void bntP2Mao_5ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+    private void bntAvancarTurnoActionPerformed(java.awt.event.ActionEvent evt) {
+    	if(realizouAcao == false && rodada.getTipo() == TipoRodada.ESCOLHA_DEFENSORES) {
+    		rodada.mudarTipo();
+    	}
+    	rodada.finalizarTurno(this.realizouAcao);
+    	iniciarTurno();
     }
     
-    private void bntP1Evocada_0ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP1Evocada_1ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP1Evocada_2ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP1Evocada_3ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP1Evocada_4ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP1Evocada_5ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP2Evocada_0ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP2Evocada_1ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP2Evocada_2ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP2Evocada_3ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP2Evocada_4ActionPerformed(java.awt.event.ActionEvent evt) {
-	
-	}
-    private void bntP2Evocada_5ActionPerformed(java.awt.event.ActionEvent evt) {
-	
+    private void bntP1MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {                                            
+        if(campo.getP1().comprarCarta(posicao, campo)) {
+        	atualizarMao();
+        	atualizarEvocadas();
+        	realizouAcao = true;
+        	rodada.finalizarTurno(this.realizouAcao);
+        	iniciarTurno();
+        }
+        else {
+        	System.out.println("Nao foi possivel comprar essa carta! escolha outra ou finalize o turno!");
+        }
     }
     
-    private void bntP1EmCampo_0ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
+    private void bntP2MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {                                            
+        if(campo.getP2().comprarCarta(posicao, campo)) {
+        	atualizarMao();
+        	atualizarEvocadas();
+        	realizouAcao = true;
+        	rodada.finalizarTurno(this.realizouAcao);
+        	iniciarTurno();
+        }
+        else {
+        	System.out.println("Nao foi possivel comprar essa carta! escolha outra ou finalize o turno!");
+        }
     }
-    private void bntP1EmCampo_1ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
+    
+    private void bntP1EvocadaActionPerformed(java.awt.event.ActionEvent evt, int posicao) {
+    	Runnable aguardarP1Evocada = new Runnable() {
+        	public void run() {
+        		try {
+        			bntAvancarTurno.setEnabled(false);
+        			desativarEvocadasP1();
+        			desativarMaoP1();
+            		ativarCampoSelecionavelP1();
+            		while(aguardandoIndex) {
+            			Thread.sleep(100);
+            		}
+            		campo.getP1().colocarEmCampo(posicao, indexEscolhido);
+            		atualizarEmCampo();
+            		atualizarEvocadas();
+            		desativarEmCampoP1();
+            		ativarEvocadasP1();
+            		bntAvancarTurno.setEnabled(true);
+            		if(campo.getP1().getTurno() == Turno.ATAQUE) {
+            			bntAvancarTurno.setText("<html>Atacar</html>");
+            		}
+            		else {
+            			bntAvancarTurno.setText("<html>Defender</html>");
+            		}
+            		rodada.mudarTipo();
+        		} catch (Exception e) {}
+        	}
+        };
+    	if(aguardandoCarta == false) {
+    		System.out.println("Selecione o local do campo para a carta!");
+    		aguardandoIndex = true;
+    		Thread tarefa = new Thread(aguardarP1Evocada);
+    		tarefa.start();
+    	}
+    	else {
+    		cartaEscolhida = campo.getP1().getEvocadas().get(posicao);
+    		aguardandoCarta = false;
+    	}
+    	realizouAcao = true;
     }
-    private void bntP1EmCampo_2ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
+    private void bntP2EvocadaActionPerformed(java.awt.event.ActionEvent evt, int posicao) {
+    	Runnable aguardarP2Evocada = new Runnable() {
+        	public void run() {
+        		try {
+        			bntAvancarTurno.setEnabled(false);
+        			desativarEvocadasP2();
+        			desativarMaoP2();
+            		ativarCampoSelecionavelP2();
+            		while(aguardandoIndex) {
+            			Thread.sleep(100);
+            		}
+            		campo.getP2().colocarEmCampo(posicao, indexEscolhido);
+            		atualizarEmCampo();
+            		atualizarEvocadas();
+            		desativarEmCampoP2();
+            		ativarEvocadasP2();
+            		bntAvancarTurno.setEnabled(true);
+            		if(campo.getP2().getTurno() == Turno.ATAQUE) {
+            			bntAvancarTurno.setText("<html>Atacar</html>");
+            		}
+            		else {
+            			bntAvancarTurno.setText("<html>Defender</html>");
+            		}
+            		rodada.mudarTipo();
+        		} catch (Exception e) {}
+        	}
+        };
+    	if(aguardandoCarta == false) {
+    		System.out.println("Selecione o local do campo para a carta!");
+    		aguardandoIndex = true;
+    		Thread tarefa = new Thread(aguardarP2Evocada);
+    		tarefa.start();
+    	}
+    	else {
+    		cartaEscolhida = campo.getP2().getEvocadas().get(posicao);
+    		aguardandoCarta = false;
+    	}
+    	realizouAcao = true;
     }
-    private void bntP1EmCampo_3ActionPerformed(java.awt.event.ActionEvent evt) {
-	
+    
+    private void bntP1EmCampoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {
+    	if(aguardandoCarta == true) {
+    		cartaEscolhida = campo.getP1().getEmCampo().get(posicao);
+    		aguardandoCarta = false;
+    	}
+    	else if(aguardandoIndex == true) {
+    		indexEscolhido = posicao;
+    		aguardandoIndex = false;
+    	}
+    	realizouAcao = true;
     }
-    private void bntP1EmCampo_4ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP1EmCampo_5ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP2EmCampo_0ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP2EmCampo_1ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP2EmCampo_2ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP2EmCampo_3ActionPerformed(java.awt.event.ActionEvent evt) {
-	
-    }
-    private void bntP2EmCampo_4ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
-    }
-    private void bntP2EmCampo_5ActionPerformed(java.awt.event.ActionEvent evt) {
-    	
+    private void bntP2EmCampoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {
+    	if(aguardandoCarta == true) {
+    		cartaEscolhida = campo.getP2().getEmCampo().get(posicao);
+    		aguardandoCarta = false;
+    	}
+    	else if(aguardandoIndex == true) {
+    		indexEscolhido = posicao;
+    		aguardandoIndex = false;
+    	}
+    	realizouAcao = true;
     }
     
 //=========================================================================================================================    

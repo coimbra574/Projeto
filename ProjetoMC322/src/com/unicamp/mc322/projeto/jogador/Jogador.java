@@ -19,6 +19,7 @@ public abstract class Jogador {
 	private Scanner teclado = new Scanner(System.in);
 	protected ArrayList<Carta> mao = new ArrayList<Carta>();  //Ira representar as cartas que podem ser compradas pelo jogador
 	protected ArrayList<Seguidor> evocadas = new ArrayList<Seguidor>();  //Ira representar as cartas compradas
+	protected ArrayList<Seguidor> emCampo = new ArrayList<Seguidor>();  //Ira representar as cartas no campo de batalha
 	protected Deck deckJogador;
 	private int numeroJogadorNoCampo=0;
 	
@@ -32,6 +33,12 @@ public abstract class Jogador {
 		this.turno = turnoInicial;
 		this.deckJogador = DeckFactory.getDeck(tipoDeck);
 		obter4CartasIniciais();
+		emCampo.add(null);
+		emCampo.add(null);
+		emCampo.add(null);
+		emCampo.add(null);
+		emCampo.add(null);
+		emCampo.add(null);
 	}
 	
 	public void setNumeroEmCampo(int n) {
@@ -46,6 +53,14 @@ public abstract class Jogador {
 		return turno;
 	}
 	
+	public int getMana() {
+		return mana;
+	}
+	
+	public int getManaDeFeitico() {
+		return manaDeFeitico;
+	}
+	
 	public ArrayList<Carta> getMao() {
 		return mao;
 	}
@@ -54,12 +69,21 @@ public abstract class Jogador {
 		return evocadas;
 	}
 	
+	public ArrayList<Seguidor> getEmCampo() {
+		return emCampo;
+	}
+	
 	public int getNexus() {
 		return nexus;
 	}
 	
 	public void adicionarAoNexus(int valorAdicionado) {
 		nexus += valorAdicionado;
+	}
+	
+	public void colocarEmCampo(int posicaoEvocada, int posicaoCampo) {
+		emCampo.add(posicaoCampo, evocadas.get(posicaoEvocada));
+		evocadas.remove(posicaoEvocada);
 	}
 	
 	private void obter4CartasIniciais() {
@@ -106,7 +130,7 @@ public abstract class Jogador {
 		/*
 		 * Verificar se o jogadore possui mana suficiente para invocar/ativar uma carta
 		 */
-		if(mana > carta.getMana()) {
+		if(mana >= carta.getMana()) {
 			return true;
 		}else {
 			return false;

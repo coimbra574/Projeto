@@ -21,8 +21,6 @@ import com.unicamp.mc322.projeto.turno.Turno;
 public class Campo {
 	public final int LARGURA_CAMPO = 6;
 	private Seguidor[][] unidadesEvocadas = new Seguidor[2][LARGURA_CAMPO];
-	private ArrayList<Seguidor> evocadasP1 = new ArrayList<Seguidor>();
-	private ArrayList<Seguidor> evocadasP2 = new ArrayList<Seguidor>();
 	private Jogador jogador1,jogador2;
 	private Rodada rodada;
 	private int nexusP1, nexusP2;
@@ -35,6 +33,8 @@ public class Campo {
 		this.nexusP2 = 20;
 		definirNumeroEmCampo(p1, p2);
 		this.rodada = new Rodada(p1,p2);
+		jogador1.atualizarMana(rodada.getNumeroRodada());
+		jogador2.atualizarMana(rodada.getNumeroRodada());
 		this.interfaceGrafica = new InterfaceGrafica(this, rodada);
 		interfaceGrafica.iniciarTurno();
 	}
@@ -162,9 +162,9 @@ public class Campo {
 
 	public ArrayList<Seguidor> getEvocadas(numeroJogador numeroJogador) {
 		if(numeroJogador == numeroJogador.PLAYER1) {
-			return evocadasP1;
+			return jogador1.getEvocadas();
 		} else {
-			return evocadasP2;
+			return jogador2.getEvocadas();
 		}
 	}
 }

@@ -10,6 +10,8 @@ public class Rodada {
 	private Jogador jogador1, jogador2;
 	private numeroJogador numeroJogadorAtual;
 	private TipoRodada tipo;
+	private boolean acaoJogador1;
+	private boolean acaoJogador2;
 	
 	public Rodada(Jogador p1, Jogador p2) {
 		numeroRodada = 1;
@@ -17,6 +19,8 @@ public class Rodada {
 		this.jogador2 = p2;
 		this.numeroJogadorAtual = numeroJogador.PLAYER1;  // Jogo começa com p1
 		this.tipo = TipoRodada.COMPRA_DE_CARTAS;
+		this.acaoJogador1 = true;
+		this.acaoJogador2 = true;
 	}
 	
 	public int getNumeroRodada() {
@@ -31,32 +35,43 @@ public class Rodada {
 		if(tipo == TipoRodada.COMPRA_DE_CARTAS) {
 			tipo = TipoRodada.ESCOLHA_DEFENSORES;
 		}
+		else if(tipo == TipoRodada.ESCOLHA_DEFENSORES){
+			tipo = TipoRodada.BATALHA;
+		}
 		else {
 			tipo = TipoRodada.COMPRA_DE_CARTAS;
 		}
 	}
 	
-	public void terminarRodada() {
-		numeroRodada++;
-		// Atualizar dados jogadores e do jogo no geral
-	}
-	
-	public void finalizarTurno() {
-		if(tipo == TipoRodada.ESCOLHA_DEFENSORES) {
+	public void finalizarTurno(boolean realizouAcao) {
+		if(tipo == TipoRodada.BATALHA) {
+			//combate
 			finalizarRodada();
 			return;
 		}
 		if(numeroJogadorAtual == numeroJogador.PLAYER1) {
+			acaoJogador1 = realizouAcao;
 			numeroJogadorAtual = numeroJogador.PLAYER2;
 		}
 		else {
+			acaoJogador2 = realizouAcao;
 			numeroJogadorAtual = numeroJogador.PLAYER1;
+		}
+		if(!acaoJogador1 && !acaoJogador2) {
+			finalizarRodada();
+			return;
 		}
 	}
 	
 	private void finalizarRodada() {
+		this.tipo = TipoRodada.COMPRA_DE_CARTAS;
+		numeroRodada++;
 		jogador1.acabarRodada();
+		jogador1.atualizarMana(numeroRodada);
 		jogador2.acabarRodada();
+		jogador2.atualizarMana(numeroRodada);
+		this.acaoJogador1 = true;
+		this.acaoJogador2 = true;
 	}
 	
 	public numeroJogador getNumeroJogadorAtual() {
