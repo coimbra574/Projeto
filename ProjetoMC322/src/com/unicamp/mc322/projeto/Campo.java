@@ -12,15 +12,11 @@ package com.unicamp.mc322.projeto;
 import java.util.ArrayList;
 
 import com.unicamp.mc322.projeto.Interface.InterfaceGrafica;
-import com.unicamp.mc322.projeto.cartas.Caracteristica;
-import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.jogador.Jogador;
-import com.unicamp.mc322.projeto.turno.Turno;
 
 public class Campo {
 	public final int LARGURA_CAMPO = 6;
-	private Seguidor[][] unidadesEvocadas = new Seguidor[2][LARGURA_CAMPO];
 	private Jogador jogador1,jogador2;
 	private Rodada rodada;
 	private int nexusP1, nexusP2;
@@ -32,7 +28,7 @@ public class Campo {
 		this.nexusP1 = 20;
 		this.nexusP2 = 20;
 		definirNumeroEmCampo(p1, p2);
-		this.rodada = new Rodada(p1,p2);
+		this.rodada = new Rodada(p1,p2, this);
 		jogador1.atualizarMana(rodada.getNumeroRodada());
 		jogador2.atualizarMana(rodada.getNumeroRodada());
 		this.interfaceGrafica = new InterfaceGrafica(this, rodada);
@@ -67,31 +63,12 @@ public class Campo {
 		jogador2.setNumeroEmCampo(2);
 	}
 	
-	public void adicionarCartaEmCampo(int numeroJogador, int posicao, Carta carta) {
-		unidadesEvocadas[numeroJogador][posicao-1] = (Seguidor) carta;
-	}
-	
-	
-	public void removerCartaEmCampo(int numeroJogador, int posicao) {
-		unidadesEvocadas[numeroJogador][posicao-1] = null;
-	}
-	
-	
-	public void alterarCartaEmCampo(numeroJogador numeroJogador, int posicao, Caracteristica caracteristica, int novoValor) {
-		if(caracteristica.equals(Caracteristica.PODER)) {
-			//unidadesEvocadas[numeroJogador][posicao-1].setPoder(novoValor);
-		}
-		else {
-			//unidadesEvocadas[numeroJogador][posicao-1].setVida(novoValor);
-		}
-	}
-	
-	public boolean possuiCartaEscolhivel(numeroJogador numJogador) {
+	public boolean possuiCartaEscolhivel(NumeroJogador numJogador) {
 		return false;
 	}
 	
 	public Seguidor selecionarUmaUnidadeAliada() {
-		if(rodada.getNumeroJogadorAtual() == numeroJogador.PLAYER1) {
+		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
 			return interfaceGrafica.selecionarCartaP1();
 		}
 		else {
@@ -100,7 +77,7 @@ public class Campo {
 	}
 	
 	public Seguidor selecionarUmaUnidadeInimiga() {
-		if(rodada.getNumeroJogadorAtual() == numeroJogador.PLAYER1) {
+		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
 			return interfaceGrafica.selecionarCartaP2();
 		}
 		else {
@@ -108,39 +85,8 @@ public class Campo {
 		}
 	}
 	
-
-	/*public ArrayList<Carta> selecionarUnidades(int numeroJogador, int ...posicoes) {
-		ArrayList<Carta> cartasSelecionadas = null;
-		for(int posicaoAux : posicoes) {
-			cartasSelecionadas.add(selecionarUmaUnidade(numeroJogador, posicaoAux));
-		}
-		return cartasSelecionadas;
-	}*/
-	
-	
-	public int procurarCartaEmCampo(int numeroJogador, Carta carta) {
-		int indexCarta = -1;
-		for(int i=0; i<LARGURA_CAMPO; i++) {
-			if(unidadesEvocadas[numeroJogador][i].equals(carta)) {
-				indexCarta = i;
-			}
-		}
-		return indexCarta;
-	}
-	
-	
-	// Remove cartas sem vida em campo
-	public void verificarCartasComVida(int numeroJogador) {
-		for(int i=0; i<LARGURA_CAMPO; i++) {
-			if(unidadesEvocadas[numeroJogador][i].getVida() <= 0) {
-				removerCartaEmCampo(numeroJogador,i);
-			}
-		}
-	}
-	
-	
-	public void adicionarAoNexusJogador(numeroJogador numeroJogador, int valorAdicionado) {
-		if(numeroJogador == numeroJogador.PLAYER1) {
+	public void adicionarAoNexusJogador(NumeroJogador jogador, int valorAdicionado) {
+		if(jogador == NumeroJogador.PLAYER1) {
 			jogador1.adicionarAoNexus(valorAdicionado);
 		} else {
 			jogador2.adicionarAoNexus(valorAdicionado);
@@ -154,17 +100,23 @@ public class Campo {
 	public Jogador getP2() {
 		return jogador2;
 	}
-	
-	public void terminarTurno() {
-		
-	}
 
-
-	public ArrayList<Seguidor> getEvocadas(numeroJogador numeroJogador) {
-		if(numeroJogador == numeroJogador.PLAYER1) {
+	public ArrayList<Seguidor> getEvocadas(NumeroJogador jogador) {
+		if(jogador == NumeroJogador.PLAYER1) {
 			return jogador1.getEvocadas();
 		} else {
 			return jogador2.getEvocadas();
+		}
+	}
+	
+	public void fimDeJogo() {
+		interfaceGrafica.setVisible(false);
+		System.out.println("Fim de jogo!");
+		if(jogador1.getNexus() <= 0) {
+			System.out.print("O vencedor foi o Jogador 1");
+		}
+		else {
+			System.out.print("O vencedor foi o Jogador 2");
 		}
 	}
 }

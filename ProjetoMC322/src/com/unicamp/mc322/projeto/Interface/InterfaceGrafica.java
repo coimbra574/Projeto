@@ -11,7 +11,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import com.unicamp.mc322.projeto.Campo;
 import com.unicamp.mc322.projeto.Rodada;
 import com.unicamp.mc322.projeto.TipoRodada;
-import com.unicamp.mc322.projeto.numeroJogador;
+import com.unicamp.mc322.projeto.NumeroJogador;
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.turno.Turno;
@@ -62,7 +62,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 		atualizarTurno();
 		
 		//Vez do jogador1
-		if(rodada.getNumeroJogadorAtual() == numeroJogador.PLAYER1) {
+		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
 			desativarMaoP2();
 			desativarEvocadasP2();
 			if(rodada.getTipo() == TipoRodada.COMPRA_DE_CARTAS) {
@@ -223,8 +223,8 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 	}
 	
 	public void atualizarNexus() {
-		int nexusP1 = campo.getNexus(1);
-		int nexusP2 = campo.getNexus(2);
+		int nexusP1 = campo.getP1().getNexus();
+		int nexusP2 = campo.getP2().getNexus();
 		jblP1VidaNexus.setText(Integer.toString(nexusP1));
 		jblP2VidaNexus.setText(Integer.toString(nexusP2));
 	}
@@ -258,11 +258,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 		}
 		
 		for(int i = 0; i < evocadasPlayer1.size() && i < maoP1.size(); i++) {
-			evocadasP1.get(i).setText(evocadasPlayer1.get(i).toStringCompra());
+			evocadasP1.get(i).setText(evocadasPlayer1.get(i).toStringEvocada());
 			evocadasP1.get(i).setVisible(true);
 		}
 		for(int i = 0; i < evocadasPlayer2.size() && i < maoP2.size(); i++) {
-			evocadasP2.get(i).setText(evocadasPlayer2.get(i).toStringCompra());
+			evocadasP2.get(i).setText(evocadasPlayer2.get(i).toStringEvocada());
 			evocadasP2.get(i).setVisible(true);
 		}
 	}
@@ -458,7 +458,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         panelCampoP1.add(bntP1EmCampo_3);
         
         bntP1EmCampo_0 = new JButton();
-        bntP1EmCampo_0.setText("<html>Campeao 0<br /><br />Vida: 10<br />Ataque: 5</html>");
+        bntP1EmCampo_0.setText("<html>Selecionar</html>");
         bntP1EmCampo_0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	bntP1EmCampoActionPerformed(evt, 0);
@@ -1003,7 +1003,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 //=========================================================================================================================
 /*												Clique de Botoes							  							 */
     private void bntAvancarTurnoActionPerformed(java.awt.event.ActionEvent evt) {
-    	if(realizouAcao == false && rodada.getTipo() == TipoRodada.ESCOLHA_DEFENSORES) {
+    	if(realizouAcao == true || rodada.getTipo() == TipoRodada.ESCOLHA_DEFENSORES) {
     		rodada.mudarTipo();
     	}
     	rodada.finalizarTurno(this.realizouAcao);
@@ -1019,7 +1019,8 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         	iniciarTurno();
         }
         else {
-        	System.out.println("Nao foi possivel comprar essa carta! escolha outra ou finalize o turno!");
+        	System.out.println("Nao foi possivel comprar essa carta! e"
+        			+ "scolha outra ou finalize o turno!");
         }
     }
     
@@ -1059,7 +1060,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             		else {
             			bntAvancarTurno.setText("<html>Defender</html>");
             		}
-            		rodada.mudarTipo();
         		} catch (Exception e) {}
         	}
         };
@@ -1098,7 +1098,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             		else {
             			bntAvancarTurno.setText("<html>Defender</html>");
             		}
-            		rodada.mudarTipo();
         		} catch (Exception e) {}
         	}
         };

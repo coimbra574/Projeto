@@ -29,8 +29,8 @@ public class Melhoria extends Efeito {
 		if(cartaSelecionada != null) {
 			int novoPoder = cartaSelecionada.getPoder() + n;
 			int novaVida = cartaSelecionada.getVida() + m;
-			campo.alterarCartaEmCampo(rodada.getNumeroJogadorAtual(), unidade, Caracteristica.PODER, novoPoder);
-			campo.alterarCartaEmCampo(rodada.getNumeroJogadorAtual(), unidade, Caracteristica.VIDA, novaVida);
+			cartaSelecionada.setPoder(novoPoder);
+			cartaSelecionada.setVida(novaVida);
 		}
 	}
 

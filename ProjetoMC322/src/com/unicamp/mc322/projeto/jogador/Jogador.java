@@ -1,14 +1,12 @@
 package com.unicamp.mc322.projeto.jogador;
 
 import com.unicamp.mc322.projeto.Campo;
-import com.unicamp.mc322.projeto.Interface.InterfaceGrafica;
 import com.unicamp.mc322.projeto.Interface.InterfaceTerminal;
 import com.unicamp.mc322.projeto.cartas.*;
 import com.unicamp.mc322.projeto.deckFactory.Deck;
 import com.unicamp.mc322.projeto.deckFactory.DeckFactory;
 import com.unicamp.mc322.projeto.deckFactory.TipoDeck;
 import com.unicamp.mc322.projeto.turno.*;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public abstract class Jogador {
@@ -16,7 +14,6 @@ public abstract class Jogador {
 	private int nexus = 20;
 	private int manaDeFeitico = 0;
 	private Turno turno;
-	private Scanner teclado = new Scanner(System.in);
 	protected ArrayList<Carta> mao = new ArrayList<Carta>();  //Ira representar as cartas que podem ser compradas pelo jogador
 	protected ArrayList<Seguidor> evocadas = new ArrayList<Seguidor>();  //Ira representar as cartas compradas
 	protected ArrayList<Seguidor> emCampo = new ArrayList<Seguidor>();  //Ira representar as cartas no campo de batalha
@@ -214,6 +211,14 @@ public abstract class Jogador {
 		}else {
 			turno = Turno.DEFESA;
 		}
+	}
+
+	public void adicionarEvocada(Seguidor carta) {
+		evocadas.add(carta);
+	}
+
+	public void removerEmCampo(int index) {
+		emCampo.add(index, null);
 	}
 	
 	

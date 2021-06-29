@@ -22,6 +22,6 @@ public class Desafio extends Efeito {
 		Rodada rodada = campo.getRodada();
 		Jogador jogadorAtual = rodada.getJogador(rodada.getNumeroJogadorAtual());
 		Jogador jogadorOponente = rodada.getJogador(rodada.getNumeroJogadorOponente());
-		Combate novoCombate = new Combate(campo, jogadorAtual, jogadorOponente);
+		Combate.iniciar(campo, jogadorAtual, jogadorOponente);
 	}
 }

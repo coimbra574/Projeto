@@ -107,15 +107,20 @@ public class Seguidor extends Carta {
 		return texto;
 	}
 	
-	@Override
 	public String toStringEvocada() {
-		String texto = "";
+		String texto = "<html>";
+		texto += this.nome + "<br />";
+		texto += "Vida: " + Integer.toString(this.vida) + "<br />";
+		texto += "Poder: " + Integer.toString(this.poder) + "<br />";
+		texto += "</html>";
 		return texto;
 	}
 	
-	@Override
 	public String toStringEmCampo() {
-		String texto = "";
+		String texto = "<html>";
+		texto += this.nome + "<br />";
+		texto += "V: " + Integer.toString(this.vida);
+		texto += "  P: " + Integer.toString(this.poder);
 		return texto;
 	}
 	

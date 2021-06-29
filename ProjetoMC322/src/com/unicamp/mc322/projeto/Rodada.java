@@ -1,26 +1,26 @@
 package com.unicamp.mc322.projeto;
 
-import com.unicamp.mc322.projeto.cartas.Caracteristica;
-import com.unicamp.mc322.projeto.cartas.Carta;
-import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.jogador.Jogador;
+import com.unicamp.mc322.projeto.turno.Turno;
 
 public class Rodada {
 	private int numeroRodada;
 	private Jogador jogador1, jogador2;
-	private numeroJogador numeroJogadorAtual;
+	private NumeroJogador numeroJogadorAtual;
 	private TipoRodada tipo;
 	private boolean acaoJogador1;
 	private boolean acaoJogador2;
+	private Campo campo;
 	
-	public Rodada(Jogador p1, Jogador p2) {
+	public Rodada(Jogador p1, Jogador p2, Campo campo) {
 		numeroRodada = 1;
 		this.jogador1 = p1;
 		this.jogador2 = p2;
-		this.numeroJogadorAtual = numeroJogador.PLAYER1;  // Jogo começa com p1
+		this.numeroJogadorAtual = NumeroJogador.PLAYER1;  // Jogo começa com p1
 		this.tipo = TipoRodada.COMPRA_DE_CARTAS;
 		this.acaoJogador1 = true;
 		this.acaoJogador2 = true;
+		this.campo = campo;
 	}
 	
 	public int getNumeroRodada() {
@@ -45,17 +45,22 @@ public class Rodada {
 	
 	public void finalizarTurno(boolean realizouAcao) {
 		if(tipo == TipoRodada.BATALHA) {
-			//combate
+			if(jogador1.getTurno() == Turno.ATAQUE) {
+				Combate.iniciar(campo, jogador1, jogador2);
+			}
+			else {
+				Combate.iniciar(campo, jogador2, jogador1);
+			}
 			finalizarRodada();
 			return;
 		}
-		if(numeroJogadorAtual == numeroJogador.PLAYER1) {
+		if(numeroJogadorAtual == NumeroJogador.PLAYER1) {
 			acaoJogador1 = realizouAcao;
-			numeroJogadorAtual = numeroJogador.PLAYER2;
+			numeroJogadorAtual = NumeroJogador.PLAYER2;
 		}
 		else {
 			acaoJogador2 = realizouAcao;
-			numeroJogadorAtual = numeroJogador.PLAYER1;
+			numeroJogadorAtual = NumeroJogador.PLAYER1;
 		}
 		if(!acaoJogador1 && !acaoJogador2) {
 			finalizarRodada();
@@ -64,6 +69,9 @@ public class Rodada {
 	}
 	
 	private void finalizarRodada() {
+		if(jogador1.getNexus() <= 0 || jogador2.getNexus() <= 0) {
+			campo.fimDeJogo();
+		}
 		this.tipo = TipoRodada.COMPRA_DE_CARTAS;
 		numeroRodada++;
 		jogador1.acabarRodada();
@@ -74,22 +82,22 @@ public class Rodada {
 		this.acaoJogador2 = true;
 	}
 	
-	public numeroJogador getNumeroJogadorAtual() {
+	public NumeroJogador getNumeroJogadorAtual() {
 		return numeroJogadorAtual;
 	}
 	
 	
-	public numeroJogador getNumeroJogadorOponente() {
-		if(numeroJogadorAtual == numeroJogador.PLAYER1) {
-			return numeroJogador.PLAYER2;
+	public NumeroJogador getNumeroJogadorOponente() {
+		if(numeroJogadorAtual == NumeroJogador.PLAYER1) {
+			return NumeroJogador.PLAYER2;
 		} else {
-			return numeroJogador.PLAYER1;
+			return NumeroJogador.PLAYER1;
 		}
 	}
 	
 	
-	public Jogador getJogador(numeroJogador numeroJogador) {
-		if(numeroJogador == numeroJogador.PLAYER1) {
+	public Jogador getJogador(NumeroJogador jogador) {
+		if(jogador == NumeroJogador.PLAYER1) {
 			return jogador1;
 		}else {
 			return jogador2;

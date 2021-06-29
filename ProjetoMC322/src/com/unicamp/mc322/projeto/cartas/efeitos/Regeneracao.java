@@ -26,7 +26,7 @@ public class Regeneracao extends Efeito {
 		
 		if(cartaSelecionada != null) {
 			int novaVida = cartaSelecionada.getVidaTotal();
-			campo.alterarCartaEmCampo(rodada.getNumeroJogadorAtual(), unidade, Caracteristica.VIDA, novaVida);
+			cartaSelecionada.setVida(novaVida);
 		}
 	}
 

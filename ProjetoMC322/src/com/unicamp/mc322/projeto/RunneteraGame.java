@@ -30,7 +30,7 @@ public class RunneteraGame {
 		
 		this.campoBatalha = new Campo(player1, player2);
 		
-		interfaceTerminal.exitGame();
+		System.out.println("Jogo Iniciado!");
 	}
 	
 	private void criarJogadores() {

@@ -1,6 +1,6 @@
 package com.unicamp.mc322.projeto;
 
-public enum numeroJogador {
+public enum NumeroJogador {
 	PLAYER1,
 	PLAYER2;
 }

@@ -66,8 +66,6 @@ public class Campeao extends Seguidor {
 		return condicaoAtendida;
 	}
 	
-	
-	
 	public void subirNivel() {
 		setVida(getVida() + evolucao.getMaisVida());
 		setPoder(getPoder() + evolucao.getMaisPoder());
@@ -77,6 +75,22 @@ public class Campeao extends Seguidor {
 		for(Efeito aux : evolucao.getNovosEfeitos()) {
 			efeitos.add(aux);
 		}
+	}
+	
+	@Override
+	public String toStringEvocada() {
+		String texto = "<html>";
+		texto += this.nome + "<br />";
+		texto += "Vida: " + Integer.toString(getVida()) + "<br />";
+		texto += "Poder: " + Integer.toString(getPoder()) + "<br />";
+		if(nivel == Nivel.NORMAL) {
+			texto += "Nivel: N<br />";
+		}
+		else {
+			texto += "Nivel: S<br />";
+		}
+		texto += "</html>";
+		return texto;
 	}
 	
 }

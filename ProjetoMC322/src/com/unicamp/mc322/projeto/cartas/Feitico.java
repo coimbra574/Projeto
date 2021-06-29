@@ -46,18 +46,6 @@ public class Feitico extends Carta {
 	}
 	
 	@Override
-	public String toStringEvocada() {
-		String texto = "";
-		return texto;
-	}
-	
-	@Override
-	public String toStringEmCampo() {
-		String texto = "";
-		return texto;
-	}
-	
-	@Override
 	public String toStringDetalhes() {
 		String texto = "";
 		return texto;

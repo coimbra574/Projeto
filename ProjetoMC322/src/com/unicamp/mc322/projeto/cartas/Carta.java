@@ -29,10 +29,6 @@ public abstract class Carta {
 
 	public abstract String toStringCompra();
 	
-	public abstract String toStringEvocada();
-	
-	public abstract String toStringEmCampo();
-	
 	public abstract String toStringDetalhes();
 	
 }
