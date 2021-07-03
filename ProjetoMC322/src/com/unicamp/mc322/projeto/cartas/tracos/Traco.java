@@ -8,4 +8,5 @@ public abstract class Traco {
 	public abstract void ativarTraco(Seguidor cartaAtacante, Seguidor cartaDefensor, Jogador defensor);
 	
 	public abstract TipoTraco getTraco();
+
 }

@@ -32,7 +32,7 @@ public class Feitico extends Carta {
 	@Override
 	public String toString() {
 		String texto = this.tipo + " " + this.nome + ", Custo: " + this.custo;
-		texto += ", Efeito: "; //@TODO + efeito.toString();
+		//texto += ", Efeito: "; //@TODO + efeito.toString();
 		return texto;
 	}
 	
@@ -47,8 +47,14 @@ public class Feitico extends Carta {
 	
 	@Override
 	public String toStringDetalhes() {
-		String texto = "";
+		String texto = "\n Nome: " + nome + ", Custo: " + custo;
+		if(efeito == null) {
+			texto += ", Efeito: sem efeito";
+		} else {
+			texto += ", Efeito: " + efeito.getNome() + " (" + efeito.getInfo() + ") ";
+		}
 		return texto;
 	}
+	
 
 }

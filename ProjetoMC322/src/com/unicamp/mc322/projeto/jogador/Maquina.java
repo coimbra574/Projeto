@@ -41,12 +41,12 @@ public class Maquina extends Jogador{
 		return mao;
 	}
 
-	@Override
-	public void escolherCartaUtilizar(Campo campo) {
+	//@Override
+	//public void escolherCartaUtilizar(Campo campo) {
 		/*
 		 * A maquina deve escolher as cartas na mão que irá invocar ou ativar o efeito
 		 */
-		boolean continuar=false;
+		/*boolean continuar=false;
 		int limite = 4;//Vou colocar um limite de vezes para que ele possa continuar pra evitar loops muito grandes
 		int loops = 0;
 		do {
@@ -71,6 +71,6 @@ public class Maquina extends Jogador{
 			loops+=1;
 		}while(mana>0 && continuar && loops<limite);
 		
-	}
+	}*/
 
 }

@@ -18,6 +18,8 @@ public class Melhoria extends Efeito {
 		super(true, false);
 		this.n = n;
 		this.m = m;
+		setNome("Melhoria");
+		setInfo("Adiciona +n de poder e +m de vida a uma unidade selecionada");
 	}
 
 	@Override

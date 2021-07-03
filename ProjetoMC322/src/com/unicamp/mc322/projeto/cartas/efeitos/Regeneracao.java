@@ -16,6 +16,8 @@ public class Regeneracao extends Efeito {
 	
 	public Regeneracao() {
 		super(true, false);
+		setNome("Regeneração");
+		setInfo("Cura totalmente uma carta aliada");
 	}
 	
 	@Override

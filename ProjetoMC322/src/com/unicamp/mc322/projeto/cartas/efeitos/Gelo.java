@@ -14,6 +14,8 @@ public class Gelo extends Efeito {
 
 	public Gelo() {
 		super(false, true);
+		setNome("Gelo");
+		setInfo(" Altera o poder de uma unidade para 0 nesta rodada");
 	}
 	
 	@Override

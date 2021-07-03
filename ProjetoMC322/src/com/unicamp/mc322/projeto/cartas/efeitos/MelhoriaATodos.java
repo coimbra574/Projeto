@@ -20,6 +20,8 @@ public class MelhoriaATodos extends Efeito {
 		super(true, false);
 		this.n = n;
 		this.m = m;
+		setNome("Melhoria a todos");
+		setInfo("Adiciona +n de poder e +m de vida a todas as unidades aliadas evocadas");
 	}
 
 	@Override

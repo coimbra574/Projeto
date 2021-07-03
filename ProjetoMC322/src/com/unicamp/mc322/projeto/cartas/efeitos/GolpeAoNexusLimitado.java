@@ -13,6 +13,8 @@ public class GolpeAoNexusLimitado extends Efeito {
 	public GolpeAoNexusLimitado(int n) {
 		super(false, false);
 		this.n = n;
+		setNome("Golpe ao Nexus Limitado");
+		setInfo("Golpeia o nexus do adversário em n pontos de dano");
 	}
 	
 	@Override

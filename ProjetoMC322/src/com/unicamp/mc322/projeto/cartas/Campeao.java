@@ -8,7 +8,7 @@ public class Campeao extends Seguidor {
 	private Nivel nivel;
 	private int numeroAtaques=0, seguidoresMortos=0, danoCausado=0, danoAdicionado=0;
 	private DadosEvolucao evolucao;
-	private Traco traco; // SÓ 1 TRAÇO?
+	private Traco traco; 
 	private ArrayList<Efeito> efeitos = new ArrayList<Efeito>();
 
 	public Campeao(String nome, int custo, int poder, int vida, DadosEvolucao evolucao, Traco traco, Efeito ... efeitos) {
@@ -93,4 +93,11 @@ public class Campeao extends Seguidor {
 		return texto;
 	}
 	
+	@Override 
+	public String toStringDetalhes() {
+		String texto = super.toStringDetalhes();
+		texto += ", Nivel: " + nivel.toString();
+		texto += ", Condição para evolução: " + evolucao.getQuantEvolucao() + " " + evolucao.getCondicaoEvolucao().toString();
+		return texto;
+	}
 }

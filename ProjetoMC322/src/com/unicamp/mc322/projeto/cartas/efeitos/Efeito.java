@@ -8,6 +8,7 @@ public abstract class Efeito {
 	private TipoEfeito tipoEfeito = TipoEfeito.SELECIONADO;
 	private boolean usaCartaAliada;
 	private boolean usaCartaInimiga;
+	private String nome, info;
 	
 	public Efeito(boolean usaCartaAliada, boolean usaCartaInimiga) {
 		this.usaCartaAliada = usaCartaAliada;
@@ -34,5 +35,21 @@ public abstract class Efeito {
 
 	public boolean requerCartaInimiga() {
 		return usaCartaInimiga;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	protected void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public String getInfo() {
+		return info;
+	}
+	
+	protected void setInfo(String info) {
+		this.info = info;
 	}
 }

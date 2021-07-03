@@ -29,14 +29,14 @@ public class Humano  extends Jogador{
 		return mao;
 	}
 
-	@Override
-	public void escolherCartaUtilizar(Campo campo) {
+	//@Override
+	//public void escolherCartaUtilizar(Campo campo) {
 		/*
 		 * O jogador deve escolher as cartas na mão que irá invocar ou ativar o efeito
 		 * 
 		 * Talvez adicionar a funcao de ativar feiti�o ou invocar seguidor/campeao aqui na hora em que escolhe? ok
 		 */
-		boolean continuar=false;
+		/*boolean continuar=false;
 		do {
 			
 			System.out.println("Escolha uma carta para utilizar");
@@ -65,6 +65,6 @@ public class Humano  extends Jogador{
 			}
 		}while(mana>0 && continuar);
 		
-	}
+	}*/
 
 }

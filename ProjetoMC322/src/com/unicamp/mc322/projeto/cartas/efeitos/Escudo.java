@@ -14,6 +14,8 @@ public class Escudo extends Efeito {
 
 	public Escudo() {
 		super(true, false);
+		setNome("Escudo");
+		setInfo(" Cria uma barreira que anula o próximo dano que uma unidade levaria");
 	}
 	
 	@Override

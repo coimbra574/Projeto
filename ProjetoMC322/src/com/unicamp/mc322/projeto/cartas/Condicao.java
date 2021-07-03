@@ -10,9 +10,20 @@
 package com.unicamp.mc322.projeto.cartas;
 
 public enum Condicao {
-	NUM_ATAQUE,
-	NUM_SEGUIDORES_MORTOS,
-	NUM_DANO_CAUSADO,
-	NUM_DANO_ADD,
-	SEM_EVOLUCAO;
+	NUM_ATAQUE("ataques"),
+	NUM_SEGUIDORES_MORTOS("seguidores mortos"),
+	NUM_DANO_CAUSADO("pontos de dano causado"),
+	NUM_DANO_ADD("pontos de dano adicionado"),
+	SEM_EVOLUCAO("sem evolução");
+	
+	private String condicao;
+	
+	Condicao(String condicao){
+		this.condicao = condicao;
+	}
+	
+	@Override
+	public String toString() {
+		return condicao;
+	}
 }

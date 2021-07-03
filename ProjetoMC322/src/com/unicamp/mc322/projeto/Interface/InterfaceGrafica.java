@@ -23,6 +23,9 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.Panel;
 import javax.swing.JLayeredPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
 
 
 public class InterfaceGrafica extends javax.swing.JFrame {
@@ -35,6 +38,8 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 	private boolean realizouAcao;
 	private ArrayList<JButton> maoP1 = new ArrayList<JButton>();
 	private ArrayList<JButton> maoP2 = new ArrayList<JButton>();
+	private ArrayList<JButton> infoP1Mao = new ArrayList<JButton>();
+	private ArrayList<JButton> infoP2Mao = new ArrayList<JButton>();
 	private ArrayList<JButton> evocadasP1 = new ArrayList<JButton>();
 	private ArrayList<JButton> evocadasP2 = new ArrayList<JButton>();
 	private ArrayList<JButton> emCampoP1 = new ArrayList<JButton>();
@@ -101,6 +106,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 			maoP1.get(i).setEnabled(false);
 			maoP2.get(i).setVisible(false);
 			maoP2.get(i).setEnabled(false);
+			infoP1Mao.get(i).setVisible(false);
+			infoP1Mao.get(i).setEnabled(false);
+			infoP2Mao.get(i).setVisible(false);
+			infoP2Mao.get(i).setEnabled(false);
 			evocadasP1.get(i).setVisible(false);
 			evocadasP1.get(i).setEnabled(false);
 			evocadasP2.get(i).setVisible(false);
@@ -115,24 +124,28 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 	private void desativarMaoP1() {
 		for(int i = 0; i < maoP1.size(); i++) {
 			maoP1.get(i).setEnabled(false);
+			infoP1Mao.get(i).setEnabled(false);
 		}
 	}
 	
 	private void desativarMaoP2() {
 		for(int i = 0; i < maoP2.size(); i++) {
 			maoP2.get(i).setEnabled(false);
+			infoP2Mao.get(i).setEnabled(false);
 		}
 	}
 	
 	private void ativarMaoP1() {
 		for(int i = 0; i < maoP1.size(); i++) {
 			maoP1.get(i).setEnabled(true);
+			infoP1Mao.get(i).setEnabled(true);
 		}
 	}
 	
 	private void ativarMaoP2() {
 		for(int i = 0; i < maoP2.size(); i++) {
 			maoP2.get(i).setEnabled(true);
+			infoP2Mao.get(i).setEnabled(true);
 		}
 	}
 	
@@ -235,16 +248,20 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 		
 		for(int i = 0; i < maoP1.size() && i < maoP1.size(); i++) {
 			maoP1.get(i).setVisible(false);
+			infoP1Mao.get(i).setVisible(false);
 			maoP2.get(i).setVisible(false);
+			infoP2Mao.get(i).setVisible(false);
 		}
 		
 		for(int i = 0; i < maoPlayer1.size() && i < maoP1.size(); i++) {
 			maoP1.get(i).setText(maoPlayer1.get(i).toStringCompra());
 			maoP1.get(i).setVisible(true);
+			infoP1Mao.get(i).setVisible(true);
 		}
 		for(int i = 0; i < maoPlayer2.size() && i < maoP2.size(); i++) {
 			maoP2.get(i).setText(maoPlayer2.get(i).toStringCompra());
 			maoP2.get(i).setVisible(true);
+			infoP2Mao.get(i).setVisible(true);
 		}
 	}
 	
@@ -715,10 +732,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         jblP2ManaFeitico.setBounds(45, 258, 27, 17);
         panelInformacoes.add(jblP2ManaFeitico);
         
-        btnInformacoes = new JButton("<html><center>Informacoes<br />Sobre<br />Cartas</center></html>");
-        btnInformacoes.setBounds(10, 655, 107, 47);
-        panelInformacoes.add(btnInformacoes);
-        
         jblTipoDeTurnoPlayer2 = new JLabel();
         jblTipoDeTurnoPlayer2.setHorizontalAlignment(SwingConstants.CENTER);
         jblTipoDeTurnoPlayer2.setText("Ataque");
@@ -734,18 +747,12 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         			.addComponent(panelNexus, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(layout.createSequentialGroup()
-        					.addComponent(panelEvocadasP2, GroupLayout.PREFERRED_SIZE, 674, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED))
-        				.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
-        				.addGroup(layout.createSequentialGroup()
-        					.addComponent(panelMaoP2, GroupLayout.PREFERRED_SIZE, 673, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED))
-        				.addGroup(layout.createSequentialGroup()
-        					.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
-        						.addComponent(panelEvocadasP1, Alignment.LEADING)
-        						.addComponent(panelMaoP1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 673, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED)))
+        				.addComponent(panelEvocadasP2, GroupLayout.PREFERRED_SIZE, 674, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(panelCampo, GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+        				.addComponent(panelMaoP2, GroupLayout.PREFERRED_SIZE, 673, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
+        					.addComponent(panelEvocadasP1, Alignment.LEADING)
+        					.addComponent(panelMaoP1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(layeredPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -756,25 +763,27 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(panelInformacoes, GroupLayout.PREFERRED_SIZE, 737, GroupLayout.PREFERRED_SIZE)
         				.addGroup(layout.createSequentialGroup()
-        					.addGap(237)
         					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(panelNexus, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
         						.addGroup(layout.createSequentialGroup()
-        							.addGap(285)
-        							.addComponent(layeredPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-        				.addGroup(layout.createSequentialGroup()
-        					.addContainerGap()
-        					.addComponent(panelMaoP2, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+        							.addContainerGap()
+        							.addComponent(panelMaoP2, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(panelEvocadasP2, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+        							.addGap(15)
+        							.addComponent(panelCampo, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(panelEvocadasP1, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(layout.createSequentialGroup()
+        							.addGap(237)
+        							.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        								.addComponent(panelNexus, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
+        								.addGroup(layout.createSequentialGroup()
+        									.addGap(285)
+        									.addComponent(layeredPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
         					.addGap(18)
-        					.addComponent(panelEvocadasP2, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-        					.addGap(15)
-        					.addComponent(panelCampo, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
-        					.addGap(18)
-        					.addComponent(panelEvocadasP1, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-        					.addGap(18)
-        					.addComponent(panelMaoP1, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
-        				.addComponent(panelInformacoes, GroupLayout.PREFERRED_SIZE, 737, GroupLayout.PREFERRED_SIZE))
+        					.addComponent(panelMaoP1, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         
@@ -834,6 +843,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         panelEvocadasP1.add(bntP1Evocada_0);
         
         bntP1Evocada_1 = new JButton();
+        panelEvocadasP1.setLayer(bntP1Evocada_1, 0);
         bntP1Evocada_1.setText("<html>Campeao 1<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
         bntP1Evocada_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -867,6 +877,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         panelEvocadasP1.add(bntP1Evocada_3);
         
         bntP1Evocada_4 = new JButton();
+        panelEvocadasP1.setLayer(bntP1Evocada_4, 0);
         bntP1Evocada_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5<br />Nivel: 1</html>");
         bntP1Evocada_4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -933,6 +944,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         panelMaoP1.add(bntP1Mao_3);
         
         bntP1Mao_4 = new JButton();
+        panelMaoP1.setLayer(bntP1Mao_4, 0);
         bntP1Mao_4.setText("<html>Campeao 4<br /><br />Vida: 10<br />Ataque: 5<br />Custo: 0</html>");
         bntP1Mao_4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -954,16 +966,169 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         bntP1Mao_5.setBounds(520, 0, 80, 90);
         panelMaoP1.add(bntP1Mao_5);
         getContentPane().setLayout(layout);
-
-        pack();
         
+       
+        // ---------------------------------------------------------------------
+        // ---------------------- Botoes de Informacao -------------------------
+        // ---------------------------------------------------------------------
+        
+        btnInfoP1Mao_0 = new JButton("Info");
+        btnInfoP1Mao_0.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		btnInfoP1MaoActionPerformed(e, 0);
+        	}
+        });
+        panelMaoP1.setLayer(btnInfoP1Mao_0, 1);
+        btnInfoP1Mao_0.setForeground(Color.BLACK);
+        btnInfoP1Mao_0.setBackground(Color.ORANGE);
+        btnInfoP1Mao_0.setBounds(160, 0, 80, 12);
+        panelMaoP1.add(btnInfoP1Mao_0);
+        
+        btnInfoP1Mao_1 = new JButton("Info");
+        btnInfoP1Mao_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		btnInfoP1MaoActionPerformed(e, 1);
+        	}
+        });
+        panelMaoP1.setLayer(btnInfoP1Mao_1, 1);
+        btnInfoP1Mao_1.setForeground(Color.BLACK);
+        btnInfoP1Mao_1.setBackground(Color.ORANGE);
+        btnInfoP1Mao_1.setBounds(250, 0, 80, 12);
+        panelMaoP1.add(btnInfoP1Mao_1);
+        
+        btnInfoP1Mao_2 = new JButton("Info");
+        btnInfoP1Mao_2.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		btnInfoP1MaoActionPerformed(e, 2);
+        	}
+        });
+        panelMaoP1.setLayer(btnInfoP1Mao_2, 1);
+        btnInfoP1Mao_2.setForeground(Color.BLACK);
+        btnInfoP1Mao_2.setBackground(Color.ORANGE);
+        btnInfoP1Mao_2.setBounds(340, 0, 80, 12);
+        panelMaoP1.add(btnInfoP1Mao_2);
+        
+        btnInfoP1Mao_3 = new JButton("Info");
+        btnInfoP1Mao_3.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		btnInfoP1MaoActionPerformed(e, 3);
+        	}
+        });
+        panelMaoP1.add(btnInfoP1Mao_3);
+        panelMaoP1.setLayer(btnInfoP1Mao_3, 1);
+        btnInfoP1Mao_3.setForeground(Color.BLACK);
+        btnInfoP1Mao_3.setBackground(Color.ORANGE);
+        btnInfoP1Mao_3.setBounds(430, 0, 80, 12);
+        
+        btnInfoP1Mao_4 = new JButton("Info");
+        btnInfoP1Mao_4.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		btnInfoP1MaoActionPerformed(e, 4);
+        	}
+        });
+        panelMaoP1.setLayer(btnInfoP1Mao_4, 1);
+        btnInfoP1Mao_4.setForeground(Color.BLACK);
+        btnInfoP1Mao_4.setBackground(Color.ORANGE);
+        btnInfoP1Mao_4.setBounds(70, 0, 80, 12);
+        panelMaoP1.add(btnInfoP1Mao_4);
+        
+        btnInfoP1Mao_5 = new JButton("Info");
+        btnInfoP1Mao_5.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		btnInfoP1MaoActionPerformed(e, 5);
+        	}
+        });
+        panelMaoP1.setLayer(btnInfoP1Mao_5, 1);
+        btnInfoP1Mao_5.setForeground(Color.BLACK);
+        btnInfoP1Mao_5.setBackground(Color.ORANGE);
+        btnInfoP1Mao_5.setBounds(520, 0, 80, 12);
+        panelMaoP1.add(btnInfoP1Mao_5);
+        
+        
+        btnInfoP2Mao_0 = new JButton("Info");
+        btnInfoP2Mao_0.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		btnInfoP2MaoActionPerformed(e, 0);
+        	}
+        });
+        panelMaoP2.setLayer(btnInfoP2Mao_0, 1);
+        btnInfoP2Mao_0.setForeground(Color.BLACK);
+        btnInfoP2Mao_0.setBackground(Color.ORANGE);
+        btnInfoP2Mao_0.setBounds(160, 0, 80, 12);
+        panelMaoP2.add(btnInfoP2Mao_0);
+        
+        btnInfoP2Mao_1 = new JButton("Info");
+        btnInfoP2Mao_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		btnInfoP2MaoActionPerformed(e, 1);
+        	}
+        });
+        panelMaoP2.setLayer(btnInfoP2Mao_1, 1);
+        btnInfoP2Mao_1.setForeground(Color.BLACK);
+        btnInfoP2Mao_1.setBackground(Color.ORANGE);
+        btnInfoP2Mao_1.setBounds(250, 0, 80, 12);
+        panelMaoP2.add(btnInfoP2Mao_1);
+        
+        btnInfoP2Mao_2 = new JButton("Info");
+        btnInfoP2Mao_2.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		btnInfoP2MaoActionPerformed(e, 2);
+        	}
+        });
+        panelMaoP2.setLayer(btnInfoP2Mao_2, 1);
+        btnInfoP2Mao_2.setForeground(Color.BLACK);
+        btnInfoP2Mao_2.setBackground(Color.ORANGE);
+        btnInfoP2Mao_2.setBounds(340, 0, 80, 12);
+        panelMaoP2.add(btnInfoP2Mao_2);
+        
+        btnInfoP2Mao_3 = new JButton("Info");
+        btnInfoP2Mao_3.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		btnInfoP2MaoActionPerformed(e, 3);
+        	}
+        });
+        panelMaoP2.setLayer(btnInfoP2Mao_3, 1);
+        btnInfoP2Mao_3.setForeground(Color.BLACK);
+        btnInfoP2Mao_3.setBackground(Color.ORANGE);
+        btnInfoP2Mao_3.setBounds(430, 0, 80, 12);
+        panelMaoP2.add(btnInfoP2Mao_3);
+        
+        btnInfoP2Mao_4 = new JButton("Info");
+        btnInfoP2Mao_4.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		btnInfoP2MaoActionPerformed(e, 4);
+        	}
+        });
+        panelMaoP2.setLayer(btnInfoP2Mao_4, 1);
+        btnInfoP2Mao_4.setForeground(Color.BLACK);
+        btnInfoP2Mao_4.setBackground(Color.ORANGE);
+        btnInfoP2Mao_4.setBounds(70, 0, 80, 12);
+        panelMaoP2.add(btnInfoP2Mao_4);
+        
+        btnInfoP2Mao_5 = new JButton("Info");
+        panelMaoP2.setLayer(btnInfoP2Mao_5, 1);
+        btnInfoP2Mao_5.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		btnInfoP2MaoActionPerformed(e, 5);
+        	}
+        });
+        btnInfoP2Mao_5.setForeground(Color.BLACK);
+        btnInfoP2Mao_5.setBackground(Color.ORANGE);
+        btnInfoP2Mao_5.setBounds(520, 0, 80, 12);
+        panelMaoP2.add(btnInfoP2Mao_5);
+        
+
+        // -------------------------------------------------------------------
+        // --------------------- Adicionar aos ArrayLists --------------------  
+        pack();
+          
         maoP1.add(bntP1Mao_0);
         maoP1.add(bntP1Mao_1);
         maoP1.add(bntP1Mao_2);
         maoP1.add(bntP1Mao_3);
         maoP1.add(bntP1Mao_4);
         maoP1.add(bntP1Mao_5);
-        
+
         maoP2.add(bntP2Mao_0);
         maoP2.add(bntP2Mao_1);
         maoP2.add(bntP2Mao_2);
@@ -971,6 +1136,20 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         maoP2.add(bntP2Mao_4);
         maoP2.add(bntP2Mao_5);
         
+        infoP1Mao.add(btnInfoP1Mao_0);
+        infoP1Mao.add(btnInfoP1Mao_1);
+        infoP1Mao.add(btnInfoP1Mao_2);
+        infoP1Mao.add(btnInfoP1Mao_3);
+        infoP1Mao.add(btnInfoP1Mao_4);
+        infoP1Mao.add(btnInfoP1Mao_5);
+        
+        infoP2Mao.add(btnInfoP2Mao_0);
+        infoP2Mao.add(btnInfoP2Mao_1);
+        infoP2Mao.add(btnInfoP2Mao_2);
+        infoP2Mao.add(btnInfoP2Mao_3);
+        infoP2Mao.add(btnInfoP2Mao_4);
+        infoP2Mao.add(btnInfoP2Mao_5);
+ 
         evocadasP1.add(bntP1Evocada_0);
         evocadasP1.add(bntP1Evocada_1);
         evocadasP1.add(bntP1Evocada_2);
@@ -1075,6 +1254,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     	}
     	realizouAcao = true;
     }
+    
     private void bntP2EvocadaActionPerformed(java.awt.event.ActionEvent evt, int posicao) {
     	Runnable aguardarP2Evocada = new Runnable() {
         	public void run() {
@@ -1125,6 +1305,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     	}
     	realizouAcao = true;
     }
+    
     private void bntP2EmCampoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {
     	if(aguardandoCarta == true) {
     		cartaEscolhida = campo.getP2().getEmCampo().get(posicao);
@@ -1136,6 +1317,20 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     	}
     	realizouAcao = true;
     }
+    
+    
+    private void btnInfoP2MaoActionPerformed(ActionEvent evt, int posicao){
+    	Carta carta = campo.getP2().getMao().get(posicao);
+    	System.out.println(carta.toStringDetalhes());
+    }    
+    
+    private void btnInfoP1MaoActionPerformed(ActionEvent evt, int posicao){
+    	Carta carta = campo.getP1().getMao().get(posicao);
+    	System.out.println(carta.toStringDetalhes());
+    }  
+    
+    
+   
     
 //=========================================================================================================================    
     
@@ -1186,7 +1381,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private JLabel jblTipoDeTurnoPlayer1;
     private JLabel jblP2Mana;
     private JLabel jblP2ManaFeitico;
-    private JButton btnInformacoes;
     private JLabel jblTipoDeTurnoPlayer2;
     private JLayeredPane panelCampoP1;
     private JButton bntP1EmCampo_1;
@@ -1202,4 +1396,16 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private JButton bntP2EmCampo_0;
     private JButton bntP2EmCampo_4;
     private JButton bntP2EmCampo_5;
+    private JButton btnInfoP1Mao_3;
+    private JButton btnInfoP1Mao_5;
+    private JButton btnInfoP2Mao_0;
+    private JButton btnInfoP2Mao_4;
+    private JButton btnInfoP2Mao_1;
+    private JButton btnInfoP2Mao_2;
+    private JButton btnInfoP2Mao_5;
+    private JButton btnInfoP2Mao_3;
+    private JButton btnInfoP1Mao_4;
+    private JButton btnInfoP1Mao_0;
+    private JButton btnInfoP1Mao_1;
+    private JButton btnInfoP1Mao_2;
 }

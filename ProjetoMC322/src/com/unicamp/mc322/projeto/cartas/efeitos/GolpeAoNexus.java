@@ -13,6 +13,8 @@ public class GolpeAoNexus extends Efeito {
 	
 	public GolpeAoNexus() {
 		super(true, false);
+		setNome("Golpe ao  Nexus");
+		setInfo("Uma unidade evocada ataca o nexus do oponente");
 	}
 	
 	@Override

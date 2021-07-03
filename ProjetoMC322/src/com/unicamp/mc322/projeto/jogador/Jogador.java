@@ -1,4 +1,4 @@
-package com.unicamp.mc322.projeto.jogador;
+              package com.unicamp.mc322.projeto.jogador;
 
 import com.unicamp.mc322.projeto.Campo;
 import com.unicamp.mc322.projeto.Interface.InterfaceTerminal;
@@ -120,7 +120,7 @@ public abstract class Jogador {
 	
 	
 	// Escolhe cartas invocadas para utilizar
-	public abstract void escolherCartaUtilizar(Campo campo);
+	//public abstract void escolherCartaUtilizar(Campo campo);
 	
 	
 	protected boolean verificarCarta(Carta carta) {
@@ -139,31 +139,35 @@ public abstract class Jogador {
 		 * Esse metodo eh chamado quando o jogador tenta comprar uma carta, retorna true se a compra foi possivel.
 		 */
 		Carta carta = mao.get(posicaoMao);
+		if(!carta.equals(null)) {
 		
-		if(verificarCarta(carta)) {
-			if(carta.getTipo() == TipoCarta.FEITICO) {
-				Feitico feitico = (Feitico) mao.get(posicaoMao);
-				if(feitico.ehPossivel(campo)) {
-					mana -= feitico.getMana();
-					feitico.ativarCarta(campo);
+			if(verificarCarta(carta)) {
+				if(carta.getTipo() == TipoCarta.FEITICO) {
+					Feitico feitico = (Feitico) mao.get(posicaoMao);
+					if(feitico.ehPossivel(campo)) {
+						mana -= feitico.getMana();
+						feitico.ativarCarta(campo);
+						mao.remove(posicaoMao);
+						return true;
+					}
+					else {
+						return false;
+					}
+					
+				}
+				else {
+					mana -= carta.getMana();
+					evocadas.add((Seguidor) carta);
 					mao.remove(posicaoMao);
 					return true;
 				}
-				else {
-					return false;
-				}
-				
+			} else {
+				System.out.println("Sem mana suficiente para invocar esta carta");
+				return false;
 			}
-			else {
-				mana -= carta.getMana();
-				evocadas.add((Seguidor) carta);
-				mao.remove(posicaoMao);
-				return true;
-			}
-		} else {
-			System.out.println("Sem mana suficiente para invocar esta carta");
-			return false;
 		}
+		
+		else return false;
 	}
 	
 	protected void ativarEfeito(Carta carta) {
@@ -176,6 +180,7 @@ public abstract class Jogador {
 	public void diminuirNexus(int dano) {
 		this.nexus-=dano;
 	}
+	
 	
 	// Deixar essa parte de combate aqui ou na classe Jogo/Game?
 //	public void atacar(Jogador oponente, Campo campo, int... posicaoUnidades) {

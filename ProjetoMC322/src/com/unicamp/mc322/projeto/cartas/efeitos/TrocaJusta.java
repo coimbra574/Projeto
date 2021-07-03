@@ -13,6 +13,8 @@ public class TrocaJusta extends Efeito {
 	public TrocaJusta() {
 		super(true, false);
 		super.setTipoEfeito(TipoEfeito.AUTOMATICO);
+		setNome("Troca Justa");
+		setInfo("Ao ser destruído, compra uma carta");
 	}
 
 	@Override

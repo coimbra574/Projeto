@@ -20,6 +20,7 @@ public class Seguidor extends Carta {
 		this.traco = traco;
 		vida = vidaTotal;
 		
+		
 		for(Efeito aux : efeitos) {
 			listaEfeitos.add(aux);
 		}
@@ -91,7 +92,7 @@ public class Seguidor extends Carta {
 	
 	@Override
 	public String toString() {
-		String texto = this.tipo + " " + this.nome + ", Custo: " + this.custo;
+		String texto = this.tipo.toString() + " " + this.nome + ", Custo: " + this.custo;
 		texto += ", Vida: " + this.vida + ", Poder: " + this.poder;
 		return texto;
 	}
@@ -124,11 +125,30 @@ public class Seguidor extends Carta {
 		return texto;
 	}
 	
-	@Override
+	@Override 
 	public String toStringDetalhes() {
-		String texto = this.tipo + this.nome + ", Custo: " + this.custo;
-		texto += ", Vida: " + this.vida + ", Poder: " + this.poder;
+		String texto = "\n " + toString();
+		
+		if(traco == null) {
+			texto += "\n Traço: sem traço";
+		} else {
+			texto += "\n Traço: " + traco.toString();
+		}
+		
+		boolean temEfeito = false;
+		for(Efeito efeitoAux : listaEfeitos) {
+			if(efeitoAux != null) {
+				temEfeito = true;
+				texto += "\n Efeitos: " + efeitoAux.getNome() + " (" + efeitoAux.getInfo() + ") ";
+			}
+		}
+		
+		if(!temEfeito) {
+			texto += "\n Efeitos: sem efeitos";
+		}
+		
 		return texto;
 	}
+	
 }
 	

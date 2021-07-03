@@ -16,6 +16,8 @@ public class Strike extends Efeito {
 	
 	public Strike() {
 		super(true, true);
+		setNome("Strike");
+		setInfo("Um aliado atacante golpeia todos os oponentes defensores");
 	}
 	
 	@Override

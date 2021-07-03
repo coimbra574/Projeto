@@ -13,6 +13,8 @@ public class MaoDeMidas extends Efeito {
 	public MaoDeMidas() {
 		super(true, false);
 		super.setTipoEfeito(TipoEfeito.AUTOMATICO);
+		setNome("Mão de Midas");
+		setInfo(" A carta ao destruir uma unidade inimiga recebe uma unidade específica na sua mão");
 	}
 
 	@Override

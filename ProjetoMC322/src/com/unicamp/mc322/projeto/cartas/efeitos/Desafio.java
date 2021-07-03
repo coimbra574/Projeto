@@ -13,6 +13,8 @@ public class Desafio extends Efeito {
 	
 	public Desafio() {
 		super(true, true);
+		setNome("Desafio");
+		setInfo("Escolha uma carta aliada e uma oponente para um combate imediato");
 	}
 
 	private int unidadeAliada, unidadeOponente;
