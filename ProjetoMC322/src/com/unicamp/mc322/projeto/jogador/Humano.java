@@ -24,6 +24,7 @@ public class Humano  extends Jogador{
 		for(int i: listaDeSubstituicao) {
 			Carta novaCarta = deckJogador.pegarCartaAleatoriaDeck();
 			deckJogador.recolocarNoBaralho(mao.get(i));
+			mao.remove(i);
 			mao.add(i, novaCarta);
 		}
 		return mao;
