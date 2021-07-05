@@ -19,12 +19,12 @@ public class Melhoria extends Efeito {
 		this.n = n;
 		this.m = m;
 		setNome("Melhoria");
-		setInfo("Adiciona +n de poder e +m de vida a uma unidade selecionada");
+		setInfo("Adiciona +"+n+" de poder e +"+m+" de vida a uma unidade selecionada");
 	}
 
 	@Override
 	public void ativarEfeito(Campo campo) {
-		usuarioEscolherUnidade("Selecione a unidade o qual deseja ativar o efeito: ");
+		System.out.println("Selecione a unidade o qual deseja ativar o efeito: ");
 		Rodada rodada = campo.getRodada();
 		Seguidor cartaSelecionada = campo.selecionarUmaUnidadeAliada();
 		

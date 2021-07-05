@@ -12,7 +12,6 @@ import com.unicamp.mc322.projeto.cartas.Caracteristica;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 
 public class Strike extends Efeito {
-	private int unidade;
 	
 	public Strike() {
 		super(true, true);
@@ -23,8 +22,9 @@ public class Strike extends Efeito {
 	@Override
 	public void ativarEfeito(Campo campo) {
 		Rodada rodada = campo.getRodada();
-		usuarioEscolherUnidade("Selecione a unidade o qual deseja ativar o efeito: ");
+		System.out.println("Selecione a unidade o qual deseja ativar o efeito: ");
 		Seguidor cartaSelecionada = (Seguidor) campo.selecionarUmaUnidadeAliada();
+		System.out.println("\n Efeito Strike ativado");
 		ArrayList<Seguidor> inimigos = campo.getEvocadas(rodada.getNumeroJogadorOponente());
 		
 		for(Seguidor carta: inimigos) {

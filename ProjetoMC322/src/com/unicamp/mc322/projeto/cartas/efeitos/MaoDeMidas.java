@@ -5,28 +5,33 @@ package com.unicamp.mc322.projeto.cartas.efeitos;
 
 import com.unicamp.mc322.projeto.Campo;
 import com.unicamp.mc322.projeto.Rodada;
+import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.jogador.Jogador;
 
 public class MaoDeMidas extends Efeito {
+	Carta novaCarta;
 	
-	public MaoDeMidas() {
+	public MaoDeMidas(Carta novaCarta) {
 		super(true, false);
-		super.setTipoEfeito(TipoEfeito.AUTOMATICO);
+		super.setTipoEfeito(TipoAtivacao.FIM_DA_RODADA);
+		this.novaCarta = novaCarta;
 		setNome("Mão de Midas");
 		setInfo(" A carta ao destruir uma unidade inimiga recebe uma unidade específica na sua mão");
 	}
 
 	@Override
 	public void ativarEfeito(Campo campo) {
-		/*//numeroCartaSelecionada = rodada.getNumeroCartaSelecionada; // recebe através do resultado da rodada
 		Rodada rodada = campo.getRodada();
-		Seguidor cartaSelecionada = campo.selecionarUmaUnidade(rodada.getNumeroJogadorAtual(), numeroCartaSelecionada);
+		Jogador jogador = rodada.getJogador(rodada.getNumeroJogadorAplicarEfeito());
+		int numeroCarta = rodada.getIndexCartaAplicarEfeito();
+		Seguidor carta = jogador.getEvocadas().get(numeroCarta);
 		
-		if(cartaSelecionada.getMatouUmSeguidor() == true) {
-			Jogador jogadorAtual = rodada.getJogador(rodada.getNumeroJogadorAtual());
-			jogadorAtual.pegarCarta();
-		}*/
+		if(carta.getMatouUmSeguidor() == true) {
+			System.out.println("\n Efeito Mão de Midas ativado, jogador recebeu uma carta "+ novaCarta.getTipo() + " " + novaCarta.getNome());
+			jogador.getMao().add(novaCarta);
+			carta.setMatouUmSeguidor(false);
+		}
 	}
 	
 }

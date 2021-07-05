@@ -1,4 +1,4 @@
-              package com.unicamp.mc322.projeto.jogador;
+package com.unicamp.mc322.projeto.jogador;
 
 import com.unicamp.mc322.projeto.Campo;
 import com.unicamp.mc322.projeto.Interface.InterfaceTerminal;
@@ -144,7 +144,7 @@ public abstract class Jogador {
 			if(verificarCarta(carta)) {
 				if(carta.getTipo() == TipoCarta.FEITICO) {
 					Feitico feitico = (Feitico) mao.get(posicaoMao);
-					if(feitico.ehPossivel(campo)) {
+					if(feitico.ehPossivel(campo)) { // Verifica se existem unidades para se aplicar o feitiço
 						mana -= feitico.getMana();
 						feitico.ativarCarta(campo);
 						mao.remove(posicaoMao);

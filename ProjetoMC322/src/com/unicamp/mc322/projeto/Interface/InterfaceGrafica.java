@@ -14,6 +14,8 @@ import com.unicamp.mc322.projeto.TipoRodada;
 import com.unicamp.mc322.projeto.NumeroJogador;
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
+import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
+import com.unicamp.mc322.projeto.cartas.efeitos.TipoAtivacao;
 import com.unicamp.mc322.projeto.turno.Turno;
 
 import javax.swing.JButton;
@@ -331,12 +333,13 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 		ativarEvocadasP1();
 		ativarEmCampoP1();
 		aguardandoCarta = true;
-		while(aguardandoCarta != false) {
+		while(aguardandoCarta != false) {   
 			//Espera
 		}
-		
 		return (Seguidor) cartaEscolhida;
 	}
+	
+	
 	
 	public Seguidor selecionarCartaP2() {
 		ativarEvocadasP2();
@@ -1180,7 +1183,8 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }// </editor-fold>                        
     
 //=========================================================================================================================
-/*												Clique de Botoes							  							 */
+/*												Clique de Botoes	
+ * 						  							 */
     private void bntAvancarTurnoActionPerformed(java.awt.event.ActionEvent evt) {
     	if(realizouAcao == true || rodada.getTipo() == TipoRodada.ESCOLHA_DEFENSORES) {
     		rodada.mudarTipo();
@@ -1189,7 +1193,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     	iniciarTurno();
     }
     
-    private void bntP1MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {                                            
+    private void bntP1MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {
         if(campo.getP1().comprarCarta(posicao, campo)) {
         	atualizarMao();
         	atualizarEvocadas();
@@ -1203,7 +1207,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         }
     }
     
-    private void bntP2MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {                                            
+    private void bntP2MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) { 
         if(campo.getP2().comprarCarta(posicao, campo)) {
         	atualizarMao();
         	atualizarEvocadas();
@@ -1263,8 +1267,8 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         			desativarEvocadasP2();
         			desativarMaoP2();
             		ativarCampoSelecionavelP2();
-            		while(aguardandoIndex) {
-            			Thread.sleep(100);
+            		while(aguardandoIndex) {  
+            			Thread.sleep(100);    
             		}
             		campo.getP2().colocarEmCampo(posicao, indexEscolhido);
             		atualizarEmCampo();

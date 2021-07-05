@@ -5,6 +5,7 @@ import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Condicao;
 import com.unicamp.mc322.projeto.cartas.DadosEvolucao;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
+import com.unicamp.mc322.projeto.cartas.TipoCarta;
 import com.unicamp.mc322.projeto.cartas.efeitos.*;
 import com.unicamp.mc322.projeto.cartas.tracos.*;
 import com.unicamp.mc322.projeto.cartas.Feitico;
@@ -14,17 +15,17 @@ import java.util.ArrayList;
 public class ListaCartas {
 	private Campeao garen;
 	
-	private Seguidor tiana = new Seguidor("Tiana", 8, 7, 7, null, null, null);
-	private Seguidor vanguarda = new Seguidor("Vanguarda", 4, 3, 3, null, null, null);
-	private Seguidor duelista = new Seguidor("Duelista", 3, 3, 2, null, null, null);
-	private Seguidor defensor = new Seguidor("Defensor", 2, 2, 2, null, null, null);
-	private Seguidor poro = new Seguidor("Poro", 1, 2, 1, null, null, null);
-	private Seguidor poroDefensor = new Seguidor("Poro Defensor", 1, 1, 2, null, null, null);
+	private Seguidor poro = new Seguidor("Poro", 1, 2, 1, null);
+	private Seguidor tiana = new Seguidor("Tiana", 8, 7, 7, null, new GolpeAoNexus());
+	private Seguidor vanguarda = new Seguidor("Vanguarda", 4, 3, 3, null, new MelhoriaATodos(1,1));
+	private Seguidor duelista = new Seguidor("Duelista", 3, 3, 2, null, new MaoDeMidas(poro));
+	private Seguidor defensor = new Seguidor("Defensor", 2, 2, 2, new Furia(0,1));
+	private Seguidor poroDefensor = new Seguidor("Poro Defensor", 1, 1, 2, null, new TrocaJusta());
 	
-	private Feitico julgamento = new Feitico("Julgamento", 8, null);
-	private Feitico valorRedobrado = new Feitico("Valor Redobrado", 6, null);
-	private Feitico golpeCerteiro = new Feitico("Golpe Certeiro", 1, null);
-	private Feitico combateUmUm = new Feitico("Combate um-a-um", 2, null);
+	private Feitico julgamento = new Feitico("Julgamento", 8, new Strike());
+	private Feitico valorRedobrado = new Feitico("Valor Redobrado", 6, new Regeneracao(), new GolpeAoNexusLimitado(2));
+	private Feitico golpeCerteiro = new Feitico("Golpe Certeiro", 1, new Melhoria(1,1));
+	private Feitico combateUmUm = new Feitico("Combate um-a-um", 2, new Desafio());
 	
 	private ArrayList<Carta> listaCampeoes = new ArrayList<Carta>();
 	private ArrayList<Carta> listaSeguidores = new ArrayList<Carta>();

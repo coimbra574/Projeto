@@ -23,10 +23,11 @@ public class Regeneracao extends Efeito {
 	@Override
 	public void ativarEfeito(Campo campo) {
 		Rodada rodada = campo.getRodada();
-		usuarioEscolherUnidade("Selecione a unidade o qual deseja ativar o efeito: ");
+		System.out.println("Selecione a unidade o qual deseja ativar o efeito: ");
 		Seguidor cartaSelecionada = campo.selecionarUmaUnidadeAliada();
 		
 		if(cartaSelecionada != null) {
+			System.out.println("Efeito Regeneração ativado");
 			int novaVida = cartaSelecionada.getVidaTotal();
 			cartaSelecionada.setVida(novaVida);
 		}

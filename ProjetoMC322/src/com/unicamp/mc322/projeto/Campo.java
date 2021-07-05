@@ -12,6 +12,7 @@ package com.unicamp.mc322.projeto;
 import java.util.ArrayList;
 
 import com.unicamp.mc322.projeto.Interface.InterfaceGrafica;
+import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.jogador.Jogador;
 
@@ -57,14 +58,26 @@ public class Campo {
 		return rodada;
 	}
 	
-	
+
 	public void definirNumeroEmCampo(Jogador jogador1, Jogador jogador2) {
 		jogador1.setNumeroEmCampo(1);
 		jogador2.setNumeroEmCampo(2);
 	}
 	
 	public boolean possuiCartaEscolhivel(NumeroJogador numJogador) {
-		return false;
+		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
+			return verificarSeExisteEvocada(jogador1);
+		} else {
+			return verificarSeExisteEvocada(jogador2);
+		}
+	}
+	
+	
+	private boolean verificarSeExisteEvocada(Jogador jogador) {
+		if(jogador.getEvocadas().isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 	
 	public Seguidor selecionarUmaUnidadeAliada() {
@@ -91,6 +104,19 @@ public class Campo {
 		} else {
 			jogador2.adicionarAoNexus(valorAdicionado);
 		}
+	}
+	
+	// Retorna indice de carta evocada se encontrada
+	public int procurarCartaEvocada(NumeroJogador player, Seguidor carta) {
+		int indexEncontrado=-1;
+		Jogador jogador = rodada.getJogador(player);
+		ArrayList<Seguidor> evocadas = jogador.getEvocadas();
+		for(int i=0; i<evocadas.size(); i++) {
+			if(evocadas.get(i).equals(carta)) {
+				indexEncontrado=i;
+			}
+		}
+		return indexEncontrado;
 	}
 	
 	public Jogador getP1() {

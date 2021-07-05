@@ -1,16 +1,23 @@
 package com.unicamp.mc322.projeto;
 
+import java.util.ArrayList;
+
+import com.unicamp.mc322.projeto.cartas.Seguidor;
+import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
+import com.unicamp.mc322.projeto.cartas.efeitos.TipoAtivacao;
 import com.unicamp.mc322.projeto.jogador.Jogador;
 import com.unicamp.mc322.projeto.turno.Turno;
 
 public class Rodada {
 	private int numeroRodada;
+	private int indexCartaAplicarEfeito;
 	private Jogador jogador1, jogador2;
-	private NumeroJogador numeroJogadorAtual;
+	private NumeroJogador numeroJogadorAtual,numeroJogadorAplicarEfeito;
 	private TipoRodada tipo;
 	private boolean acaoJogador1;
 	private boolean acaoJogador2;
 	private Campo campo;
+	
 	
 	public Rodada(Jogador p1, Jogador p2, Campo campo) {
 		numeroRodada = 1;
@@ -74,10 +81,14 @@ public class Rodada {
 		}
 		this.tipo = TipoRodada.COMPRA_DE_CARTAS;
 		numeroRodada++;
+		ativarEfeitosFimDaRodada(NumeroJogador.PLAYER1);
+		ativarEfeitosFimDaRodada(NumeroJogador.PLAYER2);
 		jogador1.acabarRodada();
 		jogador1.atualizarMana(numeroRodada);
 		jogador2.acabarRodada();
 		jogador2.atualizarMana(numeroRodada);
+		jogador1.pegarCarta();
+		jogador2.pegarCarta();
 		this.acaoJogador1 = true;
 		this.acaoJogador2 = true;
 	}
@@ -104,6 +115,29 @@ public class Rodada {
 		}
 	}
 	
+	public void ativarEfeitosFimDaRodada(NumeroJogador player) {
+		int index = 0;
+		ArrayList<Seguidor> cartasEvocadas = campo.getEvocadas(player);
+		for(Seguidor carta : cartasEvocadas) {
+			for(Efeito efeito : carta.getEfeitos()) {
+				if(efeito.getTipoAtivacao() == TipoAtivacao.FIM_DA_RODADA) {
+					indexCartaAplicarEfeito = index;
+					numeroJogadorAplicarEfeito = player;
+					efeito.ativarEfeito(campo);
+				}
+				index++;
+			}
+		}
+	}
+	
+	
+	public int getIndexCartaAplicarEfeito() {
+		return indexCartaAplicarEfeito;
+	}
+	
+	public NumeroJogador getNumeroJogadorAplicarEfeito() {
+		return numeroJogadorAplicarEfeito;
+	}
 	
 	
 }

@@ -10,7 +10,8 @@ import com.unicamp.mc322.projeto.cartas.Caracteristica;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 
 public class Escudo extends Efeito {
-	private int valorVidaOriginal=0, numeroCartaSelecionada=-1;; // Por conta desses parametros, pra cada carta precisamos instanciar os efeitos, msm que o mesmo efeito
+	private int valorVidaOriginal=0, indexCartaEvocada=-1;
+	private Seguidor carta;
 
 	public Escudo() {
 		super(true, false);
@@ -22,18 +23,19 @@ public class Escudo extends Efeito {
 	public void ativarEfeito(Campo campo) {
 		Rodada rodada = campo.getRodada();
 		
-		if(this.getTipoEfeito().equals(TipoEfeito.SELECIONADO)) {
-			//numeroCartaSelecionada = rodada.getNumeroCartaSelecionada; // recebe através do resultado da rodada
-			Seguidor carta = campo.selecionarUmaUnidadeAliada();
+		if(this.getTipoAtivacao().equals(TipoAtivacao.NA_COMPRA)) {
+			System.out.println("\n Efeito Escudo ativado");
+			carta = campo.selecionarUmaUnidadeAliada();
+			indexCartaEvocada = campo.procurarCartaEvocada(rodada.getNumeroJogadorAtual(), carta);
 			valorVidaOriginal = carta.getVida();
 			carta.setVida(10000);  // Valor muito alto
-			this.setTipoEfeito(TipoEfeito.AUTOMATICO);  // valor é atualizado ao original no final da rodada
+			this.setTipoEfeito(TipoAtivacao.FIM_DA_RODADA);  // valor é atualizado ao original no final da rodada
 		} else {
-			Seguidor carta = campo.selecionarUmaUnidadeAliada();
+			System.out.println("\n Efeito Escudo desativado");
 			carta.setVida(valorVidaOriginal);
 			valorVidaOriginal = 0;
-			numeroCartaSelecionada = -1;
-			this.setTipoEfeito(TipoEfeito.SELECIONADO);
+			indexCartaEvocada = -1;
+			this.setTipoEfeito(TipoAtivacao.NA_COMPRA);
 		}
 	}
 	

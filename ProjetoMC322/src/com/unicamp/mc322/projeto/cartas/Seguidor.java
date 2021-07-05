@@ -3,6 +3,7 @@ package com.unicamp.mc322.projeto.cartas;
 import java.util.ArrayList;
 
 import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
+import com.unicamp.mc322.projeto.cartas.efeitos.TipoAtivacao;
 import com.unicamp.mc322.projeto.cartas.tracos.TipoTraco;
 import com.unicamp.mc322.projeto.cartas.tracos.Traco;
 import com.unicamp.mc322.projeto.jogador.Jogador;
@@ -20,9 +21,10 @@ public class Seguidor extends Carta {
 		this.traco = traco;
 		vida = vidaTotal;
 		
-		
-		for(Efeito aux : efeitos) {
-			listaEfeitos.add(aux);
+		if(efeitos != null) {
+			for(Efeito aux : efeitos) {
+				listaEfeitos.add(aux);
+			}
 		}
 	}
 	
@@ -87,6 +89,10 @@ public class Seguidor extends Carta {
 	
 	public TipoTraco getTipoTraco() {
 		return traco.getTraco();
+	}
+	
+	public ArrayList<Efeito> getEfeitos() {
+		return listaEfeitos;
 	}
 	
 	

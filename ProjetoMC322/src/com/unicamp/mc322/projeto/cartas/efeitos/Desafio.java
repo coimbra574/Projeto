@@ -16,11 +16,10 @@ public class Desafio extends Efeito {
 		setNome("Desafio");
 		setInfo("Escolha uma carta aliada e uma oponente para um combate imediato");
 	}
-
-	private int unidadeAliada, unidadeOponente;
 	
 	@Override
 	public void ativarEfeito(Campo campo) {		
+		System.out.println("\n Efeito Desafio ativado");
 		Rodada rodada = campo.getRodada();
 		Jogador jogadorAtual = rodada.getJogador(rodada.getNumeroJogadorAtual());
 		Jogador jogadorOponente = rodada.getJogador(rodada.getNumeroJogadorOponente());

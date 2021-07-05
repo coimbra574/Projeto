@@ -5,6 +5,6 @@
 
 package com.unicamp.mc322.projeto.cartas.efeitos;
 
-public enum TipoEfeito {
-	AUTOMATICO, SELECIONADO;
+public enum TipoAtivacao {
+	FIM_DA_RODADA, NA_COMPRA;
 }

@@ -21,11 +21,12 @@ public class MelhoriaATodos extends Efeito {
 		this.n = n;
 		this.m = m;
 		setNome("Melhoria a todos");
-		setInfo("Adiciona +n de poder e +m de vida a todas as unidades aliadas evocadas");
+		setInfo("Adiciona +"+n+" de poder e +"+m+" de vida a todas as unidades aliadas");
 	}
 
 	@Override
 	public void ativarEfeito(Campo campo) {
+		System.out.println("Efeito Melhoria a Todos ativado");
 		int novoPoder;
 		int novaVida;
 		Rodada rodada = campo.getRodada();

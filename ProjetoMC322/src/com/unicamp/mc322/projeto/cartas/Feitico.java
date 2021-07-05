@@ -1,29 +1,40 @@
 package com.unicamp.mc322.projeto.cartas;
 
+import java.util.ArrayList;
+
 import com.unicamp.mc322.projeto.Campo;
 import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
 
 public class Feitico extends Carta {
-	Efeito efeito;
+	private ArrayList<Efeito> listaEfeitos = new ArrayList<Efeito>();
 	
-	public Feitico(String nome, int custo, Efeito efeito) {
+	public Feitico(String nome, int custo, Efeito ... listaEfeitos) {
 		super(nome,custo, TipoCarta.FEITICO);
-		this.efeito = efeito;
+		
+		if(listaEfeitos != null) {
+			for(Efeito efeitoAux : listaEfeitos) {
+				this.listaEfeitos.add(efeitoAux);
+			}
+		}
 	}
 
 	public void ativarCarta(Campo campo) {
-		efeito.ativarEfeito(campo);
+		for(Efeito efeitoAux : listaEfeitos) {
+			efeitoAux.ativarEfeito(campo);
+		}
 	}
 	
 	public boolean ehPossivel(Campo campo) {
-		if(efeito.requerCartaAliada()) {
-			if(campo.possuiCartaEscolhivel(campo.getRodada().getNumeroJogadorAtual()) == false) {
-				return false;
+		for(Efeito efeito : listaEfeitos) {
+			if(efeito.requerCartaAliada()) {
+				if(campo.possuiCartaEscolhivel(campo.getRodada().getNumeroJogadorAtual()) == false) {
+					return false;
+				}
 			}
-		}
-		if(efeito.requerCartaInimiga()) {
-			if(campo.possuiCartaEscolhivel(campo.getRodada().getNumeroJogadorOponente()) == false) {
-				return false;
+			if(efeito.requerCartaInimiga()) {
+				if(campo.possuiCartaEscolhivel(campo.getRodada().getNumeroJogadorOponente()) == false) {
+					return false;
+				}
 			}
 		}
 		return true;
@@ -48,10 +59,17 @@ public class Feitico extends Carta {
 	@Override
 	public String toStringDetalhes() {
 		String texto = "\n Nome: " + nome + ", Custo: " + custo;
-		if(efeito == null) {
-			texto += ", Efeito: sem efeito";
-		} else {
-			texto += ", Efeito: " + efeito.getNome() + " (" + efeito.getInfo() + ") ";
+		boolean temEfeito = false;
+		texto += "\n Efeitos: ";
+		for(Efeito efeitoAux : listaEfeitos) {
+			if(efeitoAux != null) {
+				temEfeito = true;
+				texto += "\n " + efeitoAux.getNome() + " (" + efeitoAux.getInfo() + ") ";
+			}
+		}
+		
+		if(!temEfeito) {
+			texto += "sem efeitos";
 		}
 		return texto;
 	}

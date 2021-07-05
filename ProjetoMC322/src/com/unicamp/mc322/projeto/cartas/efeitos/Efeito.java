@@ -5,7 +5,7 @@ import java.util.Scanner;
 import com.unicamp.mc322.projeto.Campo;
 
 public abstract class Efeito {
-	private TipoEfeito tipoEfeito = TipoEfeito.SELECIONADO;
+	private TipoAtivacao tipoAtivacao = TipoAtivacao.NA_COMPRA;
 	private boolean usaCartaAliada;
 	private boolean usaCartaInimiga;
 	private String nome, info;
@@ -21,12 +21,12 @@ public abstract class Efeito {
 		System.out.print(mensagemAoUsuario);
 	}
 	
-	public TipoEfeito getTipoEfeito() {
-		return tipoEfeito;
+	public TipoAtivacao getTipoAtivacao() {
+		return tipoAtivacao;
 	}
 	
-	protected void setTipoEfeito(TipoEfeito tipo) {
-		tipoEfeito = tipo;
+	protected void setTipoEfeito(TipoAtivacao tipo) {
+		tipoAtivacao = tipo;
 	}
 
 	public boolean requerCartaAliada() {

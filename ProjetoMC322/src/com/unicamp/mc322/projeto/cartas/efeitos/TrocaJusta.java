@@ -1,4 +1,4 @@
-/* Ao ser destruido, compra una carta
+/* Ao ser destruido, ganha uma carta
  */
 
 package com.unicamp.mc322.projeto.cartas.efeitos;
@@ -12,21 +12,22 @@ public class TrocaJusta extends Efeito {
 	
 	public TrocaJusta() {
 		super(true, false);
-		super.setTipoEfeito(TipoEfeito.AUTOMATICO);
+		super.setTipoEfeito(TipoAtivacao.FIM_DA_RODADA);
 		setNome("Troca Justa");
-		setInfo("Ao ser destruído, compra uma carta");
+		setInfo("Ao ser destruído voce ganha uma carta");
 	}
 
 	@Override
 	public void ativarEfeito(Campo campo) {
-		/*//numeroCartaSelecionada = rodada.getNumeroCartaSelecionada; // recebe através do resultado da rodada
 		Rodada rodada = campo.getRodada();
-		Seguidor cartaSelecionada = campo.selecionarUmaUnidade(rodada.getNumeroJogadorAtual(), numeroCartaSelecionada);
+		Jogador jogador = rodada.getJogador(rodada.getNumeroJogadorAplicarEfeito());
+		int numeroCarta = rodada.getIndexCartaAplicarEfeito();
+		Seguidor carta = jogador.getEvocadas().get(numeroCarta);
 		
-		if(cartaSelecionada.getVida() == 0) {
-			Jogador jogadorAtual = rodada.getJogador(rodada.getNumeroJogadorAtual());
-			jogadorAtual.pegarCarta();
-		}*/
+		if(carta.getVida() == 0) {
+			System.out.println("\n Efeito Troca Justa ativado");
+			jogador.pegarCarta();
+		}
 	}
 	
 }
