@@ -144,7 +144,7 @@ public abstract class Jogador {
 			if(verificarCarta(carta)) {
 				if(carta.getTipo() == TipoCarta.FEITICO) {
 					Feitico feitico = (Feitico) mao.get(posicaoMao);
-					if(feitico.ehPossivel(campo)) { // Verifica se existem unidades para se aplicar o feitiço
+					if(feitico.ehPossivel(campo)) { // Verifica se existem unidades para se aplicar o feitiï¿½o
 						mana -= feitico.getMana();
 						feitico.ativarCarta(campo);
 						mao.remove(posicaoMao);
