@@ -8,6 +8,7 @@ import com.unicamp.mc322.projeto.turno.Turno;
 import java.util.Random;
 
 public class Maquina extends Jogador{
+	
 
 	public Maquina(Turno turnoInicial) {
 		super(turnoInicial);
@@ -15,6 +16,9 @@ public class Maquina extends Jogador{
 
 	@Override
 	protected ArrayList<Carta> substituirCartas(ArrayList<Carta> mao)  {
+		/*
+		 * Esse método deverá ser responsável por substituir as cartas 
+		 */
 		Random geradorAleatorio = new Random();
 		int indiceCarta;
 		int numCartas;
