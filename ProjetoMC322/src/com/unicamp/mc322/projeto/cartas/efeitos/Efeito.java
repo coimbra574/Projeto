@@ -2,7 +2,7 @@ package com.unicamp.mc322.projeto.cartas.efeitos;
 
 import java.util.Scanner;
 
-import com.unicamp.mc322.projeto.Campo;
+import com.unicamp.mc322.projeto.campo.Campo;
 
 public abstract class Efeito {
 	private TipoAtivacao tipoAtivacao = TipoAtivacao.NA_COMPRA;

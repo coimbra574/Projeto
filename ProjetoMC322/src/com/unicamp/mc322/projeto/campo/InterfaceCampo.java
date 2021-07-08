@@ -1,4 +1,4 @@
-package com.unicamp.mc322.projeto.Interface;
+package com.unicamp.mc322.projeto.campo;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -8,7 +8,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import com.unicamp.mc322.projeto.Campo;
 import com.unicamp.mc322.projeto.Rodada;
 import com.unicamp.mc322.projeto.TipoRodada;
 import com.unicamp.mc322.projeto.NumeroJogador;
@@ -30,7 +29,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 
 
-public class InterfaceGrafica extends javax.swing.JFrame {
+public class InterfaceCampo extends javax.swing.JFrame {
 	private Campo campo;
 	private Rodada rodada;
 	private boolean aguardandoCarta;
@@ -47,16 +46,20 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 	private ArrayList<JButton> emCampoP1 = new ArrayList<JButton>();
 	private ArrayList<JButton> emCampoP2 = new ArrayList<JButton>();
 
-    public InterfaceGrafica(Campo campo, Rodada rodada) {
+    public InterfaceCampo(Campo campo, Rodada rodada) {
     	getContentPane().setFont(new Font("Arial", Font.PLAIN, 10));
         initComponents();
         this.campo = campo;
         this.rodada = rodada;
-        this.setVisible(true);
 		this.aguardandoCarta = false;
 		this.aguardandoIndex = false;
 		
 		desativarTudo();
+    }
+    
+    public void ativar() {
+    	this.setVisible(true);
+    	iniciarTurno();
     }
     
 	public void iniciarTurno() {
@@ -329,13 +332,24 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 		}
 	}
 	
+	private Runnable aguardarSelecaoCarta = new Runnable() {
+    	public void run() {
+    		try {
+    			aguardandoCarta = true;
+        		while(aguardandoCarta) {
+        			Thread.sleep(100);
+        		}
+    		} catch (Exception e) {}
+    	}
+    };
+	
 	public Seguidor selecionarCartaP1() {
 		ativarEvocadasP1();
 		ativarEmCampoP1();
-		aguardandoCarta = true;
-		while(aguardandoCarta != false) {   
-			//Espera
-		}
+		aguardarSelecaoCarta.run();
+		desativarEvocadasP1();
+		desativarEmCampoP1();
+		
 		return (Seguidor) cartaEscolhida;
 	}
 	
@@ -344,10 +358,9 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 	public Seguidor selecionarCartaP2() {
 		ativarEvocadasP2();
 		ativarEmCampoP2();
-		aguardandoCarta = true;
-		while(aguardandoCarta == true) {
-			//Espera
-		}
+		aguardarSelecaoCarta.run();
+		desativarEvocadasP2();
+		desativarEmCampoP2();
 		
 		return (Seguidor) cartaEscolhida;
 	}

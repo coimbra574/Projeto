@@ -8,10 +8,8 @@ public abstract class Deck {
 	protected ArrayList<Carta> baralho = new ArrayList<Carta>();
 	protected int numCartasDeck = 40;	
 	
-	//Deck(String tipoDeck) {
 	protected Deck() {
 		super();
-		//baralho = contruirDeck();//Eh aqui?? ou nas subclasses?
 	}
 	
 	protected abstract ArrayList<Carta> construirDeck();
@@ -21,12 +19,10 @@ public abstract class Deck {
 		for(int i=0;i<4;i++) {
 			Carta carta = baralho.get(i);
 			mao.add(carta);
+			baralho.remove(i);
+			numCartasDeck -= 1;
 		}
-		for(int i=0;i<4;i++) {
-			Carta carta = baralho.get(i);
-			baralho.remove(carta);
-			numCartasDeck-=1;
-		}
+		
 		return mao;
 	}
 	
@@ -37,26 +33,31 @@ public abstract class Deck {
 		Random geradorAleatorio = new Random();
 		numero = geradorAleatorio.nextInt(numCartasDeck);
 		carta = baralho.get(numero);
-		baralho.remove(carta);
+		baralho.remove(numero);
 		numCartasDeck-=1;
 		return carta;
 	}
 	
 	public void recolocarNoBaralho(Carta carta) {
+		/* Acredito que assim ele ta substituindo uma carta ja existente
 		int numero;
 		
 		Random geradorAleatorio = new Random();
 		numero = geradorAleatorio.nextInt(numCartasDeck);
 		baralho.add(numero, carta);
 		numCartasDeck+=1;
+		 */
+		
+		baralho.add(carta);
+		numCartasDeck += 1;
 	}
 	
 	public Carta obterCartaDeck() {
 		Carta carta;
 		
 		carta = baralho.get(0);
-		baralho.remove(carta);
-		numCartasDeck-=1;
+		baralho.remove(0);
+		numCartasDeck -= 1;
 		return carta;
 	}
 

@@ -1,36 +1,66 @@
 package com.unicamp.mc322.projeto;
 
-import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
-import com.unicamp.mc322.projeto.Interface.*;
-import com.unicamp.mc322.projeto.deckFactory.Deck;
+import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.jogador.*;
 import com.unicamp.mc322.projeto.turno.Turno;
 
 public class RunneteraGame {
-	private boolean exitSelected = false;
-	private InterfaceTerminal interfaceTerminal = new InterfaceTerminal();
 	private ModoDeJogo modoDeJogo;
-	private ArrayList<Deck> listaDecks = new ArrayList<Deck>();
 	private Jogador player1;
 	private Jogador player2;
 	private Campo campoBatalha;
 	
-	public RunneteraGame() {
-		//this.listaDecks.add(new Deck("Demacia"));
-	}
-	
 	public void runGame() {
-		interfaceTerminal.GameStart();
 		
-		//Escolha do modo de jogo:
-		modoDeJogo = interfaceTerminal.escolherModo();
+		System.out.println("Bem Vindo ao Jogo!");
+		
+		escolherModo();
+		
 		criarJogadores();
 		
-		this.campoBatalha = new Campo(player1, player2);
+		campoBatalha = new Campo(player1, player2);
 		
 		System.out.println("Jogo Iniciado!");
+		
+		campoBatalha.iniciar();
+	}
+	
+	private void escolherModo() {
+		Scanner keyboard = new Scanner(System.in);
+		int escolha;
+		boolean escolhaValida;
+		
+		do{
+			System.out.println("Escolha um modo de jogo:");
+			System.out.println("Digite [1] - Humano vs Humano");
+			System.out.println("Digite [2] - Humano vs Computador");
+			System.out.println("Digite [3] - Computador vs Computador");
+			
+			escolhaValida = true;
+			
+			try {
+				escolha = Integer.valueOf(keyboard.nextLine());
+				if(escolha == 1) {
+					modoDeJogo = ModoDeJogo.HUMANOXHUMANO;
+				}
+				else if(escolha == 2) {
+					modoDeJogo = ModoDeJogo.HUMANOXCOMPUTADOR;
+				}
+				else if(escolha == 3) {
+					modoDeJogo = ModoDeJogo.COMPUTADORXCOMPUTADOR;
+				}
+				else {
+					System.out.println("Entrada Invalida!");
+					escolhaValida = false;
+				}
+			} catch (NumberFormatException ex) {
+				System.out.println("Entrada invalida. Digite um numero!\n");
+				escolhaValida = false;
+			}
+		}while(escolhaValida == false);
 	}
 	
 	private void criarJogadores() {

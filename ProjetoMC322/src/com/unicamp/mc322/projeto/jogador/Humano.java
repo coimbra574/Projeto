@@ -3,15 +3,11 @@ package com.unicamp.mc322.projeto.jogador;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.unicamp.mc322.projeto.Campo;
-import com.unicamp.mc322.projeto.Interface.InterfaceTerminal;
 import com.unicamp.mc322.projeto.cartas.Carta;
-import com.unicamp.mc322.projeto.turno.Turno;
-import com.unicamp.mc322.projeto.deckFactory.Deck;
 import com.unicamp.mc322.projeto.deckFactory.TipoDeck;
+import com.unicamp.mc322.projeto.turno.Turno;
 
 public class Humano  extends Jogador{
-	private Scanner teclado = new Scanner(System.in);
 
 	public Humano(Turno turnoInicial) {
 		super(turnoInicial);
@@ -19,53 +15,90 @@ public class Humano  extends Jogador{
 
 	@Override
 	protected ArrayList<Carta> substituirCartas(ArrayList<Carta> mao) {
-		ArrayList<Integer> listaDeSubstituicao = InterfaceTerminal.substituirCartasIniciais(mao);
+		ArrayList<Integer> comandosDigitados = new ArrayList<Integer>();
+		Scanner keyboard = new Scanner(System.in);
+		String comando;
+		Integer comandoInt=-1;
+		boolean ehInteiro = true;
 		
-		for(int i: listaDeSubstituicao) {
+		System.out.println("Deseja substituir algumas das seguintes cartas iniciais?");
+		for(int i = 0; i < mao.size(); i++) {
+			System.out.printf("Digite [%d] - Para substituir a carta:", i+1);
+			System.out.println(mao.get(i).toString());
+		}
+		System.out.println("Digite um numero ou [OK] para confirmar:");
+		comando = keyboard.nextLine();
+		
+		while(!comando.equals("OK")) {
+			ehInteiro = true;
+			try {
+				comandoInt = Integer.parseInt(comando)-1;
+			} catch (NumberFormatException ex){
+				ehInteiro = false;
+			}
+			
+			if(ehInteiro == true) {
+				comandosDigitados = realizarTroca(mao, comandosDigitados, comandoInt);
+			} else {
+				System.out.println("Entrada invalida");
+			}
+			
+			comando = keyboard.nextLine();
+		}
+		
+		for(int i: comandosDigitados) {
 			Carta novaCarta = deckJogador.pegarCartaAleatoriaDeck();
 			deckJogador.recolocarNoBaralho(mao.get(i));
 			mao.remove(i);
 			mao.add(i, novaCarta);
 		}
+		
 		return mao;
 	}
 
-	//@Override
-	//public void escolherCartaUtilizar(Campo campo) {
-		/*
-		 * O jogador deve escolher as cartas na mão que irá invocar ou ativar o efeito
-		 * 
-		 * Talvez adicionar a funcao de ativar feiti�o ou invocar seguidor/campeao aqui na hora em que escolhe? ok
-		 */
-		/*boolean continuar=false;
-		do {
-			
-			System.out.println("Escolha uma carta para utilizar");
-			int cartaParaJogar;
-			do {
-				cartaParaJogar=  Integer.valueOf(teclado.nextLine());
-			}while(cartaParaJogar>mao.size());
-			
-			if(verificarCarta(mao.get(cartaParaJogar))) {
-				if(mao.get(cartaParaJogar).getTipo().equals("Campeão") || mao.get(cartaParaJogar).getTipo().equals("Seguidor")) {
-					int posicaoNoCampo;
-					do {
-						posicaoNoCampo = Integer.valueOf(teclado.nextLine());
-					}while(posicaoNoCampo>6);
-					//invocarCarta(mao.get(cartaParaJogar), campo, posicaoNoCampo);//como eu instancio o campo dentro do jogador??
-				}else {
-					ativarEfeito(mao.get(cartaParaJogar));
-				}
-			}else {
-				System.out.println("Você não possui mana suficiente para utilizar esse carta!!!");
+	private ArrayList<Integer> realizarTroca(ArrayList<Carta> listaCartas, ArrayList<Integer> comandosDigitados, int comandoInt){
+		if(comandoInt >= 0 && comandoInt < listaCartas.size()) {
+			if(comandosDigitados.contains(comandoInt)) {
+				comandosDigitados.remove(comandoInt);
+				System.out.printf("Carta [%d] nao sera trocada.\n", comandoInt+1);
 			}
-			
-			if(mana>0) {
-				System.out.print("Deseja continuar? ");
-				continuar =  Boolean.valueOf(teclado.nextLine());//ver aqui se da pra melhoras sla
+			else {
+				comandosDigitados.add(comandoInt);
+				System.out.printf("Carta [%d] sera trocada.\n", comandoInt+1);
 			}
-		}while(mana>0 && continuar);
+		}
+		else {
+			System.out.println("Entrada Invalida!");
+		}
+		return comandosDigitados;
+	}
+	
+	@Override
+	public TipoDeck escolhaTipoDeck() {
+		Scanner keyboard = new Scanner(System.in);
+		int escolha;
 		
-	}*/
+		do{
+			System.out.println("Qual deck escolhera? ");
+			System.out.println("Digite 0 para ajuda (Ver decks disponiveis)");
+			
+			try {
+				escolha = Integer.valueOf(keyboard.nextLine());
+			} catch (NumberFormatException ex) {
+				System.out.println("Deck n�o encontrado. Tente novamente\n");
+				escolha = 0;
+			}
+			
+			if(escolha == 0) {
+				TipoDeck.ajudaEscolhaDeck();
+			}else if(escolha-1 < TipoDeck.values().length && escolha-1 >= 0){
+				return TipoDeck.values()[escolha-1];
+			}
+		}while(escolha == 0);
+		
+		System.out.println("Foi fornecido um argumento invalido para escolha do deck");
+		System.out.println("Por padrao sera criado um deck do tipo Lutador");
+		return TipoDeck.LUTADOR;
+	}
 
 }

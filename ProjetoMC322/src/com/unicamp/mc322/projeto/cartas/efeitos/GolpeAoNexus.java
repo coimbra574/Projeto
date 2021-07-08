@@ -3,8 +3,8 @@
  */
 package com.unicamp.mc322.projeto.cartas.efeitos;
 
-import com.unicamp.mc322.projeto.Campo;
 import com.unicamp.mc322.projeto.Rodada;
+import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 
 public class GolpeAoNexus extends Efeito {

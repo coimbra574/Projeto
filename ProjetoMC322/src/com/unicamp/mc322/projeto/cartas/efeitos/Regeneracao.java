@@ -6,8 +6,8 @@ package com.unicamp.mc322.projeto.cartas.efeitos;
 
 import java.util.Scanner;
 
-import com.unicamp.mc322.projeto.Campo;
 import com.unicamp.mc322.projeto.Rodada;
+import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.Caracteristica;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 

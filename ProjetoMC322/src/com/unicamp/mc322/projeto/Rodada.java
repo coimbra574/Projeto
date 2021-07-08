@@ -2,6 +2,7 @@ package com.unicamp.mc322.projeto;
 
 import java.util.ArrayList;
 
+import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
 import com.unicamp.mc322.projeto.cartas.efeitos.TipoAtivacao;

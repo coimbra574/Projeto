@@ -2,7 +2,7 @@ package com.unicamp.mc322.projeto.cartas;
 
 import java.util.ArrayList;
 
-import com.unicamp.mc322.projeto.Campo;
+import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
 
 public class Feitico extends Carta {

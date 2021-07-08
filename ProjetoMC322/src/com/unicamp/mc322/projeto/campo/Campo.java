@@ -7,12 +7,12 @@
  * 
  */
 
-package com.unicamp.mc322.projeto;
+package com.unicamp.mc322.projeto.campo;
 
 import java.util.ArrayList;
 
-import com.unicamp.mc322.projeto.Interface.InterfaceGrafica;
-import com.unicamp.mc322.projeto.cartas.Carta;
+import com.unicamp.mc322.projeto.NumeroJogador;
+import com.unicamp.mc322.projeto.Rodada;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.jogador.Jogador;
 
@@ -21,7 +21,7 @@ public class Campo {
 	private Jogador jogador1,jogador2;
 	private Rodada rodada;
 	private int nexusP1, nexusP2;
-	private InterfaceGrafica interfaceGrafica;
+	private InterfaceCampo interfaceGrafica;
 
 	public Campo(Jogador p1, Jogador p2) {
 		this.jogador1 = p1;
@@ -32,8 +32,11 @@ public class Campo {
 		this.rodada = new Rodada(p1,p2, this);
 		jogador1.atualizarMana(rodada.getNumeroRodada());
 		jogador2.atualizarMana(rodada.getNumeroRodada());
-		this.interfaceGrafica = new InterfaceGrafica(this, rodada);
-		interfaceGrafica.iniciarTurno();
+		this.interfaceGrafica = new InterfaceCampo(this, rodada);
+	}
+	
+	public void iniciar() {
+		interfaceGrafica.ativar();
 	}
 
 	
