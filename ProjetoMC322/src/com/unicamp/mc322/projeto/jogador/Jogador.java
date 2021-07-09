@@ -38,7 +38,11 @@ public abstract class Jogador {
 		emCampo.add(null);
 	}
 	
+	// Escolhe qual deck ira usar
 	protected abstract TipoDeck escolhaTipoDeck();
+	
+	// Seleciona uma carta evocada ou em campo
+	public abstract Seguidor selecionarUmaUnidadeAliada();
 	
 	public void setNumeroEmCampo(int n) {
 		numeroJogadorNoCampo = n;
@@ -183,28 +187,6 @@ public abstract class Jogador {
 		this.nexus-=dano;
 	}
 	
-	
-	// Deixar essa parte de combate aqui ou na classe Jogo/Game?
-//	public void atacar(Jogador oponente, Campo campo, int... posicaoUnidades) {
-//		/*
-//		 * Esse metodo tem acesso ao campo de invocações para selecionar os combatentes, após isso chama a 
-//		 * instancia da classe combate onde será feita a batalha
-//		 */
-//	//	ArrayList<Carta> unidadesCombatentes = campo.selecionarUnidades(numeroJogadorNoCampo, posicaoUnidades);
-//		ArrayList<Carta> unidadesDefensoras = oponente.defender(campo, posicaoUnidades);  // 
-//		//combate(unidadesCombatentes, unidadesDefensoras);
-//		acabarTurno();
-//	}
-	
-//	ArrayList<Carta> defender(Campo campo, int...posicaoUnidades) {
-//		/*
-//		 * Esse metodo deve ser responsavel pela escolha das cartas que irao defender o jogador e chamar a instancia de combate
-//		 */
-//		ArrayList<Carta> unidadesDefensoras = campo.selecionarUnidades(numeroJogadorNoCampo, posicaoUnidades);
-//		return unidadesDefensoras;
-//		
-//	}
-	
 	public void acabarRodada() {
 		if(mana<=3) {
 			manaDeFeitico = mana;
@@ -227,6 +209,5 @@ public abstract class Jogador {
 	public void removerEmCampo(int index) {
 		emCampo.add(index, null);
 	}
-	
 	
 }
