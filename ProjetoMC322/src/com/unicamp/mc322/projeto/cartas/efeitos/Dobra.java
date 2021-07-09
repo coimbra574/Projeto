@@ -19,7 +19,7 @@ public class Dobra extends Efeito {
 	@Override
 	public void ativarEfeito(Campo campo) {
 		System.out.println("Selecione a unidade o qual deseja ativar o efeito: ");
-		Seguidor cartaSelecionada = campo.selecionarUmaUnidadeAliada();
+		Seguidor cartaSelecionada = campo.getJogadorAtual().selecionarUmaUnidadeAliada(campo);
 		System.out.println("\n Efeito Dobra ativado");
 		cartaSelecionada.setPoder(2*cartaSelecionada.getPoder());
 		cartaSelecionada.setVida(2*cartaSelecionada.getVida());

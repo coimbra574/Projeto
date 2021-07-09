@@ -26,7 +26,7 @@ public class Melhoria extends Efeito {
 	public void ativarEfeito(Campo campo) {
 		System.out.println("Selecione a unidade o qual deseja ativar o efeito: ");
 		Rodada rodada = campo.getRodada();
-		Seguidor cartaSelecionada = campo.selecionarUmaUnidadeAliada();
+		Seguidor cartaSelecionada = campo.getJogadorAtual().selecionarUmaUnidadeAliada(campo);
 		
 		if(cartaSelecionada != null) {
 			int novoPoder = cartaSelecionada.getPoder() + n;

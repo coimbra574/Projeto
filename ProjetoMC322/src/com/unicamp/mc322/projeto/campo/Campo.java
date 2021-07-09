@@ -41,7 +41,6 @@ public class Campo {
 		while(nexusP1 > 0 && nexusP2 > 0) {
 			interfaceCampo.atualizar();
 			rodada.iniciar();
-			
 		}
 		interfaceCampo.setVisible(false);
 		System.out.println("Fim de jogo!");
@@ -124,6 +123,14 @@ public class Campo {
 			return jogador2;
 		} else {
 			return jogador1;
+		}
+	}
+	
+	public Jogador getJogadorAtual() {
+		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
+			return jogador1;
+		} else {
+			return jogador2;
 		}
 	}
 

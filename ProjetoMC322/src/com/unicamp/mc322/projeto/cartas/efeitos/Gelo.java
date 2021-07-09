@@ -26,7 +26,7 @@ public class Gelo extends Efeito {
 		
 		if(this.getTipoAtivacao().equals(TipoAtivacao.NA_COMPRA)) {
 			System.out.println("\n Efeito Gelo ativado");
-			carta = campo.selecionarUmaUnidadeInimiga();
+			carta = campo.getJogadorAtual().selecionarUmaUnidadeInimiga(campo);
 			indexCartaEvocada = campo.procurarCartaEvocada(rodada.getNumeroJogadorOponente(), carta);
 			valorPoderOriginal = carta.getPoder();
 			carta.setPoder(0);  

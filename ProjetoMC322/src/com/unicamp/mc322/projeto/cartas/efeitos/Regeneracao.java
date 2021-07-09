@@ -24,7 +24,7 @@ public class Regeneracao extends Efeito {
 	public void ativarEfeito(Campo campo) {
 		Rodada rodada = campo.getRodada();
 		System.out.println("Selecione a unidade o qual deseja ativar o efeito: ");
-		Seguidor cartaSelecionada = campo.selecionarUmaUnidadeAliada();
+		Seguidor cartaSelecionada = campo.getJogadorAtual().selecionarUmaUnidadeAliada(campo);
 		
 		if(cartaSelecionada != null) {
 			System.out.println("Efeito Regeneração ativado");

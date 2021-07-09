@@ -23,7 +23,7 @@ public class Strike extends Efeito {
 	public void ativarEfeito(Campo campo) {
 		Rodada rodada = campo.getRodada();
 		System.out.println("Selecione a unidade o qual deseja ativar o efeito: ");
-		Seguidor cartaSelecionada = (Seguidor) campo.selecionarUmaUnidadeAliada();
+		Seguidor cartaSelecionada = (Seguidor) campo.getJogadorAtual().selecionarUmaUnidadeAliada(campo);
 		System.out.println("\n Efeito Strike ativado");
 		ArrayList<Seguidor> inimigos = campo.getEvocadas(rodada.getNumeroJogadorOponente());
 		

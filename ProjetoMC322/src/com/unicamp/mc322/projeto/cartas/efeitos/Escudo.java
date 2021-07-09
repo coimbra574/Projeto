@@ -25,7 +25,7 @@ public class Escudo extends Efeito {
 		
 		if(this.getTipoAtivacao().equals(TipoAtivacao.NA_COMPRA)) {
 			System.out.println("\n Efeito Escudo ativado");
-			carta = campo.selecionarUmaUnidadeAliada();
+			carta = campo.getJogadorAtual().selecionarUmaUnidadeAliada(campo);
 			indexCartaEvocada = campo.procurarCartaEvocada(rodada.getNumeroJogadorAtual(), carta);
 			valorVidaOriginal = carta.getVida();
 			carta.setVida(10000);  // Valor muito alto

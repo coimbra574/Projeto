@@ -22,7 +22,7 @@ public class GolpeAoNexus extends Efeito {
 		//this.unidade = usuarioEscolherUnidade("Selecione a unidade o qual deseja ativar o efeito: ");
 		System.out.println("Golpe ao Nexus ativado");
 		Rodada rodada = campo.getRodada();
-		Seguidor cartaSelecionada = campo.selecionarUmaUnidadeAliada();
+		Seguidor cartaSelecionada = campo.getJogadorAtual().selecionarUmaUnidadeAliada(campo);
 		golpeNexus = new GolpeAoNexusLimitado(cartaSelecionada.getPoder());
 		golpeNexus.ativarEfeito(campo);
 	}

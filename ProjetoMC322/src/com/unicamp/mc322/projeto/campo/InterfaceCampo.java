@@ -1270,9 +1270,12 @@ public class InterfaceCampo extends javax.swing.JFrame {
     private void bntAvancarTurnoActionPerformed(java.awt.event.ActionEvent evt) {
     	if(realizouAcao == true || rodada.getTipo() == TipoRodada.ESCOLHA_DEFENSORES) {
     		rodada.mudarTipo();
+    		aguardandoAcao = false;
     	}
-    	rodada.finalizarTurno(this.realizouAcao);
-    	iniciarTurno();
+    	//rodada.finalizarTurno(this.realizouAcao);
+    	//iniciarTurno();
+    	realizouAcao = false;
+    	aguardandoAcao = false;
     }
     
     private void bntP1MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {

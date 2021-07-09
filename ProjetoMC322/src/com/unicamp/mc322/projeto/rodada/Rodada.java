@@ -50,7 +50,6 @@ public class Rodada {
 			else {
 				acao = jogador1.acaoRodadaDefesa(campo);
 			}
-			numeroJogadorAtual = NumeroJogador.PLAYER2;
 		}
 		else {
 			if(tipo == TipoRodada.COMPRA_DE_CARTAS) {
@@ -64,7 +63,6 @@ public class Rodada {
 			else {
 				acao = jogador2.acaoRodadaDefesa(campo);
 			}
-			numeroJogadorAtual = NumeroJogador.PLAYER1;
 		}
 		
 		finalizarTurno(acao);
