@@ -65,15 +65,15 @@ public class ListaCartas {
 	}
 	
 	Carta getCampeao(int n) {
-		return listaCampeoes.get(n);
+		return listaCampeoes.get(n).getClone();
 	}
 	
 	Carta getSeguidores(int n) {
-		return listaSeguidores.get(n);
+		return listaSeguidores.get(n).getClone();
 	}
 	
 	Carta getFeitico(int n) {
-		return listaFeitico.get(n);
+		return listaFeitico.get(n).getClone();
 	}
 	
 }
