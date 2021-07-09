@@ -225,7 +225,7 @@ public abstract class Jogador {
 	}
 
 	public void removerEmCampo(int index) {
-		emCampo.add(index, null);
+		emCampo.set(index, null);
 	}
 	
 	
