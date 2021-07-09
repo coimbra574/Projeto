@@ -1,6 +1,6 @@
 package com.unicamp.mc322.projeto.cartas;
 
-public abstract class Carta {
+public abstract class Carta implements Cloneable {
 	protected int custo;
 	protected String nome;
 	protected TipoCarta tipo;
@@ -25,6 +25,16 @@ public abstract class Carta {
 	
 	public void setMana(int novoCusto) {
 		custo = novoCusto;
+	}
+	
+	public Carta getClone() {
+		try {
+			return (Carta) this.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			System.out.println("Nao foi possivel clonar");
+			return this;
+		}
 	}
 
 	public abstract String toStringCompra();

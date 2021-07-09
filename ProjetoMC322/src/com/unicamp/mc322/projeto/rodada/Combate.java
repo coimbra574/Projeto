@@ -12,11 +12,10 @@ public class Combate {
 		ArrayList<Seguidor> emCampoAtacante = atacante.getEmCampo();
 		ArrayList<Seguidor> emCampoDefensor = defensor.getEmCampo();
 		
-		for(int i = 0; i < campo.LARGURA_CAMPO; i++) {//ta fazendo iteracoes msm sendo null
+		for(int i = 0; i < campo.LARGURA_CAMPO; i++) {
 			Seguidor cartaAtacante = emCampoAtacante.get(i);
 			Seguidor cartaDefensor = emCampoDefensor.get(i);
 			if(cartaAtacante != null) {
-				System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA");
 				if(cartaDefensor == null) {
 					danoAoNexus += cartaAtacante.getPoder();
 					atacante.adicionarEvocada(cartaAtacante);

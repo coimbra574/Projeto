@@ -270,6 +270,7 @@ public class InterfaceCampo extends javax.swing.JFrame {
 		}
 	}
 	
+	
 	public void atualizarEvocadas() {
 		ArrayList<Seguidor> evocadasPlayer1 = campo.getP1().getEvocadas();
 		ArrayList<Seguidor> evocadasPlayer2 = campo.getP2().getEvocadas();
@@ -283,11 +284,13 @@ public class InterfaceCampo extends javax.swing.JFrame {
 			evocadasP1.get(i).setText(evocadasPlayer1.get(i).toStringEvocada());
 			evocadasP1.get(i).setVisible(true);
 		}
+		
 		for(int i = 0; i < evocadasPlayer2.size() && i < maoP2.size(); i++) {
 			evocadasP2.get(i).setText(evocadasPlayer2.get(i).toStringEvocada());
 			evocadasP2.get(i).setVisible(true);
 		}
 	}
+	
 	
 	public void atualizarEmCampo() {
 		ArrayList<Seguidor> emCampoPlayer1 = campo.getP1().getEmCampo();
