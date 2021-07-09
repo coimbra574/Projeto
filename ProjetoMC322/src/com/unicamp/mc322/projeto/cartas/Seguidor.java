@@ -2,6 +2,7 @@ package com.unicamp.mc322.projeto.cartas;
 
 import java.util.ArrayList;
 
+import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
 import com.unicamp.mc322.projeto.cartas.efeitos.TipoAtivacao;
 import com.unicamp.mc322.projeto.cartas.tracos.TipoTraco;
@@ -50,6 +51,7 @@ public class Seguidor extends Carta {
 	
 	public void aumentarPoder(int n) {//Para o traco da furia. Ele acrescenta, nao muda. Por isso acho q Ã© diferente de setPoder
 		poder+=n;
+		//System.out.println("Poder: " + poder);
 	}
 	
 	public int getVida() {
@@ -62,6 +64,7 @@ public class Seguidor extends Carta {
 	
 	public void aumentarVida(int m) {//Para o traco da furia. Ele acrescenta, nao muda. Por isso acho q Ã© diferente de setVida
 		vida+=m;
+		//System.out.println("Vida: " + vida);
 	}
 	
 	public int getVidaTotal() {
@@ -76,8 +79,8 @@ public class Seguidor extends Carta {
 		return matouUmSeguidor;
 	}
 	
-	public void ativacaoTraco(Seguidor cartaDefensor, Jogador defensor) {//Para ativar o traco
-		traco.ativarTraco(this, cartaDefensor, defensor);
+	public void ativacaoTraco(Seguidor cartaDefensor, Jogador defensor, Campo campo) {//Para ativar o traco
+		traco.ativarTraco(this, cartaDefensor, defensor, campo);
 	}
 	
 	public boolean getHaTraco() {
@@ -88,6 +91,9 @@ public class Seguidor extends Carta {
 	}
 	
 	public TipoTraco getTipoTraco() {
+		if(traco == null) {
+			return null;
+		}
 		return traco.getTraco();
 	}
 	
@@ -126,7 +132,8 @@ public class Seguidor extends Carta {
 	public String toStringEmCampo() {
 		String texto = "<html>";
 		texto += this.nome + "<br />";
-		texto += "V: " + Integer.toString(this.vida);
+		//texto += "V: " + Integer.toString(this.vida);  <--------------------------
+		texto += "V: " + this.vida;
 		texto += "  P: " + Integer.toString(this.poder);
 		return texto;
 	}
@@ -136,9 +143,9 @@ public class Seguidor extends Carta {
 		String texto = "\n " + toString();
 		
 		if(traco == null) {
-			texto += "\n Traço: sem traço";
+			texto += "\n Traco: sem traco";
 		} else {
-			texto += "\n Traço: " + traco.toString();
+			texto += "\n Traco: " + traco.toString();
 		}
 		
 		boolean temEfeito = false;

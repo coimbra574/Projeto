@@ -1,4 +1,4 @@
-/* Classe para guardar informações quanto a evolução do Campeão
+/* Classe para guardar informaï¿½ï¿½es quanto a evoluï¿½ï¿½o do Campeï¿½o
  * 
  */
 
@@ -11,7 +11,7 @@ import com.unicamp.mc322.projeto.cartas.tracos.Traco;
 public class DadosEvolucao {
 	private int quantParaEvolucao, maisVida, maisPoder;
 	private Condicao condicaoDeEvolucao;
-	private Traco novoTraco;
+	private Traco novoTraco; 
 	private ArrayList<Efeito> novosEfeitos = new ArrayList<Efeito>();
 	
 	public DadosEvolucao(Condicao condicaoDeEvolucao, int quantParaEvolucao, int maisVida, int maisPoder, Traco novoTraco, Efeito ... novosEfeitos) {
@@ -38,7 +38,7 @@ public class DadosEvolucao {
 		return maisPoder;
 	}
 	
-	protected Traco getNovoTraco() {
+	public Traco getNovoTraco() {
 		return novoTraco;
 	}
 	

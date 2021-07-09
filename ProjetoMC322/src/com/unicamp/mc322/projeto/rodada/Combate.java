@@ -12,10 +12,11 @@ public class Combate {
 		ArrayList<Seguidor> emCampoAtacante = atacante.getEmCampo();
 		ArrayList<Seguidor> emCampoDefensor = defensor.getEmCampo();
 		
-		for(int i = 0; i < campo.LARGURA_CAMPO; i++) {
+		for(int i = 0; i < campo.LARGURA_CAMPO; i++) {//ta fazendo iteracoes msm sendo null
 			Seguidor cartaAtacante = emCampoAtacante.get(i);
 			Seguidor cartaDefensor = emCampoDefensor.get(i);
 			if(cartaAtacante != null) {
+				System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA");
 				if(cartaDefensor == null) {
 					danoAoNexus += cartaAtacante.getPoder();
 					atacante.adicionarEvocada(cartaAtacante);
@@ -27,7 +28,7 @@ public class Combate {
 					atacante.removerEmCampo(i);
 					defensor.removerEmCampo(i);
 					if(cartaAtacante.getHaTraco()) {
-						cartaAtacante.ativacaoTraco(cartaDefensor, defensor);//coloquei isso aqui para ativar o traco
+						cartaAtacante.ativacaoTraco(cartaDefensor, defensor, campo);//coloquei isso aqui para ativar o traco
 					}
 					if(cartaAtacante.getVida() > 0) {
 						atacante.adicionarEvocada(cartaAtacante);

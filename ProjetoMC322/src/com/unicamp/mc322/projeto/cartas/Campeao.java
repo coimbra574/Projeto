@@ -1,8 +1,12 @@
 package com.unicamp.mc322.projeto.cartas;
 
 import java.util.ArrayList;
+
+import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
+import com.unicamp.mc322.projeto.cartas.tracos.TipoTraco;
 import com.unicamp.mc322.projeto.cartas.tracos.Traco;
+import com.unicamp.mc322.projeto.jogador.Jogador;
 
 public class Campeao extends Seguidor {
 	private Nivel nivel;
@@ -97,7 +101,7 @@ public class Campeao extends Seguidor {
 	public String toStringDetalhes() {
 		String texto = super.toStringDetalhes();
 		texto += ", Nivel: " + nivel.toString();
-		texto += ", Condição para evolução: " + evolucao.getQuantEvolucao() + " " + evolucao.getCondicaoEvolucao().toString();
+		texto += ", Condicao para evolucao: " + evolucao.getQuantEvolucao() + " " + evolucao.getCondicaoEvolucao().toString();
 		return texto;
 	}
 }
