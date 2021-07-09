@@ -8,14 +8,14 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import com.unicamp.mc322.projeto.Rodada;
-import com.unicamp.mc322.projeto.TipoRodada;
-import com.unicamp.mc322.projeto.NumeroJogador;
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
 import com.unicamp.mc322.projeto.cartas.efeitos.TipoAtivacao;
-import com.unicamp.mc322.projeto.turno.Turno;
+import com.unicamp.mc322.projeto.jogador.NumeroJogador;
+import com.unicamp.mc322.projeto.rodada.Rodada;
+import com.unicamp.mc322.projeto.rodada.TipoRodada;
+import com.unicamp.mc322.projeto.rodada.Turno;
 
 import javax.swing.JButton;
 import javax.swing.SwingConstants;

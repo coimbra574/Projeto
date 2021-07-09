@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.jogador.*;
-import com.unicamp.mc322.projeto.turno.Turno;
+import com.unicamp.mc322.projeto.rodada.Turno;
 
 public class RunneteraGame {
 	private ModoDeJogo modoDeJogo;

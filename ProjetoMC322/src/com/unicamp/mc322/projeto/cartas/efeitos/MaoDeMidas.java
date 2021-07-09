@@ -3,11 +3,11 @@
 
 package com.unicamp.mc322.projeto.cartas.efeitos;
 
-import com.unicamp.mc322.projeto.Rodada;
 import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.jogador.Jogador;
+import com.unicamp.mc322.projeto.rodada.Rodada;
 
 public class MaoDeMidas extends Efeito {
 	Carta novaCarta;

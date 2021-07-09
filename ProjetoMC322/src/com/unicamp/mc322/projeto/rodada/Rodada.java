@@ -1,4 +1,4 @@
-package com.unicamp.mc322.projeto;
+package com.unicamp.mc322.projeto.rodada;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
 import com.unicamp.mc322.projeto.cartas.efeitos.TipoAtivacao;
 import com.unicamp.mc322.projeto.jogador.Jogador;
-import com.unicamp.mc322.projeto.turno.Turno;
+import com.unicamp.mc322.projeto.jogador.NumeroJogador;
 
 public class Rodada {
 	private int numeroRodada;

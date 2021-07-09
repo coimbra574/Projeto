@@ -4,8 +4,8 @@
 
 package com.unicamp.mc322.projeto.cartas.efeitos;
 
-import com.unicamp.mc322.projeto.Rodada;
 import com.unicamp.mc322.projeto.campo.Campo;
+import com.unicamp.mc322.projeto.rodada.Rodada;
 
 public class GolpeAoNexusLimitado extends Efeito {
 	private int n;

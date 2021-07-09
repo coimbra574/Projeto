@@ -4,10 +4,10 @@
 
 package com.unicamp.mc322.projeto.cartas.efeitos;
 
-import com.unicamp.mc322.projeto.Rodada;
 import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.Caracteristica;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
+import com.unicamp.mc322.projeto.rodada.Rodada;
 
 public class Escudo extends Efeito {
 	private int valorVidaOriginal=0, indexCartaEvocada=-1;

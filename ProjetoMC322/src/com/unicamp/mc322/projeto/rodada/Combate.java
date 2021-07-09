@@ -1,4 +1,4 @@
-package com.unicamp.mc322.projeto;
+package com.unicamp.mc322.projeto.rodada;
 
 import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.Seguidor;

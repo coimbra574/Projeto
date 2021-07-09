@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.deckFactory.TipoDeck;
-import com.unicamp.mc322.projeto.turno.Turno;
+import com.unicamp.mc322.projeto.rodada.Turno;
+
 import java.util.Random;
 
 public class Maquina extends Jogador{
@@ -41,5 +42,7 @@ public class Maquina extends Jogador{
 		
 		return TipoDeck.values()[escolha];
 	}
+	
+	
 
 }

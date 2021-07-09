@@ -11,10 +11,10 @@ package com.unicamp.mc322.projeto.campo;
 
 import java.util.ArrayList;
 
-import com.unicamp.mc322.projeto.NumeroJogador;
-import com.unicamp.mc322.projeto.Rodada;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.jogador.Jogador;
+import com.unicamp.mc322.projeto.jogador.NumeroJogador;
+import com.unicamp.mc322.projeto.rodada.Rodada;
 
 public class Campo {
 	public final int LARGURA_CAMPO = 6;

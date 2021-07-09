@@ -5,7 +5,8 @@ import com.unicamp.mc322.projeto.cartas.*;
 import com.unicamp.mc322.projeto.deckFactory.Deck;
 import com.unicamp.mc322.projeto.deckFactory.DeckFactory;
 import com.unicamp.mc322.projeto.deckFactory.TipoDeck;
-import com.unicamp.mc322.projeto.turno.*;
+import com.unicamp.mc322.projeto.rodada.*;
+
 import java.util.ArrayList;
 
 public abstract class Jogador {

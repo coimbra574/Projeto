@@ -4,11 +4,11 @@
 
 package com.unicamp.mc322.projeto.cartas.efeitos;
 
-import com.unicamp.mc322.projeto.Rodada;
 import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.Caracteristica;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.jogador.Jogador;
+import com.unicamp.mc322.projeto.rodada.Rodada;
 
 public class Gelo extends Efeito {
 	private int valorPoderOriginal=0, indexCartaEvocada=-1; // Por conta desses parametros, pra cada carta precisamos instanciar os efeitos, msm que o mesmo efeito
