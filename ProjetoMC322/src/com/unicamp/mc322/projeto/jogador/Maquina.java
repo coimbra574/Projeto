@@ -16,6 +16,14 @@ public class Maquina extends Jogador{
 	public Maquina(Turno turnoInicial) {
 		super(turnoInicial);
 	}
+	
+	private static void aguardarTempo() {
+	    try {
+	        Thread.sleep(300);
+	    } catch (InterruptedException e) {
+	        System.err.format("IOException: %s%n", e);
+	    }
+	}
 
 	@Override
 	protected ArrayList<Carta> substituirCartas(ArrayList<Carta> mao)  {
@@ -47,6 +55,8 @@ public class Maquina extends Jogador{
 	
 	@Override
 	public Seguidor selecionarUmaUnidadeAliada(Campo campo) {
+		aguardarTempo();
+		
 		// Faz uma lista de todas as possibilidades de escolha e sorteia a escolhida
 		ArrayList<Seguidor> cartas = new ArrayList<Seguidor>();
 		Random geradorAleatorio = new Random();
@@ -69,6 +79,8 @@ public class Maquina extends Jogador{
 	
 	@Override
 	public Seguidor selecionarUmaUnidadeInimiga(Campo campo) {
+		aguardarTempo();
+		
 		// Faz uma lista de todas as possibilidades de escolha e sorteia a escolhida
 		ArrayList<Seguidor> cartas = new ArrayList<Seguidor>();
 		Random geradorAleatorio = new Random();
@@ -91,6 +103,8 @@ public class Maquina extends Jogador{
 	
 	@Override
 	public boolean acaoRodadaCompra(Campo campo) {
+		aguardarTempo();
+		
 		// Se possivel compra carta, do contrario passa a vez.
 		for(int i = 0; i < mao.size(); i++) {
 			// Se a compra foi bem sucedida, finaliza o turno.
@@ -103,6 +117,8 @@ public class Maquina extends Jogador{
 	
 	@Override
 	public boolean acaoRodadaCompraOuAtaque(Campo campo) {
+		aguardarTempo();
+		
 		// Se possivel compra carta, do contrario ataca se tiver carta para atacar, do contrario passa a vez.
 		for(int i = 0; i < mao.size(); i++) {
 			// Se a compra foi bem sucedida, finaliza o turno.
@@ -123,6 +139,8 @@ public class Maquina extends Jogador{
 	
 	@Override
 	public boolean acaoRodadaDefesa(Campo campo) {
+		aguardarTempo();
+		
 		// Se possivel se defende, do contrario passa a vez
 		if(evocadas.size() != 0) {
 			ArrayList<Seguidor> emCampoInimigo = campo.getInimigo().getEmCampo();
