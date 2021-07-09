@@ -3,7 +3,9 @@ package com.unicamp.mc322.projeto.jogador;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.Carta;
+import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.deckFactory.TipoDeck;
 import com.unicamp.mc322.projeto.rodada.Turno;
 
@@ -29,7 +31,7 @@ public class Humano  extends Jogador{
 		System.out.println("Digite um numero ou [OK] para confirmar:");
 		comando = keyboard.nextLine();
 		
-		while(!comando.equals("OK")) {
+		while(!comando.equals("OK") && !comando.equals("ok") && !comando.equals("Ok") && !comando.equals("oK")) {
 			ehInteiro = true;
 			try {
 				comandoInt = Integer.parseInt(comando)-1;
@@ -100,5 +102,29 @@ public class Humano  extends Jogador{
 		System.out.println("Por padrao sera criado um deck do tipo Lutador");
 		return TipoDeck.LUTADOR;
 	}
-
+	
+	@Override
+	public Seguidor selecionarUmaUnidadeAliada(Campo campo) {
+		return campo.getInterface().selecionarAliadaEvocadaOuEmCampo();
+	}
+	
+	@Override
+	public Seguidor selecionarUmaUnidadeInimiga(Campo campo) {
+		return campo.getInterface().selecionarInimigoEvocadaOuEmCampo();
+	}
+	
+	@Override
+	public boolean acaoRodadaCompra(Campo campo) {
+		return campo.getInterface().selecionarCompra();
+	}
+	
+	@Override
+	public boolean acaoRodadaCompraOuAtaque(Campo campo) {
+		return campo.getInterface().selecionarCompraOuAtaque();
+	}
+	
+	@Override
+	public boolean acaoRodadaDefesa(Campo campo) {
+		return campo.getInterface().selecionarDefesa();
+	}
 }

@@ -32,11 +32,12 @@ import java.awt.event.ActionListener;
 public class InterfaceCampo extends javax.swing.JFrame {
 	private Campo campo;
 	private Rodada rodada;
+	private boolean aguardandoAcao;
+	private boolean realizouAcao;
 	private boolean aguardandoCarta;
 	private boolean aguardandoIndex;
 	private Carta cartaEscolhida;
 	private int indexEscolhido;
-	private boolean realizouAcao;
 	private ArrayList<JButton> maoP1 = new ArrayList<JButton>();
 	private ArrayList<JButton> maoP2 = new ArrayList<JButton>();
 	private ArrayList<JButton> infoP1Mao = new ArrayList<JButton>();
@@ -45,6 +46,26 @@ public class InterfaceCampo extends javax.swing.JFrame {
 	private ArrayList<JButton> evocadasP2 = new ArrayList<JButton>();
 	private ArrayList<JButton> emCampoP1 = new ArrayList<JButton>();
 	private ArrayList<JButton> emCampoP2 = new ArrayList<JButton>();
+	private Runnable aguardarSelecaoCarta = new Runnable() {
+    	public void run() {
+    		try {
+    			aguardandoCarta = true;
+        		while(aguardandoCarta) {
+        			Thread.sleep(100);
+        		}
+    		} catch (Exception e) {}
+    	}
+    };
+	private Runnable aguardarSelecaoAcao = new Runnable() {
+    	public void run() {
+    		try {
+    			aguardandoAcao = true;
+        		while(aguardandoAcao) {
+        			Thread.sleep(100);
+        		}
+    		} catch (Exception e) {}
+    	}
+    };
 
     public InterfaceCampo(Campo campo, Rodada rodada) {
     	getContentPane().setFont(new Font("Arial", Font.PLAIN, 10));
@@ -57,19 +78,59 @@ public class InterfaceCampo extends javax.swing.JFrame {
 		desativarTudo();
     }
     
-    public void ativar() {
-    	this.setVisible(true);
-    	iniciarTurno();
-    }
-    
-	public void iniciarTurno() {
-		this.realizouAcao = false;
-		atualizarNexus();
+    public void atualizar() {
+    	atualizarNexus();
 		atualizarMao();
 		atualizarEvocadas();
 		atualizarEmCampo();
 		atualizarMana();
 		atualizarTurno();
+    }
+    
+    public boolean selecionarCompra() {
+    	if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
+			desativarMaoP2();
+			desativarEvocadasP2();
+			bntAvancarTurno.setText("<html>Passar</html>");
+			ativarMaoP1();
+		}
+		else {
+			desativarMaoP1();
+			desativarEvocadasP1();
+			bntAvancarTurno.setText("<html>Passar</html>");
+			ativarMaoP2();
+		}
+    	aguardarSelecaoAcao.run();
+    	return realizouAcao;
+    }
+    
+    public boolean selecionarCompraOuAtaque() {
+    	selecionarCompra();
+    	if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
+			ativarEvocadasP1();
+		}
+		else {
+			ativarEvocadasP2();
+		}
+    	aguardarSelecaoAcao.run();
+    	return realizouAcao;
+    }
+    
+    public boolean selecionarDefesa() {
+    	if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
+			bntAvancarTurno.setText("<html>Nao Defender</html>");
+			ativarEvocadasP1();
+		}
+		else {
+			bntAvancarTurno.setText("<html>Nao Defender</html>");
+			ativarEvocadasP2();
+		}
+    	aguardarSelecaoAcao.run();
+    	return realizouAcao;
+    }
+    
+/*	public void iniciarTurno() {
+		this.realizouAcao = false;
 		
 		//Vez do jogador1
 		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
@@ -103,7 +164,7 @@ public class InterfaceCampo extends javax.swing.JFrame {
 				ativarEvocadasP2();
 			}
 		}
-	}
+	}*/
 	
 	private void desativarTudo() {
 		for(int i = 0; i < maoP1.size(); i++) {
@@ -335,35 +396,40 @@ public class InterfaceCampo extends javax.swing.JFrame {
 		}
 	}
 	
-	private Runnable aguardarSelecaoCarta = new Runnable() {
-    	public void run() {
-    		try {
-    			aguardandoCarta = true;
-        		while(aguardandoCarta) {
-        			Thread.sleep(100);
-        		}
-    		} catch (Exception e) {}
-    	}
-    };
-	
-	public Seguidor selecionarCartaP1() {
-		ativarEvocadasP1();
-		ativarEmCampoP1();
+	public Seguidor selecionarAliadaEvocadaOuEmCampo() {
+		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
+			ativarEvocadasP1();
+			ativarEmCampoP1();
+			desativarEvocadasP1();
+			desativarEmCampoP1();
+		}
+		else {
+			ativarEvocadasP2();
+			ativarEmCampoP2();
+			desativarEvocadasP2();
+			desativarEmCampoP2();
+		}
+		
 		aguardarSelecaoCarta.run();
-		desativarEvocadasP1();
-		desativarEmCampoP1();
 		
 		return (Seguidor) cartaEscolhida;
 	}
 	
-	
-	
-	public Seguidor selecionarCartaP2() {
-		ativarEvocadasP2();
-		ativarEmCampoP2();
+	public Seguidor selecionarInimigoEvocadaOuEmCampo() {
+		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
+			ativarEvocadasP2();
+			ativarEmCampoP2();
+			desativarEvocadasP2();
+			desativarEmCampoP2();
+		}
+		else {
+			ativarEvocadasP1();
+			ativarEmCampoP1();
+			desativarEvocadasP1();
+			desativarEmCampoP1();
+		}
+		
 		aguardarSelecaoCarta.run();
-		desativarEvocadasP2();
-		desativarEmCampoP2();
 		
 		return (Seguidor) cartaEscolhida;
 	}
@@ -1214,8 +1280,9 @@ public class InterfaceCampo extends javax.swing.JFrame {
         	atualizarMao();
         	atualizarEvocadas();
         	realizouAcao = true;
-        	rodada.finalizarTurno(this.realizouAcao);
-        	iniciarTurno();
+        	aguardandoAcao = false;
+        	//rodada.finalizarTurno(this.realizouAcao);
+        	//iniciarTurno();
         }
         else {
         	System.out.println("Nao foi possivel comprar essa carta! e"
@@ -1228,8 +1295,9 @@ public class InterfaceCampo extends javax.swing.JFrame {
         	atualizarMao();
         	atualizarEvocadas();
         	realizouAcao = true;
-        	rodada.finalizarTurno(this.realizouAcao);
-        	iniciarTurno();
+        	aguardandoAcao = false;
+        	//rodada.finalizarTurno(this.realizouAcao);
+        	//iniciarTurno();
         }
         else {
         	System.out.println("Nao foi possivel comprar essa carta! escolha outra ou finalize o turno!");

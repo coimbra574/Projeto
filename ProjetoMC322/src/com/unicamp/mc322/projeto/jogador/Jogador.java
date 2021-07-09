@@ -13,7 +13,7 @@ public abstract class Jogador {
 	protected int mana = 0;
 	private int nexus = 20;
 	private int manaDeFeitico = 0;
-	private Turno turno;
+	protected Turno turno;
 	protected ArrayList<Carta> mao = new ArrayList<Carta>();  //Ira representar as cartas que podem ser compradas pelo jogador
 	protected ArrayList<Seguidor> evocadas = new ArrayList<Seguidor>();  //Ira representar as cartas compradas
 	protected ArrayList<Seguidor> emCampo = new ArrayList<Seguidor>();  //Ira representar as cartas no campo de batalha
@@ -41,8 +41,20 @@ public abstract class Jogador {
 	// Escolhe qual deck ira usar
 	protected abstract TipoDeck escolhaTipoDeck();
 	
-	// Seleciona uma carta evocada ou em campo
-	public abstract Seguidor selecionarUmaUnidadeAliada();
+	// Seleciona uma carta evocada ou em campo do seu deck
+	public abstract Seguidor selecionarUmaUnidadeAliada(Campo campo);
+	
+	// Seleciona uma carta evocada ou em campo do inimigo
+	public abstract Seguidor selecionarUmaUnidadeInimiga(Campo campo);
+	
+	// Seleciona uma carta para comprar ou passa a vez
+	public abstract boolean acaoRodadaCompra(Campo campo);
+	
+	// Seleciona uma carta para comprar ou uma evocada para atacar ou passa a vez
+	public abstract boolean acaoRodadaCompraOuAtaque(Campo campo);
+	
+	// Seleciona cartas evocadas para defender ou passa a vez
+	public abstract boolean acaoRodadaDefesa(Campo campo);
 	
 	public void setNumeroEmCampo(int n) {
 		numeroJogadorNoCampo = n;
@@ -129,11 +141,12 @@ public abstract class Jogador {
 	//public abstract void escolherCartaUtilizar(Campo campo);
 	
 	
-	protected boolean verificarCarta(Carta carta) {
+	protected boolean verificarCarta(Carta carta, Campo campo) {
 		/*
 		 * Verificar se o jogadore possui mana suficiente para invocar/ativar uma carta
+		 * O numero maximo de cartas evocadas eh campo.LARGURA_CAMPO = 6
 		 */
-		if(mana >= carta.getMana()) {
+		if(mana >= carta.getMana() && evocadas.size() < campo.LARGURA_CAMPO) {
 			return true;
 		}else {
 			return false;
@@ -147,7 +160,7 @@ public abstract class Jogador {
 		Carta carta = mao.get(posicaoMao);
 		if(!carta.equals(null)) {
 		
-			if(verificarCarta(carta)) {
+			if(verificarCarta(carta, campo)) {
 				if(carta.getTipo() == TipoCarta.FEITICO) {
 					Feitico feitico = (Feitico) mao.get(posicaoMao);
 					if(feitico.ehPossivel(campo)) { // Verifica se existem unidades para se aplicar o feiti�o

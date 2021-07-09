@@ -21,7 +21,7 @@ public class Campo {
 	private Jogador jogador1,jogador2;
 	private Rodada rodada;
 	private int nexusP1, nexusP2;
-	private InterfaceCampo interfaceGrafica;
+	private InterfaceCampo interfaceCampo;
 
 	public Campo(Jogador p1, Jogador p2) {
 		this.jogador1 = p1;
@@ -32,13 +32,20 @@ public class Campo {
 		this.rodada = new Rodada(p1,p2, this);
 		jogador1.atualizarMana(rodada.getNumeroRodada());
 		jogador2.atualizarMana(rodada.getNumeroRodada());
-		this.interfaceGrafica = new InterfaceCampo(this, rodada);
+		this.interfaceCampo = new InterfaceCampo(this, rodada);
 	}
 	
 	public void iniciar() {
-		interfaceGrafica.ativar();
+		interfaceCampo.setVisible(true);
+		// O jogo termina quando um dos nexus tiver vida igual ou menor que zero.
+		while(nexusP1 > 0 && nexusP2 > 0) {
+			interfaceCampo.atualizar();
+			rodada.iniciar();
+			
+		}
+		interfaceCampo.setVisible(false);
+		System.out.println("Fim de jogo!");
 	}
-
 	
 	public int getNexus(int numeroJogador) {
 		if(numeroJogador == 1) {
@@ -54,7 +61,7 @@ public class Campo {
 		} else {
 			nexusP2 = valorAdicionado;
 		}
-		interfaceGrafica.atualizarNexus();
+		interfaceCampo.atualizarNexus();
 	}
 	
 	public Rodada getRodada() {
@@ -81,24 +88,6 @@ public class Campo {
 			return false;
 		}
 		return true;
-	}
-	
-	public Seguidor selecionarUmaUnidadeAliada() {
-		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
-			return interfaceGrafica.selecionarCartaP1();
-		}
-		else {
-			return interfaceGrafica.selecionarCartaP2();
-		}
-	}
-	
-	public Seguidor selecionarUmaUnidadeInimiga() {
-		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
-			return interfaceGrafica.selecionarCartaP2();
-		}
-		else {
-			return interfaceGrafica.selecionarCartaP1();
-		}
 	}
 	
 	public void adicionarAoNexusJogador(NumeroJogador jogador, int valorAdicionado) {
@@ -129,6 +118,14 @@ public class Campo {
 	public Jogador getP2() {
 		return jogador2;
 	}
+	
+	public Jogador getInimigo() {
+		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
+			return jogador2;
+		} else {
+			return jogador1;
+		}
+	}
 
 	public ArrayList<Seguidor> getEvocadas(NumeroJogador jogador) {
 		if(jogador == NumeroJogador.PLAYER1) {
@@ -139,7 +136,7 @@ public class Campo {
 	}
 	
 	public void fimDeJogo() {
-		interfaceGrafica.setVisible(false);
+		interfaceCampo.setVisible(false);
 		System.out.println("Fim de jogo!");
 		if(jogador1.getNexus() <= 0) {
 			System.out.print("O vencedor foi o Jogador 1");
@@ -147,5 +144,9 @@ public class Campo {
 		else {
 			System.out.print("O vencedor foi o Jogador 2");
 		}
+	}
+	
+	public InterfaceCampo getInterface() {
+		return interfaceCampo;
 	}
 }

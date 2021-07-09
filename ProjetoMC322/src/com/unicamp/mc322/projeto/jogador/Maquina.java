@@ -2,7 +2,9 @@ package com.unicamp.mc322.projeto.jogador;
 
 import java.util.ArrayList;
 
+import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.Carta;
+import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.deckFactory.TipoDeck;
 import com.unicamp.mc322.projeto.rodada.Turno;
 
@@ -43,6 +45,96 @@ public class Maquina extends Jogador{
 		return TipoDeck.values()[escolha];
 	}
 	
+	@Override
+	public Seguidor selecionarUmaUnidadeAliada(Campo campo) {
+		// Faz uma lista de todas as possibilidades de escolha e sorteia a escolhida
+		ArrayList<Seguidor> cartas = new ArrayList<Seguidor>();
+		Random geradorAleatorio = new Random();
+		
+		for(Seguidor carta: emCampo) {
+			if(carta != null) {
+				cartas.add(carta);
+			}
+		}
+		for(Seguidor carta: evocadas) {
+			if(carta != null) {
+				cartas.add(carta);
+			}
+		}
+
+		int escolha = geradorAleatorio.nextInt(cartas.size());
+		
+		return cartas.get(escolha);
+	}
 	
+	@Override
+	public Seguidor selecionarUmaUnidadeInimiga(Campo campo) {
+		// Faz uma lista de todas as possibilidades de escolha e sorteia a escolhida
+		ArrayList<Seguidor> cartas = new ArrayList<Seguidor>();
+		Random geradorAleatorio = new Random();
+		
+		for(Seguidor carta: campo.getInimigo().getEmCampo()) {
+			if(carta != null) {
+				cartas.add(carta);
+			}
+		}
+		for(Seguidor carta: campo.getInimigo().getEvocadas()) {
+			if(carta != null) {
+				cartas.add(carta);
+			}
+		}
+
+		int escolha = geradorAleatorio.nextInt(cartas.size());
+		
+		return cartas.get(escolha);
+	}
+	
+	@Override
+	public boolean acaoRodadaCompra(Campo campo) {
+		// Se possivel compra carta, do contrario passa a vez.
+		for(int i = 0; i < mao.size(); i++) {
+			// Se a compra foi bem sucedida, finaliza o turno.
+			if(comprarCarta(i, campo)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean acaoRodadaCompraOuAtaque(Campo campo) {
+		// Se possivel compra carta, do contrario ataca se tiver carta para atacar, do contrario passa a vez.
+		for(int i = 0; i < mao.size(); i++) {
+			// Se a compra foi bem sucedida, finaliza o turno.
+			if(comprarCarta(i, campo)) {
+				return true;
+			}
+		}
+		// Se eh atacante, ataca com todas as cartas disponiveis.
+		if(evocadas.size() != 0) {
+			for(int i = 0; i < evocadas.size(); i++) {
+				emCampo.add(i, evocadas.get(i));
+			}
+			evocadas.clear();
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean acaoRodadaDefesa(Campo campo) {
+		// Se possivel se defende, do contrario passa a vez
+		if(evocadas.size() != 0) {
+			ArrayList<Seguidor> emCampoInimigo = campo.getInimigo().getEmCampo();
+			for(int i = 0; i < emCampoInimigo.size(); i++) {
+				if(evocadas.size() != 0 && emCampoInimigo.get(i) != null) {
+					emCampo.add(i, evocadas.get(0));
+					evocadas.remove(0);
+				}
+			}
+			return true;
+		}
+		return false;
+	}
 
 }

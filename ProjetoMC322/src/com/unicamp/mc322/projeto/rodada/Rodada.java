@@ -19,7 +19,6 @@ public class Rodada {
 	private boolean acaoJogador2;
 	private Campo campo;
 	
-	
 	public Rodada(Jogador p1, Jogador p2, Campo campo) {
 		numeroRodada = 1;
 		this.jogador1 = p1;
@@ -34,6 +33,41 @@ public class Rodada {
 		this.acaoJogador1 = true;
 		this.acaoJogador2 = true;
 		this.campo = campo;
+	}
+	
+	public void iniciar() {
+		boolean acao;
+		
+		if(numeroJogadorAtual == NumeroJogador.PLAYER1) {
+			if(tipo == TipoRodada.COMPRA_DE_CARTAS) {
+				if(jogador1.getTurno() == Turno.ATAQUE) {
+					acao = jogador1.acaoRodadaCompraOuAtaque(campo);
+				}
+				else {
+					acao = jogador1.acaoRodadaCompra(campo);
+				}
+			}
+			else {
+				acao = jogador1.acaoRodadaDefesa(campo);
+			}
+			numeroJogadorAtual = NumeroJogador.PLAYER2;
+		}
+		else {
+			if(tipo == TipoRodada.COMPRA_DE_CARTAS) {
+				if(jogador2.getTurno() == Turno.ATAQUE) {
+					acao = jogador2.acaoRodadaCompraOuAtaque(campo);
+				}
+				else {
+					acao = jogador2.acaoRodadaCompra(campo);
+				}
+			}
+			else {
+				acao = jogador2.acaoRodadaDefesa(campo);
+			}
+			numeroJogadorAtual = NumeroJogador.PLAYER1;
+		}
+		
+		finalizarTurno(acao);
 	}
 	
 	public int getNumeroRodada() {
