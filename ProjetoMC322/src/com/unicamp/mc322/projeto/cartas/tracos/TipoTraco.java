@@ -4,7 +4,7 @@ public enum TipoTraco {
 	ELUSIVO("Elusivo"),
 	FURIA("Furia"),
 	ATAQUEDUPLO("Ataque Duplo"),
-	SEMTRACO("Sem traço");
+	SEMTRACO("Sem traco");
 	
 	private String nome;
 	
