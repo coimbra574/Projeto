@@ -24,7 +24,12 @@ public class Rodada {
 		numeroRodada = 1;
 		this.jogador1 = p1;
 		this.jogador2 = p2;
-		this.numeroJogadorAtual = NumeroJogador.PLAYER1;  // Jogo começa com p1
+		if(jogador1.getTurno() == Turno.ATAQUE) {
+			this.numeroJogadorAtual = NumeroJogador.PLAYER1;
+		}
+		else {
+			this.numeroJogadorAtual = NumeroJogador.PLAYER2;
+		}
 		this.tipo = TipoRodada.COMPRA_DE_CARTAS;
 		this.acaoJogador1 = true;
 		this.acaoJogador2 = true;
