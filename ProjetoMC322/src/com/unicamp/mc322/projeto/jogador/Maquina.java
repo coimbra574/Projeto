@@ -48,7 +48,7 @@ public class Maquina extends Jogador{
 	@Override
 	public TipoDeck escolhaTipoDeck() {
 		Random geradorAleatorio = new Random();
-		int escolha = geradorAleatorio.nextInt(TipoDeck.values().length);
+		int escolha = geradorAleatorio.nextInt(TipoDeck.values().length-1);
 		
 		return TipoDeck.values()[escolha];
 	}
@@ -108,10 +108,13 @@ public class Maquina extends Jogador{
 		// Se possivel compra carta, do contrario passa a vez.
 		for(int i = 0; i < mao.size(); i++) {
 			// Se a compra foi bem sucedida, finaliza o turno.
-			if(comprarCarta(i, campo)) {
+			if(verificarCarta(mao.get(i), campo)) {
+				comprarCarta(i, campo);
 				return true;
 			}
 		}
+		
+		// Se nao atacou ou comprou carta, passa a vez.
 		return false;
 	}
 	
@@ -122,7 +125,8 @@ public class Maquina extends Jogador{
 		// Se possivel compra carta, do contrario ataca se tiver carta para atacar, do contrario passa a vez.
 		for(int i = 0; i < mao.size(); i++) {
 			// Se a compra foi bem sucedida, finaliza o turno.
-			if(comprarCarta(i, campo)) {
+			if(verificarCarta(mao.get(i), campo)) {
+				comprarCarta(i, campo);
 				return true;
 			}
 		}
@@ -132,8 +136,11 @@ public class Maquina extends Jogador{
 				emCampo.add(i, evocadas.get(i));
 			}
 			evocadas.clear();
+			campo.getRodada().mudarTipo();
 			return true;
 		}
+		
+		// Se nao atacou ou comprou carta, passa a vez.
 		return false;
 	}
 	

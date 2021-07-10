@@ -146,7 +146,17 @@ public abstract class Jogador {
 		 * Verificar se o jogadore possui mana suficiente para invocar/ativar uma carta
 		 * O numero maximo de cartas evocadas eh campo.LARGURA_CAMPO = 6
 		 */
-		if(mana >= carta.getMana() && evocadas.size() < campo.LARGURA_CAMPO) {
+		if(carta.getTipo() == TipoCarta.FEITICO && mana+manaDeFeitico >= carta.getMana()) {
+			Feitico feitico = (Feitico) carta;
+			// Verifica se existem unidades para se aplicar o feitico
+			if(feitico.ehPossivel(campo)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else if(mana >= carta.getMana() && evocadas.size() < campo.LARGURA_CAMPO) {
 			return true;
 		}else {
 			return false;
@@ -163,16 +173,17 @@ public abstract class Jogador {
 			if(verificarCarta(carta, campo)) {
 				if(carta.getTipo() == TipoCarta.FEITICO) {
 					Feitico feitico = (Feitico) mao.get(posicaoMao);
-					if(feitico.ehPossivel(campo)) { // Verifica se existem unidades para se aplicar o feiti�o
-						mana -= feitico.getMana();
-						feitico.ativarCarta(campo);
-						mao.remove(posicaoMao);
-						return true;
+					if(manaDeFeitico >= feitico.getMana()) {
+						manaDeFeitico -= feitico.getMana();
 					}
 					else {
-						return false;
+						mana += manaDeFeitico;
+						manaDeFeitico = 0;
+						mana -= feitico.getMana();
 					}
-					
+					feitico.ativarCarta(campo);
+					mao.remove(posicaoMao);
+					return true;
 				}
 				else {
 					mana -= carta.getMana();

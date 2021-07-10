@@ -9,8 +9,8 @@ public class DeckFactory {
 		case LUTADOR:
 			return new DeckLutador();
 		case NAOEXISTENTE:
-			System.out.println("Não existe esse tipo de Deck!!!");
-			System.out.println("Por padrão será criado um deck do tipo Lutador");
+			System.out.println("Foi fornecido um argumento invalido para escolha do deck");
+			System.out.println("Por padrao sera criado um deck do tipo Lutador");
 			return new DeckLutador();
 		}
 		return null;

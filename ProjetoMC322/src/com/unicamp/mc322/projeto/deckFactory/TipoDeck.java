@@ -18,7 +18,7 @@ public enum TipoDeck {
 	
 	public static void ajudaEscolhaDeck() {
 		TipoDeck[] Decks = values();
-		for(int i = 0; i < Decks.length; i++) {
+		for(int i = 0; i < Decks.length-1; i++) {
 			System.out.printf("Para criar um deck do tipo %s digite: %d\n", Decks[i].toString(), i+1);
 		}
 		System.out.print("Qualquer outro valor resultarao em um deck padrao do tipo Lutador\n");

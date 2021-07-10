@@ -87,20 +87,17 @@ public class Humano  extends Jogador{
 			try {
 				escolha = Integer.valueOf(keyboard.nextLine());
 			} catch (NumberFormatException ex) {
-				System.out.println("Deck não encontrado. Tente novamente\n");
-				escolha = 0;
+				return TipoDeck.NAOEXISTENTE;
 			}
 			
 			if(escolha == 0) {
 				TipoDeck.ajudaEscolhaDeck();
-			}else if(escolha-1 < TipoDeck.values().length && escolha-1 >= 0){
+			}else if(escolha-1 < TipoDeck.values().length-1 && escolha-1 >= 0){
 				return TipoDeck.values()[escolha-1];
 			}
 		}while(escolha == 0);
-		
-		System.out.println("Foi fornecido um argumento invalido para escolha do deck");
-		System.out.println("Por padrao sera criado um deck do tipo Lutador");
-		return TipoDeck.LUTADOR;
+
+		return TipoDeck.NAOEXISTENTE;
 	}
 	
 	@Override
