@@ -60,8 +60,8 @@ public class InterfaceCampo extends javax.swing.JFrame {
     	public void run() {
     		try {
     			aguardandoAcao = true;
-        		while(aguardandoAcao) {
-        			Thread.sleep(100);
+        		while(aguardandoAcao == true) {
+        			Thread.sleep(50);
         		}
     		} catch (Exception e) {}
     	}
@@ -1272,10 +1272,12 @@ public class InterfaceCampo extends javax.swing.JFrame {
     		rodada.mudarTipo();
     		aguardandoAcao = false;
     	}
+    	else {
+        	realizouAcao = false;
+        	aguardandoAcao = false;
+    	}
     	//rodada.finalizarTurno(this.realizouAcao);
     	//iniciarTurno();
-    	realizouAcao = false;
-    	aguardandoAcao = false;
     }
     
     private void bntP1MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {

@@ -147,6 +147,7 @@ public class Maquina extends Jogador{
 	@Override
 	public boolean acaoRodadaDefesa(Campo campo) {
 		aguardarTempo();
+		campo.getRodada().mudarTipo();
 		
 		// Se possivel se defende, do contrario passa a vez
 		if(evocadas.size() != 0) {
