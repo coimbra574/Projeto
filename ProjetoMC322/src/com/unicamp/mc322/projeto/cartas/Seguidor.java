@@ -103,6 +103,10 @@ public class Seguidor extends Carta {
 		return listaEfeitos;
 	}
 	
+	public void addEfeito(Efeito novoEfeito) {
+		listaEfeitos.add(novoEfeito);
+	}
+	
 	
 	@Override
 	public String toString() {

@@ -50,6 +50,7 @@ public class ListaCartas {
 		listaFeitico.add(valorRedobrado);
 		listaFeitico.add(golpeCerteiro);
 		listaFeitico.add(combateUmUm);
+		
 	}
 	
 	int getNumCampeoes() {

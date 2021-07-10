@@ -31,6 +31,7 @@ public class Gelo extends Efeito {
 			valorPoderOriginal = carta.getPoder();
 			carta.setPoder(0);  
 			this.setTipoEfeito(TipoAtivacao.FIM_DA_RODADA);  // valor é atualizado ao original no final da rodada
+			carta.addEfeito(this);
 		} else {
 			System.out.println("\n Efeito Gelo desativado");
 			carta.setPoder(valorPoderOriginal);
