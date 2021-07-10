@@ -12,6 +12,7 @@ import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
 import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
 import com.unicamp.mc322.projeto.cartas.efeitos.TipoAtivacao;
+import com.unicamp.mc322.projeto.jogador.Jogador;
 import com.unicamp.mc322.projeto.jogador.NumeroJogador;
 import com.unicamp.mc322.projeto.rodada.Rodada;
 import com.unicamp.mc322.projeto.rodada.TipoRodada;
@@ -19,6 +20,8 @@ import com.unicamp.mc322.projeto.rodada.Turno;
 
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -50,6 +53,7 @@ public class InterfaceCampo extends javax.swing.JFrame {
     	public void run() {
     		try {
     			aguardandoCarta = true;
+    			
         		while(aguardandoCarta) {
         			Thread.sleep(100);
         		}
@@ -400,14 +404,18 @@ public class InterfaceCampo extends javax.swing.JFrame {
 		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
 			ativarEvocadasP1();
 			ativarEmCampoP1();
-			desativarEvocadasP1();
-			desativarEmCampoP1();
+			desativarMaoP1();
+			desativarEvocadasP2();
+			desativarEmCampoP2();
+			desativarMaoP2();
 		}
 		else {
 			ativarEvocadasP2();
 			ativarEmCampoP2();
-			desativarEvocadasP2();
-			desativarEmCampoP2();
+			desativarMaoP2();
+			desativarEvocadasP1();
+			desativarEmCampoP1();
+			desativarMaoP1();
 		}
 		
 		aguardarSelecaoCarta.run();
@@ -415,23 +423,52 @@ public class InterfaceCampo extends javax.swing.JFrame {
 		return (Seguidor) cartaEscolhida;
 	}
 	
+	
 	public Seguidor selecionarInimigoEvocadaOuEmCampo() {
 		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
 			ativarEvocadasP2();
 			ativarEmCampoP2();
-			desativarEvocadasP2();
-			desativarEmCampoP2();
+			desativarMaoP2();
+			desativarEvocadasP1();
+			desativarEmCampoP1();
+			desativarMaoP1();
 		}
 		else {
 			ativarEvocadasP1();
 			ativarEmCampoP1();
-			desativarEvocadasP1();
-			desativarEmCampoP1();
+			desativarMaoP1();
+			desativarEvocadasP2();
+			desativarEmCampoP2();
+			desativarMaoP2();
 		}
 		
 		aguardarSelecaoCarta.run();
 		
 		return (Seguidor) cartaEscolhida;
+	}
+	
+	/* Compra de cartas, em especial feiticos, levam tempo consideravel ja que alguns efeitos 
+	 * demandam aguardar o usuario escolher uma carta, por isso usar o SwingWorker
+	 * Mais informacoes SwingWorker: https://www.devmedia.com.br/trabalhando-com-swingworker-em-java/29331
+	 */
+	private void ativarCompra(int posicao, Jogador jogador){
+		 SwingWorker worker = new SwingWorker() {
+		 @Override
+		 protected Void doInBackground() throws Exception {
+			 if(jogador.comprarCarta(posicao, campo)) {
+				 atualizarMao();
+		         atualizarEvocadas();
+		         realizouAcao = true;
+		         aguardandoAcao = false;
+		     }
+		     else {
+		    	 System.out.println("Nao foi possivel comprar essa carta! e"
+		        			+ "scolha outra ou finalize o turno!");
+		     }
+		    return null;
+		}
+		};
+		worker.execute();
 	}
 
     /**
@@ -1279,32 +1316,13 @@ public class InterfaceCampo extends javax.swing.JFrame {
     }
     
     private void bntP1MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {
-        if(campo.getP1().comprarCarta(posicao, campo)) {
-        	atualizarMao();
-        	atualizarEvocadas();
-        	realizouAcao = true;
-        	aguardandoAcao = false;
-        	//rodada.finalizarTurno(this.realizouAcao);
-        	//iniciarTurno();
-        }
-        else {
-        	System.out.println("Nao foi possivel comprar essa carta! e"
-        			+ "scolha outra ou finalize o turno!");
-        }
+    	Jogador jogador = campo.getP1();
+    	ativarCompra(posicao, jogador);
     }
     
-    private void bntP2MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) { 
-        if(campo.getP2().comprarCarta(posicao, campo)) {
-        	atualizarMao();
-        	atualizarEvocadas();
-        	realizouAcao = true;
-        	aguardandoAcao = false;
-        	//rodada.finalizarTurno(this.realizouAcao);
-        	//iniciarTurno();
-        }
-        else {
-        	System.out.println("Nao foi possivel comprar essa carta! escolha outra ou finalize o turno!");
-        }
+    private void bntP2MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {
+    	Jogador jogador = campo.getP2();
+    	ativarCompra(posicao, jogador);
     }
     
     private void bntP1EvocadaActionPerformed(java.awt.event.ActionEvent evt, int posicao) {

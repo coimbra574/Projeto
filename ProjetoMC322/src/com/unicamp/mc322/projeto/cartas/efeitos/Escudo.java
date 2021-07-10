@@ -30,6 +30,7 @@ public class Escudo extends Efeito {
 			valorVidaOriginal = carta.getVida();
 			carta.setVida(10000);  // Valor muito alto
 			this.setTipoEfeito(TipoAtivacao.FIM_DA_RODADA);  // valor é atualizado ao original no final da rodada
+			carta.addEfeito(this);
 		} else {
 			System.out.println("\n Efeito Escudo desativado");
 			carta.setVida(valorVidaOriginal);
