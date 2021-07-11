@@ -29,12 +29,16 @@ public class Combate {
 					if(cartaAtacante.getHaTraco()) {
 						cartaAtacante.ativacaoTraco(cartaDefensor, defensor, campo);//coloquei isso aqui para ativar o traco
 					}
-					if(cartaAtacante.getVida() > 0) {
-						atacante.adicionarEvocada(cartaAtacante);
+					
+					if(cartaAtacante.getVida() < 0) {
+						cartaDefensor.setMatouUmSeguidor(true);
 					}
-					if(cartaDefensor.getVida() > 0) {
-						defensor.adicionarEvocada(cartaDefensor);
+
+					if(cartaDefensor.getVida() < 0) {
+						cartaAtacante.setMatouUmSeguidor(true);
 					}
+					atacante.adicionarEvocada(cartaAtacante);
+					defensor.adicionarEvocada(cartaDefensor);
 				}
 			}
 		}

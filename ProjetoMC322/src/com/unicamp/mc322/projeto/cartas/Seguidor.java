@@ -12,7 +12,7 @@ import com.unicamp.mc322.projeto.jogador.Jogador;
 public class Seguidor extends Carta {
 	private int poder, vida, vidaTotal;
 	private Traco traco=null;
-	private ArrayList<Efeito> listaEfeitos = new ArrayList<Efeito>();
+	//private ArrayList<Efeito> listaEfeitos = new ArrayList<Efeito>();
 	private boolean matouUmSeguidor = false;  // Alterado na classe combate
 
 	public Seguidor(String nome, int custo, int poder, int vidaTotal, Traco traco, Efeito... efeitos) {
@@ -24,7 +24,7 @@ public class Seguidor extends Carta {
 		
 		if(efeitos != null) {
 			for(Efeito aux : efeitos) {
-				listaEfeitos.add(aux);
+				super.listaEfeitos.add(aux);
 			}
 		}
 	}
@@ -97,14 +97,6 @@ public class Seguidor extends Carta {
 			return null;
 		}
 		return traco.getTraco();
-	}
-	
-	public ArrayList<Efeito> getEfeitos() {
-		return listaEfeitos;
-	}
-	
-	public void addEfeito(Efeito novoEfeito) {
-		listaEfeitos.add(novoEfeito);
 	}
 	
 	

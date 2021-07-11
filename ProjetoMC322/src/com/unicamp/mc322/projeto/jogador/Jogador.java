@@ -2,6 +2,7 @@ package com.unicamp.mc322.projeto.jogador;
 
 import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.*;
+import com.unicamp.mc322.projeto.cartas.efeitos.TipoAtivacao;
 import com.unicamp.mc322.projeto.deckFactory.Deck;
 import com.unicamp.mc322.projeto.deckFactory.DeckFactory;
 import com.unicamp.mc322.projeto.deckFactory.TipoDeck;
@@ -181,12 +182,15 @@ public abstract class Jogador {
 						manaDeFeitico = 0;
 						mana -= feitico.getMana();
 					}
-					feitico.ativarCarta(campo);
+					feitico.ativarEfeitos(campo, TipoAtivacao.NA_COMPRA);
 					mao.remove(posicaoMao);
 					return true;
 				}
 				else {
 					mana -= carta.getMana();
+					if(carta.ehPossivel(campo)) {
+						carta.ativarEfeitos(campo, TipoAtivacao.NA_COMPRA);
+					}
 					evocadas.add((Seguidor) carta);
 					mao.remove(posicaoMao);
 					return true;

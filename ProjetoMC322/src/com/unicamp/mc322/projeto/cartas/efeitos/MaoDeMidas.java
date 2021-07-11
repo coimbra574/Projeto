@@ -3,6 +3,8 @@
 
 package com.unicamp.mc322.projeto.cartas.efeitos;
 
+import java.util.Scanner;
+
 import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
@@ -29,7 +31,8 @@ public class MaoDeMidas extends Efeito {
 		
 		if(carta.getMatouUmSeguidor() == true) {
 			System.out.println("\n Efeito Mão de Midas ativado, jogador recebeu uma carta "+ novaCarta.getTipo() + " " + novaCarta.getNome());
-			jogador.getMao().add(novaCarta);
+			System.out.println(" na posicao 1");
+			jogador.getMao().set(4, novaCarta);
 			carta.setMatouUmSeguidor(false);
 		}
 	}
