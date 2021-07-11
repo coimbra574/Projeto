@@ -49,10 +49,8 @@ public class Seguidor extends Carta {
 		poder = novoPoder;
 	}
 	
-	public void aumentarPoder(int n) {//Para o traco da furia. Ele acrescenta, nao muda. Por isso acho q é diferente de setPoder
-		System.out.println("Poder antes: " + poder);
+	public void aumentarPoder(int n) {
 		poder+=n;
-		System.out.println("Poder: " + poder);
 	}
 	
 	public int getVida() {
@@ -63,10 +61,8 @@ public class Seguidor extends Carta {
 		vida = novaVida;
 	}
 	
-	public void aumentarVida(int m) {//Para o traco da furia. Ele acrescenta, nao muda. Por isso acho q é diferente de setVida
-		System.out.println("Vida antes: " + vida);
+	public void aumentarVida(int m) {
 		vida+=m;
-		System.out.println("Vida: " + vida);
 	}
 	
 	public int getVidaTotal() {

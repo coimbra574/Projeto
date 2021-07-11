@@ -126,7 +126,7 @@ public class Campo {
 	public void fimDeJogo() {
 		interfaceCampo.setVisible(false);
 		System.out.println("Fim de jogo!");
-		if(jogador1.getNexus() <= 0) {
+		if(jogador1.getNexus() >= 0) {
 			System.out.print("O vencedor foi o Jogador 1");
 		}
 		else {
