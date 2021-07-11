@@ -24,7 +24,7 @@ public class TrocaJusta extends Efeito {
 		int numeroCarta = rodada.getIndexCartaAplicarEfeito();
 		Seguidor carta = jogador.getEvocadas().get(numeroCarta);
 		
-		if(carta.getVida() == 0) {
+		if(carta.getVida() <= 0) {
 			System.out.println("\n Efeito Troca Justa ativado");
 			jogador.pegarCarta();
 		}

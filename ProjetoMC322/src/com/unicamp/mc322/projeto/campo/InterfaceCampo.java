@@ -39,6 +39,7 @@ public class InterfaceCampo extends javax.swing.JFrame {
 	private boolean realizouAcao;
 	private boolean aguardandoCarta;
 	private boolean aguardandoIndex;
+	//private SwingWorker tarefaCompraCarta;
 	private Carta cartaEscolhida;
 	private int indexEscolhido;
 	private ArrayList<JButton> maoP1 = new ArrayList<JButton>();
@@ -53,7 +54,6 @@ public class InterfaceCampo extends javax.swing.JFrame {
     	public void run() {
     		try {
     			aguardandoCarta = true;
-    			
         		while(aguardandoCarta) {
         			Thread.sleep(100);
         		}
@@ -439,6 +439,7 @@ public class InterfaceCampo extends javax.swing.JFrame {
 		
 		aguardarSelecaoCarta.run();
 		
+		
 		return (Seguidor) cartaEscolhida;
 	}
 	
@@ -471,10 +472,28 @@ public class InterfaceCampo extends javax.swing.JFrame {
 	 * Mais informacoes SwingWorker: https://www.devmedia.com.br/trabalhando-com-swingworker-em-java/29331
 	 */
 	private void ativarCompra(int posicao, Jogador jogador){
-		 SwingWorker worker = new SwingWorker() {
+    	Runnable esperaCompraCarta = new Runnable() {
+        	public void run() {
+        		try {
+        			if(jogador.comprarCarta(posicao, campo)) {
+       				 atualizarMao();
+       		         atualizarEvocadas();
+       		         realizouAcao = true;
+       		         aguardandoAcao = false;
+       		     }
+       		     else {
+       		    	 System.out.println("Nao foi possivel comprar essa carta! e"
+       		        			+ "scolha outra ou finalize o turno!");
+       		     }
+        		} catch (Exception e) {}
+        	}
+        };
+		Thread tarefa = new Thread(esperaCompraCarta);
+		tarefa.start();
+		/*tarefaCompraCarta = new SwingWorker() {
 		 @Override
 		 protected Void doInBackground() throws Exception {
-			 if(jogador.comprarCarta(posicao, campo)) {
+		    if(jogador.comprarCarta(posicao, campo)) {
 				 atualizarMao();
 		         atualizarEvocadas();
 		         realizouAcao = true;
@@ -484,10 +503,11 @@ public class InterfaceCampo extends javax.swing.JFrame {
 		    	 System.out.println("Nao foi possivel comprar essa carta! e"
 		        			+ "scolha outra ou finalize o turno!");
 		     }
-		    return null;
+		tarefaCompraCarta.cancel(true);
+	    return null;
 		}
 		};
-		worker.execute();
+		tarefaCompraCarta.execute();*/
 	}
 
     /**

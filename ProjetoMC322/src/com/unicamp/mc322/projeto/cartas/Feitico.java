@@ -6,39 +6,17 @@ import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
 
 public class Feitico extends Carta {
-	private ArrayList<Efeito> listaEfeitos = new ArrayList<Efeito>();
 	
 	public Feitico(String nome, int custo, Efeito ... listaEfeitos) {
 		super(nome,custo, TipoCarta.FEITICO);
 		
 		if(listaEfeitos != null) {
 			for(Efeito efeitoAux : listaEfeitos) {
-				this.listaEfeitos.add(efeitoAux);
+				super.listaEfeitos.add(efeitoAux);
 			}
-		}
-	}
-
-	public void ativarCarta(Campo campo) {
-		for(Efeito efeitoAux : listaEfeitos) {
-			efeitoAux.ativarEfeito(campo);
 		}
 	}
 	
-	public boolean ehPossivel(Campo campo) {
-		for(Efeito efeito : listaEfeitos) {
-			if(efeito.requerCartaAliada()) {
-				if(campo.possuiCartaEscolhivel(campo.getRodada().getNumeroJogadorAtual()) == false) {
-					return false;
-				}
-			}
-			if(efeito.requerCartaInimiga()) {
-				if(campo.possuiCartaEscolhivel(campo.getRodada().getNumeroJogadorOponente()) == false) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
 	
 	@Override
 	public String toString() {
@@ -61,7 +39,7 @@ public class Feitico extends Carta {
 		String texto = "\n Nome: " + nome + ", Custo: " + custo;
 		boolean temEfeito = false;
 		texto += "\n Efeitos: ";
-		for(Efeito efeitoAux : listaEfeitos) {
+		for(Efeito efeitoAux : super.listaEfeitos) {
 			if(efeitoAux != null) {
 				temEfeito = true;
 				texto += "\n " + efeitoAux.getNome() + " (" + efeitoAux.getInfo() + ") ";

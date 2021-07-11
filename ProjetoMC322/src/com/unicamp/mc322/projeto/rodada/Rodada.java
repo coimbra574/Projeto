@@ -119,6 +119,7 @@ public class Rodada {
 			numeroRodada++;
 			ativarEfeitosFimDaRodada(NumeroJogador.PLAYER1);
 			ativarEfeitosFimDaRodada(NumeroJogador.PLAYER2);
+			removerSeguidoresSemVida();
 			jogador1.acabarRodada();
 			jogador1.atualizarMana(numeroRodada);
 			jogador2.acabarRodada();
@@ -174,6 +175,21 @@ public class Rodada {
 	
 	public NumeroJogador getNumeroJogadorAplicarEfeito() {
 		return numeroJogadorAplicarEfeito;
+	}
+	
+	private void removerSeguidoresSemVida() {
+		ArrayList<Seguidor> cartasEvocadasP1 = campo.getEvocadas(NumeroJogador.PLAYER1);
+		ArrayList<Seguidor> cartasEvocadasP2 = campo.getEvocadas(NumeroJogador.PLAYER2);
+		for(int i=0; i<cartasEvocadasP1.size(); i++) {
+			if(cartasEvocadasP1.get(i).getVida() <= 0) {
+				cartasEvocadasP1.remove(i);
+			}
+		}
+		for(int i=0; i<cartasEvocadasP2.size(); i++) {
+			if(cartasEvocadasP2.get(i).getVida() <= 0) {
+				cartasEvocadasP2.remove(i);
+			}
+		}
 	}
 	
 	

@@ -3,6 +3,8 @@
 
 package com.unicamp.mc322.projeto.cartas.efeitos;
 
+import java.util.Scanner;
+
 import com.unicamp.mc322.projeto.campo.Campo;
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Seguidor;

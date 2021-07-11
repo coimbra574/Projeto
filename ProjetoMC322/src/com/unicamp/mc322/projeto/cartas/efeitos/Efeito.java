@@ -17,10 +17,6 @@ public abstract class Efeito {
 	
 	public abstract void ativarEfeito(Campo campo);
 	
-	protected void usuarioEscolherUnidade(String mensagemAoUsuario) {
-		System.out.print(mensagemAoUsuario);
-	}
-	
 	public TipoAtivacao getTipoAtivacao() {
 		return tipoAtivacao;
 	}
