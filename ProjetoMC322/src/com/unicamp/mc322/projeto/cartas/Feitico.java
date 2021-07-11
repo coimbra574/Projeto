@@ -21,7 +21,6 @@ public class Feitico extends Carta {
 	@Override
 	public String toString() {
 		String texto = this.tipo + " " + this.nome + ", Custo: " + this.custo;
-		//texto += ", Efeito: "; //@TODO + efeito.toString();
 		return texto;
 	}
 	

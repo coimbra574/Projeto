@@ -39,7 +39,6 @@ public class InterfaceCampo extends javax.swing.JFrame {
 	private boolean realizouAcao;
 	private boolean aguardandoCarta;
 	private boolean aguardandoIndex;
-	//private SwingWorker tarefaCompraCarta;
 	private Carta cartaEscolhida;
 	private int indexEscolhido;
 	private ArrayList<JButton> maoP1 = new ArrayList<JButton>();
@@ -151,43 +150,6 @@ public class InterfaceCampo extends javax.swing.JFrame {
     	aguardarSelecaoAcao.run();
     	return realizouAcao;
     }
-    
-/*	public void iniciarTurno() {
-		this.realizouAcao = false;
-		
-		//Vez do jogador1
-		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
-			desativarMaoP2();
-			desativarEvocadasP2();
-			if(rodada.getTipo() == TipoRodada.COMPRA_DE_CARTAS) {
-				bntAvancarTurno.setText("<html>Passar</html>");
-				ativarMaoP1();
-				if(campo.getP1().getTurno() == Turno.ATAQUE) {
-					ativarEvocadasP1();
-				}
-			}
-			else {
-				bntAvancarTurno.setText("<html>Nao Defender</html>");
-				ativarEvocadasP1();
-			}
-		}
-		//Vez do jogador2
-		else {
-			desativarMaoP1();
-			desativarEvocadasP1();
-			if(rodada.getTipo() == TipoRodada.COMPRA_DE_CARTAS) {
-				bntAvancarTurno.setText("<html>Passar</html>");
-				ativarMaoP2();
-				if(campo.getP2().getTurno() == Turno.ATAQUE) {
-					ativarEvocadasP2();
-				}
-			}
-			else {
-				bntAvancarTurno.setText("<html>Nao Defender</html>");
-				ativarEvocadasP2();
-			}
-		}
-	}*/
 	
 	private void desativarTudo() {
 		for(int i = 0; i < maoP1.size(); i++) {
@@ -490,24 +452,6 @@ public class InterfaceCampo extends javax.swing.JFrame {
         };
 		Thread tarefa = new Thread(esperaCompraCarta);
 		tarefa.start();
-		/*tarefaCompraCarta = new SwingWorker() {
-		 @Override
-		 protected Void doInBackground() throws Exception {
-		    if(jogador.comprarCarta(posicao, campo)) {
-				 atualizarMao();
-		         atualizarEvocadas();
-		         realizouAcao = true;
-		         aguardandoAcao = false;
-		     }
-		     else {
-		    	 System.out.println("Nao foi possivel comprar essa carta! e"
-		        			+ "scolha outra ou finalize o turno!");
-		     }
-		tarefaCompraCarta.cancel(true);
-	    return null;
-		}
-		};
-		tarefaCompraCarta.execute();*/
 	}
 
     /**
@@ -1345,7 +1289,6 @@ public class InterfaceCampo extends javax.swing.JFrame {
  * 						  							 */
     private void bntAvancarTurnoActionPerformed(java.awt.event.ActionEvent evt) {
     	System.out.println("clicou" + aguardandoAcao + realizouAcao);
-    	//atualizar();
     	if(realizouAcao == true || rodada.getTipo() == TipoRodada.ESCOLHA_DEFENSORES) {
     		rodada.mudarTipo();
     		aguardandoAcao = false;
@@ -1354,8 +1297,6 @@ public class InterfaceCampo extends javax.swing.JFrame {
         	realizouAcao = false;
         	aguardandoAcao = false;
     	}
-    	//rodada.finalizarTurno(this.realizouAcao);
-    	//iniciarTurno();
     }
     
     private void bntP1MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {

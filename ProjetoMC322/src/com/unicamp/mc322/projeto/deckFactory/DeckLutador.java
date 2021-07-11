@@ -15,7 +15,7 @@ public class DeckLutador extends Deck{
 	
 	DeckLutador() {
 		super();
-		super.baralho = construirDeck();//Verificar se precisa do super, se coloca-lo ou não afeta alguma coisa
+		super.baralho = construirDeck();
 	}
 
 	@Override

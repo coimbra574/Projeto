@@ -22,10 +22,6 @@ public abstract class Jogador {
 	private int numeroJogadorNoCampo=0;
 	
 	Jogador(Turno turnoInicial) {
-		/*
-		 * Arranjar um meio de randomizar quem vai atacar primeiro
-		 */
-		//Ao inves de ser uma string o tipoDeck será que é melhor um enum??
 		super();
 		TipoDeck tipoDeck = escolhaTipoDeck();
 		this.turno = turnoInicial;
@@ -136,11 +132,6 @@ public abstract class Jogador {
 			this.mana = 10;
 		}
 	}
-	
-	
-	// Escolhe cartas invocadas para utilizar
-	//public abstract void escolherCartaUtilizar(Campo campo);
-	
 	
 	protected boolean verificarCarta(Carta carta, Campo campo) {
 		/*

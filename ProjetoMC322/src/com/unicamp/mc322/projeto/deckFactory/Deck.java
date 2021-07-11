@@ -1,6 +1,8 @@
 package com.unicamp.mc322.projeto.deckFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import com.unicamp.mc322.projeto.cartas.*;
 import java.util.Random;
 
@@ -39,17 +41,10 @@ public abstract class Deck {
 	}
 	
 	public void recolocarNoBaralho(Carta carta) {
-		/* Acredito que assim ele ta substituindo uma carta ja existente
-		int numero;
-		
-		Random geradorAleatorio = new Random();
-		numero = geradorAleatorio.nextInt(numCartasDeck);
-		baralho.add(numero, carta);
-		numCartasDeck+=1;
-		 */
 		
 		baralho.add(carta);
 		numCartasDeck += 1;
+		Collections.shuffle(baralho);
 	}
 	
 	public Carta obterCartaDeck() {
