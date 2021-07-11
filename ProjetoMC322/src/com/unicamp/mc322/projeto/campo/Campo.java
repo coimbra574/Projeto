@@ -40,7 +40,6 @@ public class Campo {
 			rodada.iniciar();
 			interfaceCampo.atualizar();
 		}
-		interfaceCampo.setVisible(false);
 		fimDeJogo();
 	}
 	
@@ -127,10 +126,10 @@ public class Campo {
 		interfaceCampo.setVisible(false);
 		System.out.println("Fim de jogo!");
 		if(jogador1.getNexus() <= 0) {
-			System.out.print("O vencedor foi o Jogador 1");
+			System.out.print("O vencedor foi o Jogador 2");
 		}
 		else {
-			System.out.print("O vencedor foi o Jogador 2");
+			System.out.print("O vencedor foi o Jogador 1");
 		}
 	}
 	

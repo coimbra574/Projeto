@@ -1344,7 +1344,6 @@ public class InterfaceCampo extends javax.swing.JFrame {
 /*												Clique de Botoes	
  * 						  							 */
     private void bntAvancarTurnoActionPerformed(java.awt.event.ActionEvent evt) {
-    	System.out.println("clicou" + aguardandoAcao + realizouAcao);
     	//atualizar();
     	if(realizouAcao == true || rodada.getTipo() == TipoRodada.ESCOLHA_DEFENSORES) {
     		rodada.mudarTipo();
