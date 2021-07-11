@@ -27,8 +27,6 @@ public class ListaCartas {
 	private Feitico golpeCerteiro = new Feitico("Golpe Certeiro", 1, new Melhoria(1,1));
 	private Feitico combateUmUm = new Feitico("Combate um-a-um", 2, new Desafio());
 	
-	private Feitico teste = new Feitico("Testando", 1, new Escudo());
-	
 	private ArrayList<Carta> listaCampeoes = new ArrayList<Carta>();
 	private ArrayList<Carta> listaSeguidores = new ArrayList<Carta>();
 	private ArrayList<Carta> listaFeitico = new ArrayList<Carta>();
@@ -48,11 +46,10 @@ public class ListaCartas {
 		listaSeguidores.add(poro);
 		listaSeguidores.add(poroDefensor);
 		
-		//listaFeitico.add(julgamento);
-		//listaFeitico.add(valorRedobrado);
-		//listaFeitico.add(golpeCerteiro);
-		//listaFeitico.add(combateUmUm);
-		listaFeitico.add(teste);
+		listaFeitico.add(julgamento);
+		listaFeitico.add(valorRedobrado);
+		listaFeitico.add(golpeCerteiro);
+		listaFeitico.add(combateUmUm);
 		
 	}
 	

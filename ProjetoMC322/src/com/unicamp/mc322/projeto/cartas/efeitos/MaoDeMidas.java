@@ -31,8 +31,7 @@ public class MaoDeMidas extends Efeito {
 		
 		if(carta.getMatouUmSeguidor() == true) {
 			System.out.println("\n Efeito Mão de Midas ativado, jogador recebeu uma carta "+ novaCarta.getTipo() + " " + novaCarta.getNome());
-			System.out.println(" na posicao 1");
-			jogador.getMao().set(4, novaCarta);
+			jogador.getMao().add(novaCarta);
 			carta.setMatouUmSeguidor(false);
 		}
 	}
