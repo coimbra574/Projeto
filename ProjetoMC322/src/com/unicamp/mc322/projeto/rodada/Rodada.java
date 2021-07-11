@@ -114,21 +114,20 @@ public class Rodada {
 	}
 	
 	private void finalizarRodada() {
-		if(jogador1.getNexus() <= 0 || jogador2.getNexus() <= 0) {
-			campo.fimDeJogo();
+		if(jogador1.getNexus() > 0 && jogador2.getNexus() > 0) {
+			this.tipo = TipoRodada.COMPRA_DE_CARTAS;
+			numeroRodada++;
+			ativarEfeitosFimDaRodada(NumeroJogador.PLAYER1);
+			ativarEfeitosFimDaRodada(NumeroJogador.PLAYER2);
+			jogador1.acabarRodada();
+			jogador1.atualizarMana(numeroRodada);
+			jogador2.acabarRodada();
+			jogador2.atualizarMana(numeroRodada);
+			jogador1.pegarCarta();
+			jogador2.pegarCarta();
+			this.acaoJogador1 = true;
+			this.acaoJogador2 = true;
 		}
-		this.tipo = TipoRodada.COMPRA_DE_CARTAS;
-		numeroRodada++;
-		ativarEfeitosFimDaRodada(NumeroJogador.PLAYER1);
-		ativarEfeitosFimDaRodada(NumeroJogador.PLAYER2);
-		jogador1.acabarRodada();
-		jogador1.atualizarMana(numeroRodada);
-		jogador2.acabarRodada();
-		jogador2.atualizarMana(numeroRodada);
-		jogador1.pegarCarta();
-		jogador2.pegarCarta();
-		this.acaoJogador1 = true;
-		this.acaoJogador2 = true;
 	}
 	
 	public NumeroJogador getNumeroJogadorAtual() {

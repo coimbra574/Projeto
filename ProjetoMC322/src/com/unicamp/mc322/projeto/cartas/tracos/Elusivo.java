@@ -16,7 +16,6 @@ public class Elusivo extends Traco{
 			cartaAtacante.setVida(cartaAtacante.getVida() + cartaDefensor.getPoder());
 			cartaDefensor.setVida(cartaDefensor.getVida() + cartaAtacante.getPoder());
 			defensor.adicionarAoNexus(-1*cartaAtacante.getPoder());
-			campo.adicionarAoNexus(2, -1*cartaAtacante.getPoder());
 			
 		}
 	}

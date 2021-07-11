@@ -69,6 +69,9 @@ public class InterfaceCampo extends javax.swing.JFrame {
         		}
     		} catch (Exception e) {}
     	}
+    	public boolean selecao() {
+    		return true;
+    	}
     };
 
     public InterfaceCampo(Campo campo, Rodada rodada) {
@@ -104,7 +107,15 @@ public class InterfaceCampo extends javax.swing.JFrame {
 			bntAvancarTurno.setText("<html>Passar</html>");
 			ativarMaoP2();
 		}
-    	aguardarSelecaoAcao.run();
+		Thread tarefa = new Thread(aguardarSelecaoAcao);
+		tarefa.start();
+		while(tarefa.isAlive() == true) {
+			try {
+		        Thread.sleep(50);
+		    } catch (InterruptedException e) {
+		        System.err.format("IOException: %s%n", e);
+		    }
+		}
     	return realizouAcao;
     }
     
@@ -116,7 +127,15 @@ public class InterfaceCampo extends javax.swing.JFrame {
 		else {
 			ativarEvocadasP2();
 		}
-    	aguardarSelecaoAcao.run();
+    	Thread tarefa = new Thread(aguardarSelecaoAcao);
+		tarefa.start();
+		while(tarefa.isAlive() == true) {
+			try {
+		        Thread.sleep(50);
+		    } catch (InterruptedException e) {
+		        System.err.format("IOException: %s%n", e);
+		    }
+		}
     	return realizouAcao;
     }
     
@@ -1305,6 +1324,8 @@ public class InterfaceCampo extends javax.swing.JFrame {
 /*												Clique de Botoes	
  * 						  							 */
     private void bntAvancarTurnoActionPerformed(java.awt.event.ActionEvent evt) {
+    	System.out.println("clicou" + aguardandoAcao + realizouAcao);
+    	//atualizar();
     	if(realizouAcao == true || rodada.getTipo() == TipoRodada.ESCOLHA_DEFENSORES) {
     		rodada.mudarTipo();
     		aguardandoAcao = false;
@@ -1320,11 +1341,13 @@ public class InterfaceCampo extends javax.swing.JFrame {
     private void bntP1MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {
     	Jogador jogador = campo.getP1();
     	ativarCompra(posicao, jogador);
+    	aguardandoAcao = false;
     }
     
     private void bntP2MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {
     	Jogador jogador = campo.getP2();
     	ativarCompra(posicao, jogador);
+    	aguardandoAcao = false;
     }
     
     private void bntP1EvocadaActionPerformed(java.awt.event.ActionEvent evt, int posicao) {

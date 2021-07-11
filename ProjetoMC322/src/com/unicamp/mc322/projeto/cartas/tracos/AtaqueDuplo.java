@@ -10,7 +10,6 @@ public class AtaqueDuplo extends Traco{
 	public void ativarTraco(Seguidor cartaAtacante, Seguidor cartaDefensor, Jogador defensor, Campo campo) {
 		if(cartaDefensor==null){
 			defensor.adicionarAoNexus(-1*cartaAtacante.getPoder());
-			campo.adicionarAoNexus(2, -1*cartaAtacante.getPoder());
 		}else {
 			cartaDefensor.setVida(cartaDefensor.getVida() - cartaAtacante.getPoder());
 		}

@@ -20,14 +20,11 @@ public class Campo {
 	public final int LARGURA_CAMPO = 6;
 	private Jogador jogador1,jogador2;
 	private Rodada rodada;
-	private int nexusP1, nexusP2;
 	private InterfaceCampo interfaceCampo;
 
 	public Campo(Jogador p1, Jogador p2) {
 		this.jogador1 = p1;
 		this.jogador2 = p2;
-		this.nexusP1 = 20;
-		this.nexusP2 = 20;
 		definirNumeroEmCampo(p1, p2);
 		this.rodada = new Rodada(p1,p2, this);
 		jogador1.atualizarMana(rodada.getNumeroRodada());
@@ -37,30 +34,14 @@ public class Campo {
 	
 	public void iniciar() {
 		interfaceCampo.setVisible(true);
+		interfaceCampo.atualizar();
 		// O jogo termina quando um dos nexus tiver vida igual ou menor que zero.
-		while(nexusP1 > 0 && nexusP2 > 0) {
-			interfaceCampo.atualizar();
+		while(jogador1.getNexus() > 0 && jogador2.getNexus() > 0) {
 			rodada.iniciar();
+			interfaceCampo.atualizar();
 		}
 		interfaceCampo.setVisible(false);
-		System.out.println("Fim de jogo!");
-	}
-	
-	public int getNexus(int numeroJogador) {
-		if(numeroJogador == 1) {
-			return nexusP1;
-		} else {
-			return nexusP2;
-		}
-	}
-	
-	public void adicionarAoNexus(int numeroJogador, int valorAdicionado) {
-		if(numeroJogador == 1) {
-			nexusP1 += valorAdicionado;
-		} else {
-			nexusP2 = valorAdicionado;
-		}
-		interfaceCampo.atualizarNexus();
+		fimDeJogo();
 	}
 	
 	public Rodada getRodada() {
