@@ -37,17 +37,17 @@ public class Campeao extends Seguidor {
 		seguidoresMortos++;
 	}
 	
-	public void incrementarDanoCausado() {
-		danoCausado++;
+	public void incrementarDanoCausado(int n) {
+		danoCausado += n;
 	}
 	
-	public void incrementarDanoAdicionado() {
-		danoAdicionado++;
+	public void incrementarDanoAdicionado(int n) {
+		danoAdicionado += n;
 	}
 	
 
-	// Verifica se a condi��o de evolu��o foi atendida
-	public boolean chequeDeNivel(int n) {
+	// Verifica se a condicao de evolucao foi atendida
+	public boolean chequeDeNivel() {
 		boolean condicaoAtendida;
 		Condicao condicaoDeEvolucao = evolucao.getCondicaoEvolucao();
 		int quantParaEvolucao = evolucao.getQuantEvolucao();

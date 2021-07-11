@@ -19,7 +19,6 @@ public class GolpeAoNexus extends Efeito {
 	
 	@Override
 	public void ativarEfeito(Campo campo) {
-		//this.unidade = usuarioEscolherUnidade("Selecione a unidade o qual deseja ativar o efeito: ");
 		System.out.println("Golpe ao Nexus ativado");
 		Rodada rodada = campo.getRodada();
 		Seguidor cartaSelecionada = campo.getJogadorAtual().selecionarUmaUnidadeAliada(campo);

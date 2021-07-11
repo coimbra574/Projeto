@@ -13,6 +13,9 @@ import java.util.ArrayList;
 
 
 public class ListaCartas {
+	/*
+	 * Para adicionar uma nova carta deve-se apenas instancia-la com as caracteristicas desejadas.
+	 */
 	private Campeao garen;
 	
 	private Seguidor poro = new Seguidor("Poro", 1, 2, 1, null);

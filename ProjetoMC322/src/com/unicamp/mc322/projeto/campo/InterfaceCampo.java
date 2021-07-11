@@ -39,7 +39,6 @@ public class InterfaceCampo extends javax.swing.JFrame {
 	private boolean realizouAcao;
 	private boolean aguardandoCarta;
 	private boolean aguardandoIndex;
-	//private SwingWorker tarefaCompraCarta;
 	private Carta cartaEscolhida;
 	private int indexEscolhido;
 	private ArrayList<JButton> maoP1 = new ArrayList<JButton>();
@@ -151,43 +150,6 @@ public class InterfaceCampo extends javax.swing.JFrame {
     	aguardarSelecaoAcao.run();
     	return realizouAcao;
     }
-    
-/*	public void iniciarTurno() {
-		this.realizouAcao = false;
-		
-		//Vez do jogador1
-		if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
-			desativarMaoP2();
-			desativarEvocadasP2();
-			if(rodada.getTipo() == TipoRodada.COMPRA_DE_CARTAS) {
-				bntAvancarTurno.setText("<html>Passar</html>");
-				ativarMaoP1();
-				if(campo.getP1().getTurno() == Turno.ATAQUE) {
-					ativarEvocadasP1();
-				}
-			}
-			else {
-				bntAvancarTurno.setText("<html>Nao Defender</html>");
-				ativarEvocadasP1();
-			}
-		}
-		//Vez do jogador2
-		else {
-			desativarMaoP1();
-			desativarEvocadasP1();
-			if(rodada.getTipo() == TipoRodada.COMPRA_DE_CARTAS) {
-				bntAvancarTurno.setText("<html>Passar</html>");
-				ativarMaoP2();
-				if(campo.getP2().getTurno() == Turno.ATAQUE) {
-					ativarEvocadasP2();
-				}
-			}
-			else {
-				bntAvancarTurno.setText("<html>Nao Defender</html>");
-				ativarEvocadasP2();
-			}
-		}
-	}*/
 	
 	private void desativarTudo() {
 		for(int i = 0; i < maoP1.size(); i++) {
@@ -467,10 +429,7 @@ public class InterfaceCampo extends javax.swing.JFrame {
 		return (Seguidor) cartaEscolhida;
 	}
 	
-	/* Compra de cartas, em especial feiticos, levam tempo consideravel ja que alguns efeitos 
-	 * demandam aguardar o usuario escolher uma carta, por isso usar o SwingWorker
-	 * Mais informacoes SwingWorker: https://www.devmedia.com.br/trabalhando-com-swingworker-em-java/29331
-	 */
+	
 	private void ativarCompra(int posicao, Jogador jogador){
     	Runnable esperaCompraCarta = new Runnable() {
         	public void run() {
@@ -480,36 +439,19 @@ public class InterfaceCampo extends javax.swing.JFrame {
        		         atualizarEvocadas();
        		         realizouAcao = true;
        		         aguardandoAcao = false;
-       		     }
-       		     else {
+       		     	}
+       		     	else {
        		    	 System.out.println("Nao foi possivel comprar essa carta! e"
        		        			+ "scolha outra ou finalize o turno!");
-       		     }
+       		     	}
         		} catch (Exception e) {}
         	}
         };
 		Thread tarefa = new Thread(esperaCompraCarta);
 		tarefa.start();
-		/*tarefaCompraCarta = new SwingWorker() {
-		 @Override
-		 protected Void doInBackground() throws Exception {
-		    if(jogador.comprarCarta(posicao, campo)) {
-				 atualizarMao();
-		         atualizarEvocadas();
-		         realizouAcao = true;
-		         aguardandoAcao = false;
-		     }
-		     else {
-		    	 System.out.println("Nao foi possivel comprar essa carta! e"
-		        			+ "scolha outra ou finalize o turno!");
-		     }
-		tarefaCompraCarta.cancel(true);
-	    return null;
-		}
-		};
-		tarefaCompraCarta.execute();*/
 	}
 
+	
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1344,7 +1286,6 @@ public class InterfaceCampo extends javax.swing.JFrame {
 /*												Clique de Botoes	
  * 						  							 */
     private void bntAvancarTurnoActionPerformed(java.awt.event.ActionEvent evt) {
-    	//atualizar();
     	if(realizouAcao == true || rodada.getTipo() == TipoRodada.ESCOLHA_DEFENSORES) {
     		rodada.mudarTipo();
     		aguardandoAcao = false;
@@ -1353,8 +1294,6 @@ public class InterfaceCampo extends javax.swing.JFrame {
         	realizouAcao = false;
         	aguardandoAcao = false;
     	}
-    	//rodada.finalizarTurno(this.realizouAcao);
-    	//iniciarTurno();
     }
     
     private void bntP1MaoActionPerformed(java.awt.event.ActionEvent evt, int posicao) {
@@ -1376,6 +1315,7 @@ public class InterfaceCampo extends javax.swing.JFrame {
         			bntAvancarTurno.setEnabled(false);
         			desativarEvocadasP1();
         			desativarMaoP1();
+        			Thread.sleep(100);
             		ativarCampoSelecionavelP1();
             		while(aguardandoIndex) {
             			Thread.sleep(100);

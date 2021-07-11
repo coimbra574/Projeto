@@ -136,4 +136,5 @@ public class Campo {
 	public InterfaceCampo getInterface() {
 		return interfaceCampo;
 	}
+
 }

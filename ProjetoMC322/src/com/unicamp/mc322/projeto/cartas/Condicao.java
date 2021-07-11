@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------
- * Indica qual é a condição de evolução para a carta Campeâo
+ * Indica qual é a condição de evolução para a carta Campeao
  *   - Atacar n vezes
  *   - Matar n seguidores inimigos
  *   - Fazer n pontos de dano

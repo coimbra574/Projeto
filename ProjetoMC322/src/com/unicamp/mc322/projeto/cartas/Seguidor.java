@@ -12,7 +12,6 @@ import com.unicamp.mc322.projeto.jogador.Jogador;
 public class Seguidor extends Carta {
 	private int poder, vida, vidaTotal;
 	private Traco traco=null;
-	//private ArrayList<Efeito> listaEfeitos = new ArrayList<Efeito>();
 	private boolean matouUmSeguidor = false;  // Alterado na classe combate
 
 	public Seguidor(String nome, int custo, int poder, int vidaTotal, Traco traco, Efeito... efeitos) {
@@ -49,24 +48,21 @@ public class Seguidor extends Carta {
 		poder = novoPoder;
 	}
 	
-	public void aumentarPoder(int n) {//Para o traco da furia. Ele acrescenta, nao muda. Por isso acho q é diferente de setPoder
-		System.out.println("Poder antes: " + poder);
+	public void aumentarPoder(int n) {
 		poder+=n;
-		System.out.println("Poder: " + poder);
 	}
 	
 	public int getVida() {
 		return vida;
 	}
 	
+	
 	public void setVida(int novaVida) {
 		vida = novaVida;
 	}
 	
-	public void aumentarVida(int m) {//Para o traco da furia. Ele acrescenta, nao muda. Por isso acho q é diferente de setVida
-		System.out.println("Vida antes: " + vida);
+	public void aumentarVida(int m) {
 		vida+=m;
-		System.out.println("Vida: " + vida);
 	}
 	
 	public int getVidaTotal() {
@@ -130,7 +126,6 @@ public class Seguidor extends Carta {
 	public String toStringEmCampo() {
 		String texto = "<html>";
 		texto += this.nome + "<br />";
-		//texto += "V: " + Integer.toString(this.vida);  <--------------------------
 		texto += "V: " + this.vida;
 		texto += "  P: " + Integer.toString(this.poder);
 		return texto;
