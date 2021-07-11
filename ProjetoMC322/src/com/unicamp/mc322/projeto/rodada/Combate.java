@@ -1,7 +1,9 @@
 package com.unicamp.mc322.projeto.rodada;
 
 import com.unicamp.mc322.projeto.campo.Campo;
+import com.unicamp.mc322.projeto.cartas.Campeao;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
+import com.unicamp.mc322.projeto.cartas.TipoCarta;
 import com.unicamp.mc322.projeto.jogador.Jogador;
 import java.util.ArrayList;
 
@@ -30,13 +32,17 @@ public class Combate {
 						cartaAtacante.ativacaoTraco(cartaDefensor, defensor, campo);//coloquei isso aqui para ativar o traco
 					}
 					
-					if(cartaAtacante.getVida() < 0) {
+					if(cartaAtacante.getVida() <= 0) {
 						cartaDefensor.setMatouUmSeguidor(true);
 					}
 
-					if(cartaDefensor.getVida() < 0) {
+					if(cartaDefensor.getVida() <= 0) {
 						cartaAtacante.setMatouUmSeguidor(true);
 					}
+					
+					verificarCampeao(cartaAtacante);
+					verificarCampeao(cartaDefensor);
+					
 					atacante.adicionarEvocada(cartaAtacante);
 					defensor.adicionarEvocada(cartaDefensor);
 				}
@@ -44,6 +50,25 @@ public class Combate {
 		}
 		
 		defensor.adicionarAoNexus(danoAoNexus * -1);
+	}
+	
+
+	private static void verificarCampeao(Seguidor carta) {
+		if(carta.getTipo() == TipoCarta.CAMPEAO) {
+			Campeao campeao = (Campeao) carta;
+			
+			campeao.incrementarDanoCausado(campeao.getPoder());
+			campeao.incrementarNumAtaques();
+			
+			if(campeao.getMatouUmSeguidor()) {
+				campeao.incrementarSeguidoresMortos();
+			}
+			
+			int danoAdicionado = campeao.getVidaTotal() - campeao.getVida();
+			if(danoAdicionado > 0) {
+				campeao.incrementarDanoAdicionado(danoAdicionado);
+			}
+		}
 	}
 
 }

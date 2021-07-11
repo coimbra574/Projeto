@@ -3,7 +3,9 @@ package com.unicamp.mc322.projeto.rodada;
 import java.util.ArrayList;
 
 import com.unicamp.mc322.projeto.campo.Campo;
+import com.unicamp.mc322.projeto.cartas.Campeao;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
+import com.unicamp.mc322.projeto.cartas.TipoCarta;
 import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
 import com.unicamp.mc322.projeto.cartas.efeitos.TipoAtivacao;
 import com.unicamp.mc322.projeto.jogador.Jogador;
@@ -119,7 +121,8 @@ public class Rodada {
 			numeroRodada++;
 			ativarEfeitosFimDaRodada(NumeroJogador.PLAYER1);
 			ativarEfeitosFimDaRodada(NumeroJogador.PLAYER2);
-			removerSeguidoresSemVida();
+			atualizarSeguidores(NumeroJogador.PLAYER1);
+			atualizarSeguidores(NumeroJogador.PLAYER2);
 			jogador1.acabarRodada();
 			jogador1.atualizarMana(numeroRodada);
 			jogador2.acabarRodada();
@@ -177,20 +180,25 @@ public class Rodada {
 		return numeroJogadorAplicarEfeito;
 	}
 	
-	private void removerSeguidoresSemVida() {
-		ArrayList<Seguidor> cartasEvocadasP1 = campo.getEvocadas(NumeroJogador.PLAYER1);
-		ArrayList<Seguidor> cartasEvocadasP2 = campo.getEvocadas(NumeroJogador.PLAYER2);
-		for(int i=0; i<cartasEvocadasP1.size(); i++) {
-			if(cartasEvocadasP1.get(i).getVida() <= 0) {
-				cartasEvocadasP1.remove(i);
-			}
-		}
-		for(int i=0; i<cartasEvocadasP2.size(); i++) {
-			if(cartasEvocadasP2.get(i).getVida() <= 0) {
-				cartasEvocadasP2.remove(i);
+	
+	// Remove seguidores evocados sem vida e verifica evolucao de campeoes
+	public void atualizarSeguidores(NumeroJogador player) {
+		ArrayList<Seguidor> cartasEvocadas = campo.getEvocadas(player);
+		for(int i=0; i<cartasEvocadas.size(); i++) {
+			if(cartasEvocadas.get(i).getVida() <= 0) {
+				cartasEvocadas.remove(i);
+			}else {
+				if(cartasEvocadas.get(i).getTipo() == TipoCarta.CAMPEAO) {
+					Campeao campeao = (Campeao) cartasEvocadas.get(i);
+					if(campeao.chequeDeNivel()) {
+						campeao.subirNivel();
+						System.out.println("Campeao " + campeao.getNome() + " subiu de nivel");
+					}
+				}
 			}
 		}
 	}
 	
+
 	
 }

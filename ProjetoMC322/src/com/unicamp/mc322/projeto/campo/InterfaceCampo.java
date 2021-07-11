@@ -429,10 +429,7 @@ public class InterfaceCampo extends javax.swing.JFrame {
 		return (Seguidor) cartaEscolhida;
 	}
 	
-	/* Compra de cartas, em especial feiticos, levam tempo consideravel ja que alguns efeitos 
-	 * demandam aguardar o usuario escolher uma carta, por isso usar o SwingWorker
-	 * Mais informacoes SwingWorker: https://www.devmedia.com.br/trabalhando-com-swingworker-em-java/29331
-	 */
+	
 	private void ativarCompra(int posicao, Jogador jogador){
     	Runnable esperaCompraCarta = new Runnable() {
         	public void run() {
@@ -442,11 +439,11 @@ public class InterfaceCampo extends javax.swing.JFrame {
        		         atualizarEvocadas();
        		         realizouAcao = true;
        		         aguardandoAcao = false;
-       		     }
-       		     else {
+       		     	}
+       		     	else {
        		    	 System.out.println("Nao foi possivel comprar essa carta! e"
        		        			+ "scolha outra ou finalize o turno!");
-       		     }
+       		     	}
         		} catch (Exception e) {}
         	}
         };
@@ -454,6 +451,7 @@ public class InterfaceCampo extends javax.swing.JFrame {
 		tarefa.start();
 	}
 
+	
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1318,6 +1316,7 @@ public class InterfaceCampo extends javax.swing.JFrame {
         			bntAvancarTurno.setEnabled(false);
         			desativarEvocadasP1();
         			desativarMaoP1();
+        			Thread.sleep(100);
             		ativarCampoSelecionavelP1();
             		while(aguardandoIndex) {
             			Thread.sleep(100);

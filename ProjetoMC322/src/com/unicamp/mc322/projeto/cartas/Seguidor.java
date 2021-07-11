@@ -56,6 +56,7 @@ public class Seguidor extends Carta {
 		return vida;
 	}
 	
+	
 	public void setVida(int novaVida) {
 		vida = novaVida;
 	}
