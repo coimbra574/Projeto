@@ -20,7 +20,7 @@ public class Campo {
 	public final int LARGURA_CAMPO = 6;
 	private Jogador jogador1,jogador2;
 	private Rodada rodada;
-	private InterfaceCampo interfaceCampo;
+	private ThreadCampo interfaceCampo;
 
 	public Campo(Jogador p1, Jogador p2) {
 		this.jogador1 = p1;
@@ -29,16 +29,16 @@ public class Campo {
 		this.rodada = new Rodada(p1,p2, this);
 		jogador1.atualizarMana(rodada.getNumeroRodada());
 		jogador2.atualizarMana(rodada.getNumeroRodada());
-		this.interfaceCampo = new InterfaceCampo(this, rodada);
+		this.interfaceCampo = new ThreadCampo(this);
+		interfaceCampo.start();
 	}
 	
 	public void iniciar() {
-		interfaceCampo.setVisible(true);
-		interfaceCampo.atualizar();
+		interfaceCampo.getInterface().atualizar();
 		// O jogo termina quando um dos nexus tiver vida igual ou menor que zero.
 		while(jogador1.getNexus() > 0 && jogador2.getNexus() > 0) {
+			interfaceCampo.getInterface().atualizar();
 			rodada.iniciar();
-			interfaceCampo.atualizar();
 		}
 		fimDeJogo();
 	}
@@ -123,18 +123,20 @@ public class Campo {
 	}
 	
 	public void fimDeJogo() {
-		interfaceCampo.setVisible(false);
+		interfaceCampo.getInterface().setVisible(false);
+		System.out.println("====================================");
 		System.out.println("Fim de jogo!");
 		if(jogador1.getNexus() <= 0) {
-			System.out.print("O vencedor foi o Jogador 2");
+			System.out.println("O vencedor foi o Jogador 2");
 		}
 		else {
-			System.out.print("O vencedor foi o Jogador 1");
+			System.out.println("O vencedor foi o Jogador 1");
 		}
+		System.out.println("====================================");
 	}
 	
 	public InterfaceCampo getInterface() {
-		return interfaceCampo;
+		return interfaceCampo.getInterface();
 	}
 
 }

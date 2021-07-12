@@ -100,28 +100,61 @@ public class Humano  extends Jogador{
 		return TipoDeck.NAOEXISTENTE;
 	}
 	
+	private static void aguardarTempo() {
+	    try {
+	        Thread.sleep(50);
+	    } catch (InterruptedException e) {
+	        System.err.format("IOException: %s%n", e);
+	    }
+	}
+	
 	@Override
 	public Seguidor selecionarUmaUnidadeAliada(Campo campo) {
-		return campo.getInterface().selecionarAliadaEvocadaOuEmCampo();
+		campo.getInterface().selecionarAliadaEvocadaOuEmCampo();
+		do {
+			aguardarTempo();
+		}while(campo.getInterface().getAguardandoCarta() == true);
+
+		return campo.getInterface().getCartaEscolhida();
 	}
 	
 	@Override
 	public Seguidor selecionarUmaUnidadeInimiga(Campo campo) {
-		return campo.getInterface().selecionarInimigoEvocadaOuEmCampo();
+		campo.getInterface().selecionarInimigoEvocadaOuEmCampo();
+		do {
+			aguardarTempo();
+		}while(campo.getInterface().getAguardandoCarta() == true);
+		
+		return campo.getInterface().getCartaEscolhida();
 	}
 	
 	@Override
 	public boolean acaoRodadaCompra(Campo campo) {
-		return campo.getInterface().selecionarCompra();
+		campo.getInterface().selecionarCompra();
+		do {
+			aguardarTempo();
+		}while(campo.getInterface().getAguardandoAcao() == true);
+		
+		return campo.getInterface().getAcaoRealizada();
 	}
 	
 	@Override
 	public boolean acaoRodadaCompraOuAtaque(Campo campo) {
-		return campo.getInterface().selecionarCompraOuAtaque();
+		campo.getInterface().selecionarCompraOuAtaque();
+		do {
+			aguardarTempo();
+		}while(campo.getInterface().getAguardandoAcao() == true);
+		
+		return campo.getInterface().getAcaoRealizada();
 	}
 	
 	@Override
 	public boolean acaoRodadaDefesa(Campo campo) {
-		return campo.getInterface().selecionarDefesa();
+		campo.getInterface().selecionarDefesa();
+		do {
+			aguardarTempo();
+		}while(campo.getInterface().getAguardandoAcao() == true);
+		
+		return campo.getInterface().getAcaoRealizada();
 	}
 }
