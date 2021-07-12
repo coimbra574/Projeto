@@ -10,9 +10,6 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.unicamp.mc322.projeto.cartas.Carta;
 import com.unicamp.mc322.projeto.cartas.Seguidor;
-import com.unicamp.mc322.projeto.cartas.efeitos.Efeito;
-import com.unicamp.mc322.projeto.cartas.efeitos.TipoAtivacao;
-import com.unicamp.mc322.projeto.jogador.Jogador;
 import com.unicamp.mc322.projeto.jogador.NumeroJogador;
 import com.unicamp.mc322.projeto.rodada.Rodada;
 import com.unicamp.mc322.projeto.rodada.TipoRodada;
@@ -404,28 +401,6 @@ public class InterfaceCampo extends javax.swing.JFrame {
 		}
 		aguardandoCarta = true;
 	}
-	
-	
-/*	private void ativarCompra(int posicao, Jogador jogador){
-    	Runnable esperaCompraCarta = new Runnable() {
-        	public void run() {
-        		try {
-        			if(jogador.comprarCarta(posicao, campo)) {
-       				 atualizarMao();
-       		         atualizarEvocadas();
-       		         realizouAcao = true;
-       		         aguardandoAcao = false;
-       		     	}
-       		     	else {
-       		    	 System.out.println("Nao foi possivel comprar essa carta! e"
-       		        			+ "scolha outra ou finalize o turno!");
-       		     	}
-        		} catch (Exception e) {}
-        	}
-        };
-		Thread tarefa = new Thread(esperaCompraCarta);
-		tarefa.start();
-	}*/
 
 	
     /**
@@ -1287,32 +1262,6 @@ public class InterfaceCampo extends javax.swing.JFrame {
     }
     
     private void bntP1EvocadaActionPerformed(java.awt.event.ActionEvent evt, int posicao) {
-    	/*Runnable aguardarP1Evocada = new Runnable() {
-        	public void run() {
-        		try {
-        			bntAvancarTurno.setEnabled(false);
-        			desativarEvocadasP1();
-        			desativarMaoP1();
-        			Thread.sleep(100);
-            		ativarCampoSelecionavelP1();
-            		while(aguardandoIndex) {
-            			Thread.sleep(100);
-            		}
-            		campo.getP1().colocarEmCampo(posicao, indexEscolhido);
-            		atualizarEmCampo();
-            		atualizarEvocadas();
-            		desativarEmCampoP1();
-            		ativarEvocadasP1();
-            		bntAvancarTurno.setEnabled(true);
-            		if(campo.getP1().getTurno() == Turno.ATAQUE) {
-            			bntAvancarTurno.setText("<html>Atacar</html>");
-            		}
-            		else {
-            			bntAvancarTurno.setText("<html>Defender</html>");
-            		}
-        		} catch (Exception e) {}
-        	}
-        };*/
     	if(aguardandoCarta == false) {
     		System.out.println("Selecione o local do campo para a carta!");
     		indexEscolhido = posicao;
@@ -1330,31 +1279,6 @@ public class InterfaceCampo extends javax.swing.JFrame {
     }
     
     private void bntP2EvocadaActionPerformed(java.awt.event.ActionEvent evt, int posicao) {
-    	/*Runnable aguardarP2Evocada = new Runnable() {
-        	public void run() {
-        		try {
-        			bntAvancarTurno.setEnabled(false);
-        			desativarEvocadasP2();
-        			desativarMaoP2();
-            		ativarCampoSelecionavelP2();
-            		while(aguardandoIndex) {  
-            			Thread.sleep(100);    
-            		}
-            		campo.getP2().colocarEmCampo(posicao, indexEscolhido);
-            		atualizarEmCampo();
-            		atualizarEvocadas();
-            		desativarEmCampoP2();
-            		ativarEvocadasP2();
-            		bntAvancarTurno.setEnabled(true);
-            		if(campo.getP2().getTurno() == Turno.ATAQUE) {
-            			bntAvancarTurno.setText("<html>Atacar</html>");
-            		}
-            		else {
-            			bntAvancarTurno.setText("<html>Defender</html>");
-            		}
-        		} catch (Exception e) {}
-        	}
-        };*/
     	if(aguardandoCarta == false) {
     		System.out.println("Selecione o local do campo para a carta!");
     		indexEscolhido = posicao;
