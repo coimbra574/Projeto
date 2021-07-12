@@ -123,7 +123,7 @@ public class Campo {
 	}
 	
 	public void fimDeJogo() {
-		interfaceCampo.getInterface().setVisible(false);
+		interfaceCampo.getInterface().dispose();
 		System.out.println("====================================");
 		System.out.println("Fim de jogo!");
 		if(jogador1.getNexus() <= 0) {
