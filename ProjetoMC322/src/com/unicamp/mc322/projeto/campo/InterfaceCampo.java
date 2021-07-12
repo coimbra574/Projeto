@@ -58,6 +58,7 @@ public class InterfaceCampo extends javax.swing.JFrame {
         this.aguardandoAcao = false;
 		this.aguardandoCarta = false;
 		this.aguardandoIndex = false;
+		this.realizouAcao = false;
 		
 		desativarTudo();
     }
@@ -89,6 +90,7 @@ public class InterfaceCampo extends javax.swing.JFrame {
     
     public void selecionarCompra() {
     	aguardandoAcao = true;
+    	realizouAcao = false;
     	if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
 			desativarMaoP2();
 			desativarEvocadasP2();
@@ -105,6 +107,7 @@ public class InterfaceCampo extends javax.swing.JFrame {
     
     public void selecionarCompraOuAtaque() {
     	aguardandoAcao = true;
+    	realizouAcao = false;
     	selecionarCompra();
     	if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
 			ativarEvocadasP1();
@@ -116,6 +119,7 @@ public class InterfaceCampo extends javax.swing.JFrame {
     
     public void selecionarDefesa() {
     	aguardandoAcao = true;
+    	realizouAcao = false;
     	if(rodada.getNumeroJogadorAtual() == NumeroJogador.PLAYER1) {
     		desativarMaoP2();
 			desativarEvocadasP2();
